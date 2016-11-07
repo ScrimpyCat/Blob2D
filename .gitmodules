@@ -22,3 +22,9 @@
 [submodule "deps/CommonC"]
 	path = deps/CommonC
 	url = https://github.com/ScrimpyCat/CommonC.git
+[submodule "CommonGameKit"]
+	path = CommonGameKit
+	url = https://github.com/ScrimpyCat/CommonGameKit
+[submodule "deps/CommonGameKit"]
+	path = deps/CommonGameKit
+	url = https://github.com/ScrimpyCat/CommonGameKit
