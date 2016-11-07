@@ -26,7 +26,7 @@
 #ifndef Blob_Game_Window_h
 #define Blob_Game_Window_h
 
-#include "GLSetup.h"
+#include <GLFW/glfw3.h>
 #include <stdatomic.h>
 
 extern GLFWwindow * const CCWindow;

@@ -26,7 +26,7 @@
 #ifndef Blob_Game_PlatformSetup_h
 #define Blob_Game_PlatformSetup_h
 
-#include "GLSetup.h"
+#include <GLFW/glfw3.h>
 
 void CCPlatformSetup(void);
 void CCPlatformWindowSetup(GLFWwindow *Window);
