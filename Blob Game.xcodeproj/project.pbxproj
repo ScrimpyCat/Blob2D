@@ -809,7 +809,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\nEXECFILE=$BUILT_PRODUCTS_DIR/$EXECUTABLE_PATH\nLIBPATH=$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH\nNEWLIBPATH=\"@executable_path/../Frameworks\"\n\nfor DYLIB in \"$LIBPATH\"/*.dylib; do\nTARGETID=$(otool -DX \"$DYLIB\")\nNEWTARGETID=\"$NEWLIBPATH/$(basename \"$DYLIB\")\"\ninstall_name_tool -change \"$TARGETID\" \"$NEWTARGETID\" \"$EXECFILE\"\ndone";
+			shellScript = "#!/bin/bash\nEXECFILE=$BUILT_PRODUCTS_DIR/$EXECUTABLE_PATH\nLIBPATH=$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH\nNEWLIBPATH=\"@executable_path/../Frameworks\"\n\n\nif [ -e \"$LIBPATH\"/*.dylib ];\nthen\nfor DYLIB in \"$LIBPATH\"/*.dylib; do\nTARGETID=$(otool -DX \"$DYLIB\")\nNEWTARGETID=\"$NEWLIBPATH/$(basename \"$DYLIB\")\"\ninstall_name_tool -change \"$TARGETID\" \"$NEWTARGETID\" \"$EXECFILE\"\ndone;\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
