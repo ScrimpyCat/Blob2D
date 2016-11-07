@@ -935,7 +935,7 @@
 		F3C401F41A56E52800095ECD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -943,6 +943,13 @@
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Blob_Game-ftdhpyeuunmhwldillzwkfrvitku/Build/Products/Debug",
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = (
+					$PROJECT_DIR/deps/CommonGameKit/deps/stdatomic,
+					$PROJECT_DIR/deps/CommonGameKit/deps/tinycthread/source,
+					$PROJECT_DIR/deps/CommonGameKit/deps/threads,
+					$PROJECT_DIR/deps/glfw/include,
+					$PROJECT_DIR/deps/Chipmunk2D/include,
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/src/mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -952,7 +959,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$PROJECT_DIR/deps/stdatomic $PROJECT_DIR/deps/tinycthread/source $PROJECT_DIR/deps/glfw/include $PROJECT_DIR/deps/Chipmunk2D/include $PROJECT_DIR/deps/libpng";
+				USER_HEADER_SEARCH_PATHS = "";
 				WARNING_CFLAGS = "-Wno-ambiguous-macro";
 			};
 			name = Debug;
@@ -960,7 +967,7 @@
 		F3C401F51A56E52800095ECD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -968,6 +975,13 @@
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Blob_Game-ftdhpyeuunmhwldillzwkfrvitku/Build/Products/Debug",
 				);
 				GCC_OPTIMIZATION_LEVEL = fast;
+				HEADER_SEARCH_PATHS = (
+					$PROJECT_DIR/deps/CommonGameKit/deps/stdatomic,
+					$PROJECT_DIR/deps/CommonGameKit/deps/tinycthread/source,
+					$PROJECT_DIR/deps/CommonGameKit/deps/threads,
+					$PROJECT_DIR/deps/glfw/include,
+					$PROJECT_DIR/deps/Chipmunk2D/include,
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/src/mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -977,7 +991,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "$PROJECT_DIR/deps/stdatomic $PROJECT_DIR/deps/tinycthread/source $PROJECT_DIR/deps/glfw/include $PROJECT_DIR/deps/Chipmunk2D/include $PROJECT_DIR/deps/libpng";
+				USER_HEADER_SEARCH_PATHS = "";
 				WARNING_CFLAGS = "-Wno-ambiguous-macro";
 			};
 			name = Release;
