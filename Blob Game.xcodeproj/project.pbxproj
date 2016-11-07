@@ -17,13 +17,13 @@
 		F3897CAA1DD04ED0008D6C1D /* CommonGameKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F3897C711DD04E93008D6C1D /* CommonGameKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F3897CAB1DD04EF9008D6C1D /* CommonGameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3897C711DD04E93008D6C1D /* CommonGameKit.framework */; };
 		F3897CF61DD0792C008D6C1D /* CommonC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3897CF51DD0792C008D6C1D /* CommonC.framework */; };
+		F3897D0B1DD10717008D6C1D /* tinycthread.c in Sources */ = {isa = PBXBuildFile; fileRef = F3897D091DD10717008D6C1D /* tinycthread.c */; };
 		F3BD177C1C00DB5600B3849E /* ExpressionSetup.c in Sources */ = {isa = PBXBuildFile; fileRef = F3BD177A1C00DB5600B3849E /* ExpressionSetup.c */; };
 		F3BD17851C00FDC200B3849E /* Configuration.c in Sources */ = {isa = PBXBuildFile; fileRef = F3BD17831C00FDC200B3849E /* Configuration.c */; };
 		F3BD17BD1C02B67900B3849E /* Project.c in Sources */ = {isa = PBXBuildFile; fileRef = F3BD17BB1C02B67900B3849E /* Project.c */; };
 		F3C222171C4AF6FD004ADC76 /* ExpressionProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C222161C4AF6FD004ADC76 /* ExpressionProjectTests.m */; };
 		F3F5D6381A56E8B4006D7F16 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3F5D6341A56E8B4006D7F16 /* Images.xcassets */; };
 		F3F5D6811A56F4A9006D7F16 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F3F5D6801A56F4A9006D7F16 /* main.c */; };
-		F3F5D6971A56F73E006D7F16 /* tinycthread.c in Sources */ = {isa = PBXBuildFile; fileRef = F3F5D6951A56F73E006D7F16 /* tinycthread.c */; };
 		F3F5D6F11A56FC70006D7F16 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3F5D6BC1A56FBDC006D7F16 /* libglfw3.a */; };
 		F3F5D6FA1A5700F3006D7F16 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3F5D6F81A5700B3006D7F16 /* CoreVideo.framework */; };
 		F3F5D6FB1A5700F3006D7F16 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3F5D6F61A5700AB006D7F16 /* IOKit.framework */; };
@@ -253,6 +253,12 @@
 		F37699771C10262400F24A44 /* ProjectExpressions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ProjectExpressions.c; sourceTree = "<group>"; };
 		F3897C5D1DD04E92008D6C1D /* CommonGameKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CommonGameKit.xcodeproj; path = deps/CommonGameKit/CommonGameKit.xcodeproj; sourceTree = "<group>"; };
 		F3897CF51DD0792C008D6C1D /* CommonC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonC.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Blob_Game-ftdhpyeuunmhwldillzwkfrvitku/Build/Products/Debug/CommonC.framework"; sourceTree = "<group>"; };
+		F3897D041DD106F0008D6C1D /* stdatomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdatomic.h; sourceTree = "<group>"; };
+		F3897D051DD106F0008D6C1D /* stdatomic_clang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdatomic_clang.h; sourceTree = "<group>"; };
+		F3897D061DD106F0008D6C1D /* stdatomic_portable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdatomic_portable.h; sourceTree = "<group>"; };
+		F3897D081DD10704008D6C1D /* threads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threads.h; sourceTree = "<group>"; };
+		F3897D091DD10717008D6C1D /* tinycthread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tinycthread.c; path = deps/CommonGameKit/deps/tinycthread/source/tinycthread.c; sourceTree = SOURCE_ROOT; };
+		F3897D0A1DD10717008D6C1D /* tinycthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinycthread.h; path = deps/CommonGameKit/deps/tinycthread/source/tinycthread.h; sourceTree = SOURCE_ROOT; };
 		F3BD177A1C00DB5600B3849E /* ExpressionSetup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ExpressionSetup.c; sourceTree = "<group>"; };
 		F3BD177B1C00DB5600B3849E /* ExpressionSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionSetup.h; sourceTree = "<group>"; };
 		F3BD17831C00FDC200B3849E /* Configuration.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Configuration.c; sourceTree = "<group>"; };
@@ -267,20 +273,15 @@
 		F3F5D6341A56E8B4006D7F16 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = src/mac/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		F3F5D6351A56E8B4006D7F16 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = src/mac/Info.plist; sourceTree = SOURCE_ROOT; };
 		F3F5D6801A56F4A9006D7F16 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = src/main.c; sourceTree = SOURCE_ROOT; };
-		F3F5D6951A56F73E006D7F16 /* tinycthread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tinycthread.c; path = deps/tinycthread/source/tinycthread.c; sourceTree = SOURCE_ROOT; };
-		F3F5D6961A56F73E006D7F16 /* tinycthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinycthread.h; path = deps/tinycthread/source/tinycthread.h; sourceTree = SOURCE_ROOT; };
 		F3F5D6991A56FBDB006D7F16 /* GLFW.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GLFW.xcodeproj; path = deps/glfw/build/GLFW.xcodeproj; sourceTree = "<group>"; };
 		F3F5D6F21A570093006D7F16 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F3F5D6F41A570099006D7F16 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		F3F5D6F61A5700AB006D7F16 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		F3F5D6F81A5700B3006D7F16 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		F3F696A61A5C8E3800E486B5 /* stdatomic_clang.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = stdatomic_clang.h; path = deps/stdatomic/stdatomic_clang.h; sourceTree = SOURCE_ROOT; };
-		F3F696A71A5C8E3800E486B5 /* stdatomic_portable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = stdatomic_portable.h; path = deps/stdatomic/stdatomic_portable.h; sourceTree = SOURCE_ROOT; };
 		F3F6C4781A599A2300B9D6BA /* PlatformSetup_mac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatformSetup_mac.m; sourceTree = "<group>"; };
 		F3F6C4A41A599A6200B9D6BA /* PlatformSetup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlatformSetup.h; sourceTree = "<group>"; };
 		F3F6C4A61A599DB700B9D6BA /* PlatformSetup_win.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PlatformSetup_win.c; sourceTree = "<group>"; };
 		F3F6C4AA1A599DF800B9D6BA /* PlatformSetup_linux.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PlatformSetup_linux.c; sourceTree = "<group>"; };
-		F3FF25311A58418800E437EB /* stdatomic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = stdatomic.h; path = deps/stdatomic/stdatomic.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +329,28 @@
 				F3897C731DD04E93008D6C1D /* CommonGameKitTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F3897D031DD106F0008D6C1D /* stdatomic */ = {
+			isa = PBXGroup;
+			children = (
+				F3897D041DD106F0008D6C1D /* stdatomic.h */,
+				F3897D051DD106F0008D6C1D /* stdatomic_clang.h */,
+				F3897D061DD106F0008D6C1D /* stdatomic_portable.h */,
+			);
+			name = stdatomic;
+			path = deps/CommonGameKit/deps/stdatomic;
+			sourceTree = "<group>";
+		};
+		F3897D071DD10704008D6C1D /* threads */ = {
+			isa = PBXGroup;
+			children = (
+				F3897D091DD10717008D6C1D /* tinycthread.c */,
+				F3897D0A1DD10717008D6C1D /* tinycthread.h */,
+				F3897D081DD10704008D6C1D /* threads.h */,
+			);
+			name = threads;
+			path = deps/CommonGameKit/deps/threads;
 			sourceTree = "<group>";
 		};
 		F3BD17481C00845D00B3849E /* Scripting */ = {
@@ -418,16 +441,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F3F5D6901A56F714006D7F16 /* tinycthread */ = {
-			isa = PBXGroup;
-			children = (
-				F3F5D6951A56F73E006D7F16 /* tinycthread.c */,
-				F3F5D6961A56F73E006D7F16 /* tinycthread.h */,
-			);
-			name = tinycthread;
-			path = "Blob Game";
-			sourceTree = "<group>";
-		};
 		F3F5D6911A56F723006D7F16 /* dependencies */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,21 +452,10 @@
 				F3F5D6F41A570099006D7F16 /* OpenGL.framework */,
 				F3F5D6F21A570093006D7F16 /* Cocoa.framework */,
 				F3F5D6991A56FBDB006D7F16 /* GLFW.xcodeproj */,
-				F3F5D6981A56FA05006D7F16 /* stdatomic */,
-				F3F5D6901A56F714006D7F16 /* tinycthread */,
+				F3897D031DD106F0008D6C1D /* stdatomic */,
+				F3897D071DD10704008D6C1D /* threads */,
 			);
 			name = dependencies;
-			sourceTree = "<group>";
-		};
-		F3F5D6981A56FA05006D7F16 /* stdatomic */ = {
-			isa = PBXGroup;
-			children = (
-				F3FF25311A58418800E437EB /* stdatomic.h */,
-				F3F696A61A5C8E3800E486B5 /* stdatomic_clang.h */,
-				F3F696A71A5C8E3800E486B5 /* stdatomic_portable.h */,
-			);
-			name = stdatomic;
-			path = "Blob Game";
 			sourceTree = "<group>";
 		};
 		F3F5D69A1A56FBDB006D7F16 /* Products */ = {
@@ -821,9 +823,9 @@
 				F3BD177C1C00DB5600B3849E /* ExpressionSetup.c in Sources */,
 				F3F5D6811A56F4A9006D7F16 /* main.c in Sources */,
 				F3BD17BD1C02B67900B3849E /* Project.c in Sources */,
-				F3F5D6971A56F73E006D7F16 /* tinycthread.c in Sources */,
 				F37699781C10262400F24A44 /* ProjectExpressions.c in Sources */,
 				F3F6C4791A599A2300B9D6BA /* PlatformSetup_mac.m in Sources */,
+				F3897D0B1DD10717008D6C1D /* tinycthread.c in Sources */,
 				F35CD6F11B3EB8130032E3A7 /* EngineSetup.c in Sources */,
 				F3BD17851C00FDC200B3849E /* Configuration.c in Sources */,
 			);
