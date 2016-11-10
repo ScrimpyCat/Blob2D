@@ -26,7 +26,7 @@
 #ifndef Blob_Game_Configuration_h
 #define Blob_Game_Configuration_h
 
-#include <CommonC/Common.h>
+#include <CommonGameKit/CommonGameKit.h>
 
 typedef enum {
     CCLaunchOptionGame,

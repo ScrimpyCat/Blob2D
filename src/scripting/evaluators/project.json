@@ -97,51 +97,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "name": "library",
-            "description": "Creates a shader library with name.",
-            "examples": ["(library \"mylib\"\n\t(if @opengl (\n\t\t(source: \"vert\" :vertex (dir: \"myshader.vs\"))\n\t\t(source: \"frag\" :fragment (dir: \"myshader.fs\"))\n\t))\n)"],
-            "return": { "type": "list", "value": [{ "type": "string" }] },
-            "args": [[{ "type": "string", "name": "name" }]],
-            "functions": [
-                {
-                    "name": "source",
-                    "description": "Register a shader source with a library.",
-                    "examples": ["(source \"vert\" :vertex (dir: \"myshader.vs\")"],
-                    "args": [
-                        [{ "type": "string", "name": "name" }, { "type": "atom", "value": "vertex" }, { "type": "list", "value": [{ "type": "option", "value": "dir" }, { "type": "string" }] }],
-                        [{ "type": "string", "name": "name" }, { "type": "atom", "value": "fragment" }, { "type": "list", "value": [{ "type": "option", "value": "dir" }, { "type": "string" }] }]
-                    ]
-                }
-            ],
-            "inputs": [
-                {
-                    "name": "source-list",
-                    "return": { "type": "list" },
-                    "description": "Holds the list of shader sources to be registered."
-                },
-                {
-                    "name": "opengl",
-                    "return": { "type": "boolean" },
-                    "description": "Indicates whether an OpenGL context is being used."
-                },
-                {
-                    "name": "metal",
-                    "return": { "type": "boolean" },
-                    "description": "Indicates whether a Metal context is being used."
-                },
-                {
-                    "name": "vulkan",
-                    "return": { "type": "boolean" },
-                    "description": "Indicates whether a Vulkan context is being used."
-                }
-            ]
-        },
-        {
-            "name": "asset",
-            "description": "Register assets with the engine. While asset registration can happen outside of this function, this is the standard mechanism to indicate asset registration.",
-            "examples": ["(asset\n\t(shader \"myshader\" (mylib vert) (mylib frag))\n)"]
         }
     ]
 }

@@ -30,6 +30,5 @@
 #include <stdatomic.h>
 
 extern GLFWwindow * const CCWindow;
-extern _Atomic(uint32_t) CCWindowFrameID;
 
 #endif
