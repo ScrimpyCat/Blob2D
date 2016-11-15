@@ -33,6 +33,13 @@
 
 @implementation ExpressionProjectTests
 
++(void) setUp
+{
+    [super setUp];
+    
+    CCExpressionEvaluatorRegister(CC_STRING("game"), CCProjectExpressionGame);
+}
+
 -(void) testProject
 {
     CCExpression Expression = CCExpressionCreateFromSource("(game \"Test Game\""

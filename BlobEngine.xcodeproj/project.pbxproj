@@ -1,0 +1,1124 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F33F1FF61DDAE16200264034 /* BlobEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = F33F1FF51DDAE16200264034 /* BlobEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F33F1FFD1DDAE16200264034 /* BlobEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F1FF21DDAE16200264034 /* BlobEngine.framework */; };
+		F34875361DDAE30A0068844D /* stdatomic_clang.h in Headers */ = {isa = PBXBuildFile; fileRef = F34875331DDAE30A0068844D /* stdatomic_clang.h */; };
+		F34875371DDAE30A0068844D /* stdatomic_portable.h in Headers */ = {isa = PBXBuildFile; fileRef = F34875341DDAE30A0068844D /* stdatomic_portable.h */; };
+		F34875381DDAE30A0068844D /* stdatomic.h in Headers */ = {isa = PBXBuildFile; fileRef = F34875351DDAE30A0068844D /* stdatomic.h */; };
+		F348753B1DDAE33D0068844D /* threads.h in Headers */ = {isa = PBXBuildFile; fileRef = F348753A1DDAE33D0068844D /* threads.h */; };
+		F348753E1DDAE3480068844D /* tinycthread.c in Sources */ = {isa = PBXBuildFile; fileRef = F348753C1DDAE3480068844D /* tinycthread.c */; };
+		F348753F1DDAE3480068844D /* tinycthread.h in Headers */ = {isa = PBXBuildFile; fileRef = F348753D1DDAE3480068844D /* tinycthread.h */; };
+		F34875B21DDAE52B0068844D /* CommonGameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34875561DDAE4ED0068844D /* CommonGameKit.framework */; };
+		F34875B61DDAE5500068844D /* CommonC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34875B51DDAE54F0068844D /* CommonC.framework */; };
+		F34875B71DDAE5600068844D /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F348757B1DDAE4F60068844D /* libglfw3.a */; };
+		F34875BC1DDAF1620068844D /* CommonGameKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F34875561DDAE4ED0068844D /* CommonGameKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F34875BE1DDAF1A70068844D /* assets in Resources */ = {isa = PBXBuildFile; fileRef = F34875BD1DDAF1A70068844D /* assets */; };
+		F34876491DDAF6810068844D /* ExpressionProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F34876481DDAF6810068844D /* ExpressionProjectTests.m */; };
+		F34876861DDAF6CB0068844D /* Project.c in Sources */ = {isa = PBXBuildFile; fileRef = F34876701DDAF6CB0068844D /* Project.c */; };
+		F34876871DDAF6CB0068844D /* Project.h in Headers */ = {isa = PBXBuildFile; fileRef = F34876711DDAF6CB0068844D /* Project.h */; };
+		F34876881DDAF6CB0068844D /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F34876721DDAF6CB0068844D /* main.c */; };
+		F348768B1DDAF6CB0068844D /* ProjectExpressions.c in Sources */ = {isa = PBXBuildFile; fileRef = F34876771DDAF6CB0068844D /* ProjectExpressions.c */; };
+		F348768C1DDAF6CB0068844D /* ProjectExpressions.h in Headers */ = {isa = PBXBuildFile; fileRef = F34876781DDAF6CB0068844D /* ProjectExpressions.h */; };
+		F348768D1DDAF6CB0068844D /* Configuration.c in Sources */ = {isa = PBXBuildFile; fileRef = F348767A1DDAF6CB0068844D /* Configuration.c */; };
+		F348768E1DDAF6CB0068844D /* Configuration.h in Headers */ = {isa = PBXBuildFile; fileRef = F348767B1DDAF6CB0068844D /* Configuration.h */; };
+		F348768F1DDAF6CB0068844D /* EngineSetup.c in Sources */ = {isa = PBXBuildFile; fileRef = F348767C1DDAF6CB0068844D /* EngineSetup.c */; };
+		F34876901DDAF6CB0068844D /* EngineSetup.h in Headers */ = {isa = PBXBuildFile; fileRef = F348767D1DDAF6CB0068844D /* EngineSetup.h */; };
+		F34876911DDAF6CB0068844D /* ExpressionSetup.c in Sources */ = {isa = PBXBuildFile; fileRef = F348767E1DDAF6CB0068844D /* ExpressionSetup.c */; };
+		F34876921DDAF6CB0068844D /* ExpressionSetup.h in Headers */ = {isa = PBXBuildFile; fileRef = F348767F1DDAF6CB0068844D /* ExpressionSetup.h */; };
+		F34876931DDAF6CB0068844D /* PlatformSetup.h in Headers */ = {isa = PBXBuildFile; fileRef = F34876801DDAF6CB0068844D /* PlatformSetup.h */; };
+		F34876951DDAF6CB0068844D /* PlatformSetup_mac.m in Sources */ = {isa = PBXBuildFile; fileRef = F34876821DDAF6CB0068844D /* PlatformSetup_mac.m */; };
+		F34876971DDAF6CB0068844D /* Window.h in Headers */ = {isa = PBXBuildFile; fileRef = F34876841DDAF6CB0068844D /* Window.h */; };
+		F34876C01DDAF80F0068844D /* CommonGameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34875561DDAE4ED0068844D /* CommonGameKit.framework */; };
+		F34876C11DDAF8190068844D /* CommonC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34875B51DDAE54F0068844D /* CommonC.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F33F1FFE1DDAE16200264034 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F33F1FE91DDAE16200264034 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F33F1FF11DDAE16200264034;
+			remoteInfo = BlobEngine;
+		};
+		F34875551DDAE4ED0068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F348754D1DDAE4EC0068844D /* CommonGameKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F3AF32791DCCD29000CAD472;
+			remoteInfo = CommonGameKit;
+		};
+		F34875571DDAE4ED0068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F348754D1DDAE4EC0068844D /* CommonGameKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F3AF32831DCCD29100CAD472;
+			remoteInfo = CommonGameKitTests;
+		};
+		F348757A1DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8C4D6BB916D8469A89192C66;
+			remoteInfo = glfw;
+		};
+		F348757C1DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3F29774A8B1042BFAD254FBF;
+			remoteInfo = boing;
+		};
+		F348757E1DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0B986A7C2CFB4CC7BEF955DB;
+			remoteInfo = gears;
+		};
+		F34875801DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 82679DBAC06444B7968E0F1B;
+			remoteInfo = heightmap;
+		};
+		F34875821DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 83C2F963B0FA4DB7B5BB4B26;
+			remoteInfo = particles;
+		};
+		F34875841DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 72E2EC0C45544DCFABAFFAB1;
+			remoteInfo = simple;
+		};
+		F34875861DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FD2A334AD90F4020A94A905F;
+			remoteInfo = splitview;
+		};
+		F34875881DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 986DF52DFC7742D3BCF7671A;
+			remoteInfo = wave;
+		};
+		F348758A1DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F99CE64CB7344C518609AEAE;
+			remoteInfo = clipboard;
+		};
+		F348758C1DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22506610014A4275BD92931F;
+			remoteInfo = cursor;
+		};
+		F348758E1DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6E3AFE6E67F4494695E3957A;
+			remoteInfo = empty;
+		};
+		F34875901DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DEF83B7EA0CF41A19698ADF4;
+			remoteInfo = events;
+		};
+		F34875921DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 499E62A2AED34F75BE1B1CAE;
+			remoteInfo = gamma;
+		};
+		F34875941DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0D4090F6F8D34027BB90AEB0;
+			remoteInfo = glfwinfo;
+		};
+		F34875961DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A8B5A316DF55423BBD5E868B;
+			remoteInfo = icon;
+		};
+		F34875981DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B6215C5B4D142A984FC35EC;
+			remoteInfo = iconify;
+		};
+		F348759A1DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C7BC0723E6BD4FB8B1DB4126;
+			remoteInfo = joysticks;
+		};
+		F348759C1DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D96391DA571D42F6A9E7F240;
+			remoteInfo = monitors;
+		};
+		F348759E1DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 707A480241CD4041A9AE5E3C;
+			remoteInfo = msaa;
+		};
+		F34875A01DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AC51579F99894421BB47D8B3;
+			remoteInfo = reopen;
+		};
+		F34875A21DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1011057BE037495DB8D10F3A;
+			remoteInfo = sharing;
+		};
+		F34875A41DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1456EBC17FCB4743A1A6C456;
+			remoteInfo = tearing;
+		};
+		F34875A61DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C61C76B97F4A49398EFED3BF;
+			remoteInfo = threads;
+		};
+		F34875A81DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 705F9A47D80C4364BB58CDD6;
+			remoteInfo = timeout;
+		};
+		F34875AA1DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 57122EA044364A6DA8C5A5D2;
+			remoteInfo = title;
+		};
+		F34875AC1DDAE4F60068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 44F1AA02A63A402D8D7824A2;
+			remoteInfo = windows;
+		};
+		F34875AE1DDAE50C0068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F348754D1DDAE4EC0068844D /* CommonGameKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F3AF32781DCCD29000CAD472;
+			remoteInfo = CommonGameKit;
+		};
+		F34875B01DDAE51D0068844D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E4E9B1512F04830B0EC8B27;
+			remoteInfo = glfw;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F34875BB1DDAE5880068844D /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F34875BC1DDAF1620068844D /* CommonGameKit.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F33F1FF21DDAE16200264034 /* BlobEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlobEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F33F1FF51DDAE16200264034 /* BlobEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlobEngine.h; sourceTree = "<group>"; };
+		F33F1FF71DDAE16200264034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = mac/Info.plist; sourceTree = "<group>"; };
+		F33F1FFC1DDAE16200264034 /* BlobEngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlobEngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F33F20031DDAE16200264034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F34875331DDAE30A0068844D /* stdatomic_clang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdatomic_clang.h; sourceTree = "<group>"; };
+		F34875341DDAE30A0068844D /* stdatomic_portable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdatomic_portable.h; sourceTree = "<group>"; };
+		F34875351DDAE30A0068844D /* stdatomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdatomic.h; sourceTree = "<group>"; };
+		F348753A1DDAE33D0068844D /* threads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threads.h; sourceTree = "<group>"; };
+		F348753C1DDAE3480068844D /* tinycthread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tinycthread.c; path = deps/CommonGameKit/deps/tinycthread/source/tinycthread.c; sourceTree = SOURCE_ROOT; };
+		F348753D1DDAE3480068844D /* tinycthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinycthread.h; path = deps/CommonGameKit/deps/tinycthread/source/tinycthread.h; sourceTree = SOURCE_ROOT; };
+		F348754D1DDAE4EC0068844D /* CommonGameKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CommonGameKit.xcodeproj; path = deps/CommonGameKit/CommonGameKit.xcodeproj; sourceTree = "<group>"; };
+		F34875591DDAE4F60068844D /* GLFW.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GLFW.xcodeproj; path = deps/glfw/build/GLFW.xcodeproj; sourceTree = "<group>"; };
+		F34875B51DDAE54F0068844D /* CommonC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonC.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/BlobEngine-faxauwsjllilcaeewsagxztvgzor/Build/Products/Debug/CommonC.framework"; sourceTree = "<group>"; };
+		F34875BD1DDAF1A70068844D /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		F34876481DDAF6810068844D /* ExpressionProjectTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionProjectTests.m; sourceTree = "<group>"; };
+		F34876701DDAF6CB0068844D /* Project.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Project.c; sourceTree = "<group>"; };
+		F34876711DDAF6CB0068844D /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		F34876721DDAF6CB0068844D /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		F34876771DDAF6CB0068844D /* ProjectExpressions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ProjectExpressions.c; sourceTree = "<group>"; };
+		F34876781DDAF6CB0068844D /* ProjectExpressions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectExpressions.h; sourceTree = "<group>"; };
+		F348767A1DDAF6CB0068844D /* Configuration.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Configuration.c; sourceTree = "<group>"; };
+		F348767B1DDAF6CB0068844D /* Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
+		F348767C1DDAF6CB0068844D /* EngineSetup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EngineSetup.c; sourceTree = "<group>"; };
+		F348767D1DDAF6CB0068844D /* EngineSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineSetup.h; sourceTree = "<group>"; };
+		F348767E1DDAF6CB0068844D /* ExpressionSetup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ExpressionSetup.c; sourceTree = "<group>"; };
+		F348767F1DDAF6CB0068844D /* ExpressionSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionSetup.h; sourceTree = "<group>"; };
+		F34876801DDAF6CB0068844D /* PlatformSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformSetup.h; sourceTree = "<group>"; };
+		F34876811DDAF6CB0068844D /* PlatformSetup_linux.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PlatformSetup_linux.c; sourceTree = "<group>"; };
+		F34876821DDAF6CB0068844D /* PlatformSetup_mac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatformSetup_mac.m; sourceTree = "<group>"; };
+		F34876831DDAF6CB0068844D /* PlatformSetup_win.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PlatformSetup_win.c; sourceTree = "<group>"; };
+		F34876841DDAF6CB0068844D /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F33F1FEE1DDAE16200264034 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F34875B71DDAE5600068844D /* libglfw3.a in Frameworks */,
+				F34875B61DDAE5500068844D /* CommonC.framework in Frameworks */,
+				F34875B21DDAE52B0068844D /* CommonGameKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F33F1FF91DDAE16200264034 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F34876C11DDAF8190068844D /* CommonC.framework in Frameworks */,
+				F34876C01DDAF80F0068844D /* CommonGameKit.framework in Frameworks */,
+				F33F1FFD1DDAE16200264034 /* BlobEngine.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F33F1FE81DDAE16200264034 = {
+			isa = PBXGroup;
+			children = (
+				F34875BD1DDAF1A70068844D /* assets */,
+				F34874691DDAE2570068844D /* Dependencies */,
+				F33F1FF41DDAE16200264034 /* BlobEngine */,
+				F33F20001DDAE16200264034 /* BlobEngineTests */,
+				F33F1FF31DDAE16200264034 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F33F1FF31DDAE16200264034 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F33F1FF21DDAE16200264034 /* BlobEngine.framework */,
+				F33F1FFC1DDAE16200264034 /* BlobEngineTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F33F1FF41DDAE16200264034 /* BlobEngine */ = {
+			isa = PBXGroup;
+			children = (
+				F33F1FF51DDAE16200264034 /* BlobEngine.h */,
+				F34876721DDAF6CB0068844D /* main.c */,
+				F34876841DDAF6CB0068844D /* Window.h */,
+				F348766F1DDAF6CB0068844D /* Engine */,
+				F34876731DDAF6CB0068844D /* Scripting */,
+				F34876791DDAF6CB0068844D /* Setup */,
+				F348764B1DDAF69F0068844D /* Supporting Files */,
+			);
+			name = BlobEngine;
+			path = src;
+			sourceTree = "<group>";
+		};
+		F33F20001DDAE16200264034 /* BlobEngineTests */ = {
+			isa = PBXGroup;
+			children = (
+				F34876471DDAF6750068844D /* Scripting */,
+				F348764A1DDAF68E0068844D /* Supporting Files */,
+			);
+			path = BlobEngineTests;
+			sourceTree = "<group>";
+		};
+		F34874691DDAE2570068844D /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				F34875B51DDAE54F0068844D /* CommonC.framework */,
+				F348754D1DDAE4EC0068844D /* CommonGameKit.xcodeproj */,
+				F34875591DDAE4F60068844D /* GLFW.xcodeproj */,
+				F34875321DDAE2D70068844D /* stdatomic */,
+				F34875391DDAE3140068844D /* threads */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		F34875321DDAE2D70068844D /* stdatomic */ = {
+			isa = PBXGroup;
+			children = (
+				F34875351DDAE30A0068844D /* stdatomic.h */,
+				F34875331DDAE30A0068844D /* stdatomic_clang.h */,
+				F34875341DDAE30A0068844D /* stdatomic_portable.h */,
+			);
+			name = stdatomic;
+			path = deps/CommonGameKit/deps/stdatomic;
+			sourceTree = "<group>";
+		};
+		F34875391DDAE3140068844D /* threads */ = {
+			isa = PBXGroup;
+			children = (
+				F348753C1DDAE3480068844D /* tinycthread.c */,
+				F348753D1DDAE3480068844D /* tinycthread.h */,
+				F348753A1DDAE33D0068844D /* threads.h */,
+			);
+			name = threads;
+			path = deps/CommonGameKit/deps/threads;
+			sourceTree = "<group>";
+		};
+		F348754E1DDAE4EC0068844D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F34875561DDAE4ED0068844D /* CommonGameKit.framework */,
+				F34875581DDAE4ED0068844D /* CommonGameKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F348755A1DDAE4F60068844D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F348757B1DDAE4F60068844D /* libglfw3.a */,
+				F348757D1DDAE4F60068844D /* boing.app */,
+				F348757F1DDAE4F60068844D /* gears.app */,
+				F34875811DDAE4F60068844D /* heightmap.app */,
+				F34875831DDAE4F60068844D /* particles.app */,
+				F34875851DDAE4F60068844D /* simple.app */,
+				F34875871DDAE4F60068844D /* splitview.app */,
+				F34875891DDAE4F60068844D /* wave.app */,
+				F348758B1DDAE4F60068844D /* clipboard */,
+				F348758D1DDAE4F60068844D /* cursor */,
+				F348758F1DDAE4F60068844D /* empty.app */,
+				F34875911DDAE4F60068844D /* events */,
+				F34875931DDAE4F60068844D /* gamma.app */,
+				F34875951DDAE4F60068844D /* glfwinfo */,
+				F34875971DDAE4F60068844D /* icon.app */,
+				F34875991DDAE4F60068844D /* iconify */,
+				F348759B1DDAE4F60068844D /* joysticks.app */,
+				F348759D1DDAE4F60068844D /* monitors */,
+				F348759F1DDAE4F60068844D /* msaa */,
+				F34875A11DDAE4F60068844D /* reopen */,
+				F34875A31DDAE4F60068844D /* sharing.app */,
+				F34875A51DDAE4F60068844D /* tearing.app */,
+				F34875A71DDAE4F60068844D /* threads.app */,
+				F34875A91DDAE4F60068844D /* timeout.app */,
+				F34875AB1DDAE4F60068844D /* title.app */,
+				F34875AD1DDAE4F60068844D /* windows.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F34876471DDAF6750068844D /* Scripting */ = {
+			isa = PBXGroup;
+			children = (
+				F34876481DDAF6810068844D /* ExpressionProjectTests.m */,
+			);
+			name = Scripting;
+			sourceTree = "<group>";
+		};
+		F348764A1DDAF68E0068844D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F33F20031DDAE16200264034 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F348764B1DDAF69F0068844D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F33F1FF71DDAE16200264034 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F348766F1DDAF6CB0068844D /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				F34876701DDAF6CB0068844D /* Project.c */,
+				F34876711DDAF6CB0068844D /* Project.h */,
+			);
+			name = Engine;
+			path = engine;
+			sourceTree = "<group>";
+		};
+		F34876731DDAF6CB0068844D /* Scripting */ = {
+			isa = PBXGroup;
+			children = (
+				F34876751DDAF6CB0068844D /* Evaluators */,
+			);
+			name = Scripting;
+			path = scripting;
+			sourceTree = "<group>";
+		};
+		F34876751DDAF6CB0068844D /* Evaluators */ = {
+			isa = PBXGroup;
+			children = (
+				F34876771DDAF6CB0068844D /* ProjectExpressions.c */,
+				F34876781DDAF6CB0068844D /* ProjectExpressions.h */,
+			);
+			name = Evaluators;
+			path = evaluators;
+			sourceTree = "<group>";
+		};
+		F34876791DDAF6CB0068844D /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				F348767A1DDAF6CB0068844D /* Configuration.c */,
+				F348767B1DDAF6CB0068844D /* Configuration.h */,
+				F348767C1DDAF6CB0068844D /* EngineSetup.c */,
+				F348767D1DDAF6CB0068844D /* EngineSetup.h */,
+				F348767E1DDAF6CB0068844D /* ExpressionSetup.c */,
+				F348767F1DDAF6CB0068844D /* ExpressionSetup.h */,
+				F34876801DDAF6CB0068844D /* PlatformSetup.h */,
+				F34876811DDAF6CB0068844D /* PlatformSetup_linux.c */,
+				F34876821DDAF6CB0068844D /* PlatformSetup_mac.m */,
+				F34876831DDAF6CB0068844D /* PlatformSetup_win.c */,
+			);
+			name = Setup;
+			path = setup;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F33F1FEF1DDAE16200264034 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F34876921DDAF6CB0068844D /* ExpressionSetup.h in Headers */,
+				F34876901DDAF6CB0068844D /* EngineSetup.h in Headers */,
+				F348753F1DDAE3480068844D /* tinycthread.h in Headers */,
+				F33F1FF61DDAE16200264034 /* BlobEngine.h in Headers */,
+				F34876971DDAF6CB0068844D /* Window.h in Headers */,
+				F34875381DDAE30A0068844D /* stdatomic.h in Headers */,
+				F34875371DDAE30A0068844D /* stdatomic_portable.h in Headers */,
+				F348768C1DDAF6CB0068844D /* ProjectExpressions.h in Headers */,
+				F348768E1DDAF6CB0068844D /* Configuration.h in Headers */,
+				F348753B1DDAE33D0068844D /* threads.h in Headers */,
+				F34876871DDAF6CB0068844D /* Project.h in Headers */,
+				F34876931DDAF6CB0068844D /* PlatformSetup.h in Headers */,
+				F34875361DDAE30A0068844D /* stdatomic_clang.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		F33F1FF11DDAE16200264034 /* BlobEngine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F33F20061DDAE16200264034 /* Build configuration list for PBXNativeTarget "BlobEngine" */;
+			buildPhases = (
+				F33F1FED1DDAE16200264034 /* Sources */,
+				F33F1FEE1DDAE16200264034 /* Frameworks */,
+				F33F1FEF1DDAE16200264034 /* Headers */,
+				F33F1FF01DDAE16200264034 /* Resources */,
+				F34875BB1DDAE5880068844D /* Copy Frameworks */,
+				F34875C91DDAF43B0068844D /* Update DYLIB Install Names */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F34875B11DDAE51D0068844D /* PBXTargetDependency */,
+				F34875AF1DDAE50C0068844D /* PBXTargetDependency */,
+			);
+			name = BlobEngine;
+			productName = BlobEngine;
+			productReference = F33F1FF21DDAE16200264034 /* BlobEngine.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F33F1FFB1DDAE16200264034 /* BlobEngineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F33F20091DDAE16200264034 /* Build configuration list for PBXNativeTarget "BlobEngineTests" */;
+			buildPhases = (
+				F33F1FF81DDAE16200264034 /* Sources */,
+				F33F1FF91DDAE16200264034 /* Frameworks */,
+				F33F1FFA1DDAE16200264034 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F33F1FFF1DDAE16200264034 /* PBXTargetDependency */,
+			);
+			name = BlobEngineTests;
+			productName = BlobEngineTests;
+			productReference = F33F1FFC1DDAE16200264034 /* BlobEngineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F33F1FE91DDAE16200264034 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Stefan Johnson";
+				TargetAttributes = {
+					F33F1FF11DDAE16200264034 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					F33F1FFB1DDAE16200264034 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = F33F1FEC1DDAE16200264034 /* Build configuration list for PBXProject "BlobEngine" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F33F1FE81DDAE16200264034;
+			productRefGroup = F33F1FF31DDAE16200264034 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F348754E1DDAE4EC0068844D /* Products */;
+					ProjectRef = F348754D1DDAE4EC0068844D /* CommonGameKit.xcodeproj */;
+				},
+				{
+					ProductGroup = F348755A1DDAE4F60068844D /* Products */;
+					ProjectRef = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				F33F1FF11DDAE16200264034 /* BlobEngine */,
+				F33F1FFB1DDAE16200264034 /* BlobEngineTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F34875561DDAE4ED0068844D /* CommonGameKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CommonGameKit.framework;
+			remoteRef = F34875551DDAE4ED0068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875581DDAE4ED0068844D /* CommonGameKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CommonGameKitTests.xctest;
+			remoteRef = F34875571DDAE4ED0068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F348757B1DDAE4F60068844D /* libglfw3.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libglfw3.a;
+			remoteRef = F348757A1DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F348757D1DDAE4F60068844D /* boing.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = boing.app;
+			remoteRef = F348757C1DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F348757F1DDAE4F60068844D /* gears.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = gears.app;
+			remoteRef = F348757E1DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875811DDAE4F60068844D /* heightmap.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = heightmap.app;
+			remoteRef = F34875801DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875831DDAE4F60068844D /* particles.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = particles.app;
+			remoteRef = F34875821DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875851DDAE4F60068844D /* simple.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = simple.app;
+			remoteRef = F34875841DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875871DDAE4F60068844D /* splitview.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = splitview.app;
+			remoteRef = F34875861DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875891DDAE4F60068844D /* wave.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = wave.app;
+			remoteRef = F34875881DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F348758B1DDAE4F60068844D /* clipboard */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = clipboard;
+			remoteRef = F348758A1DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F348758D1DDAE4F60068844D /* cursor */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = cursor;
+			remoteRef = F348758C1DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F348758F1DDAE4F60068844D /* empty.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = empty.app;
+			remoteRef = F348758E1DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875911DDAE4F60068844D /* events */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = events;
+			remoteRef = F34875901DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875931DDAE4F60068844D /* gamma.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = gamma.app;
+			remoteRef = F34875921DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875951DDAE4F60068844D /* glfwinfo */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = glfwinfo;
+			remoteRef = F34875941DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875971DDAE4F60068844D /* icon.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = icon.app;
+			remoteRef = F34875961DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875991DDAE4F60068844D /* iconify */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = iconify;
+			remoteRef = F34875981DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F348759B1DDAE4F60068844D /* joysticks.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = joysticks.app;
+			remoteRef = F348759A1DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F348759D1DDAE4F60068844D /* monitors */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = monitors;
+			remoteRef = F348759C1DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F348759F1DDAE4F60068844D /* msaa */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = msaa;
+			remoteRef = F348759E1DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875A11DDAE4F60068844D /* reopen */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = reopen;
+			remoteRef = F34875A01DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875A31DDAE4F60068844D /* sharing.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = sharing.app;
+			remoteRef = F34875A21DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875A51DDAE4F60068844D /* tearing.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = tearing.app;
+			remoteRef = F34875A41DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875A71DDAE4F60068844D /* threads.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = threads.app;
+			remoteRef = F34875A61DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875A91DDAE4F60068844D /* timeout.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = timeout.app;
+			remoteRef = F34875A81DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875AB1DDAE4F60068844D /* title.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = title.app;
+			remoteRef = F34875AA1DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F34875AD1DDAE4F60068844D /* windows.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = windows.app;
+			remoteRef = F34875AC1DDAE4F60068844D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F33F1FF01DDAE16200264034 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F34875BE1DDAF1A70068844D /* assets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F33F1FFA1DDAE16200264034 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F34875C91DDAF43B0068844D /* Update DYLIB Install Names */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update DYLIB Install Names";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nEXECFILE=$BUILT_PRODUCTS_DIR/$EXECUTABLE_PATH\nLIBPATH=$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH\nNEWLIBPATH=\"@executable_path/../Frameworks\"\n\n\nif [ -e \"$LIBPATH\"/*.dylib ];\nthen\nfor DYLIB in \"$LIBPATH\"/*.dylib; do\nTARGETID=$(otool -DX \"$DYLIB\")\nNEWTARGETID=\"$NEWLIBPATH/$(basename \"$DYLIB\")\"\ninstall_name_tool -change \"$TARGETID\" \"$NEWTARGETID\" \"$EXECFILE\"\ndone;\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F33F1FED1DDAE16200264034 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F348768D1DDAF6CB0068844D /* Configuration.c in Sources */,
+				F348753E1DDAE3480068844D /* tinycthread.c in Sources */,
+				F34876861DDAF6CB0068844D /* Project.c in Sources */,
+				F348768F1DDAF6CB0068844D /* EngineSetup.c in Sources */,
+				F34876951DDAF6CB0068844D /* PlatformSetup_mac.m in Sources */,
+				F34876881DDAF6CB0068844D /* main.c in Sources */,
+				F348768B1DDAF6CB0068844D /* ProjectExpressions.c in Sources */,
+				F34876911DDAF6CB0068844D /* ExpressionSetup.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F33F1FF81DDAE16200264034 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F34876491DDAF6810068844D /* ExpressionProjectTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F33F1FFF1DDAE16200264034 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F33F1FF11DDAE16200264034 /* BlobEngine */;
+			targetProxy = F33F1FFE1DDAE16200264034 /* PBXContainerItemProxy */;
+		};
+		F34875AF1DDAE50C0068844D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CommonGameKit;
+			targetProxy = F34875AE1DDAE50C0068844D /* PBXContainerItemProxy */;
+		};
+		F34875B11DDAE51D0068844D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = glfw;
+			targetProxy = F34875B01DDAE51D0068844D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F33F20041DDAE16200264034 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F33F20051DDAE16200264034 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F33F20071DDAE16200264034 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/deps/CommonGameKit/deps/CommonC/build/Debug",
+				);
+				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = (
+					$PROJECT_DIR/deps/glfw/include,
+					$PROJECT_DIR/deps/CommonGameKit/deps/threads,
+					$PROJECT_DIR/deps/CommonGameKit/deps/tinycthread/source,
+					$PROJECT_DIR/deps/CommonGameKit/deps/stdatomic,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/src/mac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngine;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WARNING_CFLAGS = "-Wno-ambiguous-macro";
+			};
+			name = Debug;
+		};
+		F33F20081DDAE16200264034 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/deps/CommonGameKit/deps/CommonC/build/Debug",
+				);
+				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = (
+					$PROJECT_DIR/deps/glfw/include,
+					$PROJECT_DIR/deps/CommonGameKit/deps/threads,
+					$PROJECT_DIR/deps/CommonGameKit/deps/tinycthread/source,
+					$PROJECT_DIR/deps/CommonGameKit/deps/stdatomic,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/src/mac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngine;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WARNING_CFLAGS = "-Wno-ambiguous-macro";
+			};
+			name = Release;
+		};
+		F33F200A1DDAE16200264034 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					$PROJECT_DIR/deps/CommonGameKit/deps/threads,
+					$PROJECT_DIR/deps/CommonGameKit/deps/tinycthread/source,
+					$PROJECT_DIR/deps/CommonGameKit/deps/stdatomic,
+				);
+				INFOPLIST_FILE = BlobEngineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F33F200B1DDAE16200264034 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					$PROJECT_DIR/deps/CommonGameKit/deps/threads,
+					$PROJECT_DIR/deps/CommonGameKit/deps/tinycthread/source,
+					$PROJECT_DIR/deps/CommonGameKit/deps/stdatomic,
+				);
+				INFOPLIST_FILE = BlobEngineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngineTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F33F1FEC1DDAE16200264034 /* Build configuration list for PBXProject "BlobEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F33F20041DDAE16200264034 /* Debug */,
+				F33F20051DDAE16200264034 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F33F20061DDAE16200264034 /* Build configuration list for PBXNativeTarget "BlobEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F33F20071DDAE16200264034 /* Debug */,
+				F33F20081DDAE16200264034 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F33F20091DDAE16200264034 /* Build configuration list for PBXNativeTarget "BlobEngineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F33F200A1DDAE16200264034 /* Debug */,
+				F33F200B1DDAE16200264034 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F33F1FE91DDAE16200264034 /* Project object */;
+}
