@@ -23,7 +23,7 @@
 		F34876491DDAF6810068844D /* ExpressionProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F34876481DDAF6810068844D /* ExpressionProjectTests.m */; };
 		F34876861DDAF6CB0068844D /* Project.c in Sources */ = {isa = PBXBuildFile; fileRef = F34876701DDAF6CB0068844D /* Project.c */; };
 		F34876871DDAF6CB0068844D /* Project.h in Headers */ = {isa = PBXBuildFile; fileRef = F34876711DDAF6CB0068844D /* Project.h */; };
-		F34876881DDAF6CB0068844D /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F34876721DDAF6CB0068844D /* main.c */; };
+		F34876881DDAF6CB0068844D /* EngineMain.c in Sources */ = {isa = PBXBuildFile; fileRef = F34876721DDAF6CB0068844D /* EngineMain.c */; };
 		F348768B1DDAF6CB0068844D /* ProjectExpressions.c in Sources */ = {isa = PBXBuildFile; fileRef = F34876771DDAF6CB0068844D /* ProjectExpressions.c */; };
 		F348768C1DDAF6CB0068844D /* ProjectExpressions.h in Headers */ = {isa = PBXBuildFile; fileRef = F34876781DDAF6CB0068844D /* ProjectExpressions.h */; };
 		F348768D1DDAF6CB0068844D /* Configuration.c in Sources */ = {isa = PBXBuildFile; fileRef = F348767A1DDAF6CB0068844D /* Configuration.c */; };
@@ -37,6 +37,7 @@
 		F34876971DDAF6CB0068844D /* Window.h in Headers */ = {isa = PBXBuildFile; fileRef = F34876841DDAF6CB0068844D /* Window.h */; };
 		F34876C01DDAF80F0068844D /* CommonGameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34875561DDAE4ED0068844D /* CommonGameKit.framework */; };
 		F34876C11DDAF8190068844D /* CommonC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34875B51DDAE54F0068844D /* CommonC.framework */; };
+		F34876C31DDAFA360068844D /* EngineMain.h in Headers */ = {isa = PBXBuildFile; fileRef = F34876C21DDAFA360068844D /* EngineMain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -292,7 +293,7 @@
 		F34876481DDAF6810068844D /* ExpressionProjectTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionProjectTests.m; sourceTree = "<group>"; };
 		F34876701DDAF6CB0068844D /* Project.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Project.c; sourceTree = "<group>"; };
 		F34876711DDAF6CB0068844D /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
-		F34876721DDAF6CB0068844D /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		F34876721DDAF6CB0068844D /* EngineMain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = EngineMain.c; sourceTree = "<group>"; };
 		F34876771DDAF6CB0068844D /* ProjectExpressions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ProjectExpressions.c; sourceTree = "<group>"; };
 		F34876781DDAF6CB0068844D /* ProjectExpressions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectExpressions.h; sourceTree = "<group>"; };
 		F348767A1DDAF6CB0068844D /* Configuration.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Configuration.c; sourceTree = "<group>"; };
@@ -306,6 +307,7 @@
 		F34876821DDAF6CB0068844D /* PlatformSetup_mac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatformSetup_mac.m; sourceTree = "<group>"; };
 		F34876831DDAF6CB0068844D /* PlatformSetup_win.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PlatformSetup_win.c; sourceTree = "<group>"; };
 		F34876841DDAF6CB0068844D /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
+		F34876C21DDAFA360068844D /* EngineMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineMain.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,7 +358,8 @@
 			isa = PBXGroup;
 			children = (
 				F33F1FF51DDAE16200264034 /* BlobEngine.h */,
-				F34876721DDAF6CB0068844D /* main.c */,
+				F34876C21DDAFA360068844D /* EngineMain.h */,
+				F34876721DDAF6CB0068844D /* EngineMain.c */,
 				F34876841DDAF6CB0068844D /* Window.h */,
 				F348766F1DDAF6CB0068844D /* Engine */,
 				F34876731DDAF6CB0068844D /* Scripting */,
@@ -543,6 +546,7 @@
 				F34876871DDAF6CB0068844D /* Project.h in Headers */,
 				F34876931DDAF6CB0068844D /* PlatformSetup.h in Headers */,
 				F34875361DDAE30A0068844D /* stdatomic_clang.h in Headers */,
+				F34876C31DDAFA360068844D /* EngineMain.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,7 +882,7 @@
 				F34876861DDAF6CB0068844D /* Project.c in Sources */,
 				F348768F1DDAF6CB0068844D /* EngineSetup.c in Sources */,
 				F34876951DDAF6CB0068844D /* PlatformSetup_mac.m in Sources */,
-				F34876881DDAF6CB0068844D /* main.c in Sources */,
+				F34876881DDAF6CB0068844D /* EngineMain.c in Sources */,
 				F348768B1DDAF6CB0068844D /* ProjectExpressions.c in Sources */,
 				F34876911DDAF6CB0068844D /* ExpressionSetup.c in Sources */,
 			);

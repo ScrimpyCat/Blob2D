@@ -345,7 +345,7 @@ static int EngineMain(int argc, const char *argv[])
     return EXIT_SUCCESS;
 }
 
-int main(int argc, const char *argv[])
+int BEEngineMain(int argc, const char *argv[])
 {
     CCTimestamp = glfwGetTime;
     

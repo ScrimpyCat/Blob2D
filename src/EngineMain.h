@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2016, Stefan Johnson
+ *  Copyright (c) 2015, Stefan Johnson
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification,
@@ -23,10 +23,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef BlobEngine_EngineMain_h
+#define BlobEngine_EngineMain_h
 
-#ifndef BlobEngine_Window_h
-#define BlobEngine_Window_h
-
-#include <BlobEngine/EngineMain.h>
+int BEEngineMain(int argc, const char *argv[]);
 
 #endif
