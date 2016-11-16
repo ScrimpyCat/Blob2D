@@ -27,7 +27,7 @@
 		F348768B1DDAF6CB0068844D /* ProjectExpressions.c in Sources */ = {isa = PBXBuildFile; fileRef = F34876771DDAF6CB0068844D /* ProjectExpressions.c */; };
 		F348768C1DDAF6CB0068844D /* ProjectExpressions.h in Headers */ = {isa = PBXBuildFile; fileRef = F34876781DDAF6CB0068844D /* ProjectExpressions.h */; };
 		F348768D1DDAF6CB0068844D /* Configuration.c in Sources */ = {isa = PBXBuildFile; fileRef = F348767A1DDAF6CB0068844D /* Configuration.c */; };
-		F348768E1DDAF6CB0068844D /* Configuration.h in Headers */ = {isa = PBXBuildFile; fileRef = F348767B1DDAF6CB0068844D /* Configuration.h */; };
+		F348768E1DDAF6CB0068844D /* Configuration.h in Headers */ = {isa = PBXBuildFile; fileRef = F348767B1DDAF6CB0068844D /* Configuration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F348768F1DDAF6CB0068844D /* EngineSetup.c in Sources */ = {isa = PBXBuildFile; fileRef = F348767C1DDAF6CB0068844D /* EngineSetup.c */; };
 		F34876901DDAF6CB0068844D /* EngineSetup.h in Headers */ = {isa = PBXBuildFile; fileRef = F348767D1DDAF6CB0068844D /* EngineSetup.h */; };
 		F34876911DDAF6CB0068844D /* ExpressionSetup.c in Sources */ = {isa = PBXBuildFile; fileRef = F348767E1DDAF6CB0068844D /* ExpressionSetup.c */; };

@@ -28,6 +28,8 @@
 #define Blob2D_Blob2D_h
 
 #include <CommonGameKit/CommonGameKit.h>
+
 #include <Blob2D/EngineMain.h>
+#include <Blob2D/Configuration.h>
 
 #endif
