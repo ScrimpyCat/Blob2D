@@ -14,7 +14,7 @@
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIAB2E
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
@@ -23,19 +23,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef Blob_Game_Configuration_h
-#define Blob_Game_Configuration_h
+#ifndef Blob2D_Configuration_h
+#define Blob2D_Configuration_h
 
 #include <CommonGameKit/CommonGameKit.h>
 
 typedef enum {
-    CCLaunchOptionGame,
-    CCLaunchOptionEditor,
-    CCLaunchOptionTest
-} CCLaunchOption;
+    B2LaunchOptionGame,
+    B2LaunchOptionEditor,
+    B2LaunchOptionTest
+} B2LaunchOption;
 
 typedef struct {
-    CCLaunchOption launch;
+    B2LaunchOption launch;
     FSPath project;
     char *title;
     struct {
@@ -55,10 +55,10 @@ typedef struct {
         FSPath logs;
         FSPath tmp;
     } directory;
-} CCEngineConfig;
+} B2EngineConfig;
 
 
-extern CCEngineConfig CCEngineConfiguration;
-void CCConfigureOptions(int argc, const char *argv[]);
+extern B2EngineConfig B2EngineConfiguration;
+void B2ConfigureOptions(int argc, const char *argv[]);
 
 #endif

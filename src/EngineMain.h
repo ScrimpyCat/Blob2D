@@ -23,9 +23,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BlobEngine_EngineMain_h
-#define BlobEngine_EngineMain_h
+#ifndef Blob2D_EngineMain_h
+#define Blob2D_EngineMain_h
 
-int BEEngineMain(int argc, const char *argv[]);
+/*!
+ * @brief The main entrypoint into the engine.
+ * @param argc The number of entries in argv.
+ * @param argv The program inputs.
+ * @result The error code upon completion/exit of your program.
+ */
+int B2EngineRun(int argc, const char *argv[]);
 
 #endif

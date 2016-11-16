@@ -23,8 +23,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef Blob_Game_ProjectExpressions_h
-#define Blob_Game_ProjectExpressions_h
+#ifndef Blob2D_ProjectExpressions_h
+#define Blob2D_ProjectExpressions_h
 
 #include <CommonGameKit/CommonGameKit.h>
 
@@ -47,10 +47,10 @@
  */
 
 typedef enum {
-    CCProjectExpressionValueTypeGameConfig = 'cfg\0'
-} CCProjectExpressionValueType;
+    B2ProjectExpressionValueTypeGameConfig = 'cfg\0'
+} B2ProjectExpressionValueType;
 
 
-CC_EXPRESSION_EVALUATOR(game) CCExpression CCProjectExpressionGame(CCExpression Expression);
+CC_EXPRESSION_EVALUATOR(game) CCExpression B2ProjectExpressionGame(CCExpression Expression);
 
 #endif

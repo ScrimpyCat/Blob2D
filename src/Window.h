@@ -29,6 +29,6 @@
 #include <GLFW/glfw3.h>
 #include <stdatomic.h>
 
-extern GLFWwindow * const CCWindow;
+extern GLFWwindow * const B2Window;
 
 #endif

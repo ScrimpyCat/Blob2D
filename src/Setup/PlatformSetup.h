@@ -23,12 +23,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef Blob_Game_PlatformSetup_h
-#define Blob_Game_PlatformSetup_h
+#ifndef Blob2D_PlatformSetup_h
+#define Blob2D_PlatformSetup_h
 
 #include <GLFW/glfw3.h>
 
-void CCPlatformSetup(void);
-void CCPlatformWindowSetup(GLFWwindow *Window);
+void B2PlatformSetup(void);
+void B2PlatformWindowSetup(GLFWwindow *Window);
 
 #endif

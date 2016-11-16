@@ -29,12 +29,12 @@
 #include "PlatformSetup.h"
 #include <GLFW/glfw3native.h>
 
-void CCPlatformSetup(void)
+void B2PlatformSetup(void)
 {
     
 }
 
-void CCPlatformWindowSetup(GLFWwindow *Window)
+void B2PlatformWindowSetup(GLFWwindow *Window)
 {
     
 }

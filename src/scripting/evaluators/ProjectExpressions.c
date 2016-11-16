@@ -27,7 +27,7 @@
 #include "Configuration.h"
 
 #warning Need to add a copy function
-static void CCProjectExpressionValueGameConfigDestructor(CCEngineConfig *Data)
+static void B2ProjectExpressionValueGameConfigDestructor(B2EngineConfig *Data)
 {
     CC_SAFE_Free(Data->title);
     if (Data->directory.fonts) CCCollectionDestroy(Data->directory.fonts);
@@ -42,7 +42,7 @@ static void CCProjectExpressionValueGameConfigDestructor(CCEngineConfig *Data)
     CC_SAFE_Free(Data);
 }
 
-static FSPath CCProjectExpressionPathFromExpression(CCExpression Expression, CCExpression State)
+static FSPath B2ProjectExpressionPathFromExpression(CCExpression Expression, CCExpression State)
 {
     FSPath Path = NULL;
     if (CCExpressionGetType(Expression) == CCExpressionValueTypeString)
@@ -99,10 +99,10 @@ static FSPath CCProjectExpressionPathFromExpression(CCExpression Expression, CCE
     return Path;
 }
 
-CCExpression CCProjectExpressionGame(CCExpression Expression)
+CCExpression B2ProjectExpressionGame(CCExpression Expression)
 {
-    CCEngineConfig Config = {
-        .launch = CCLaunchOptionGame,
+    B2EngineConfig Config = {
+        .launch = B2LaunchOptionGame,
         .project = NULL,
         .title = NULL,
         .window = {
@@ -223,7 +223,7 @@ CCExpression CCProjectExpressionGame(CCExpression Expression)
                                     {
                                         if (ArgCount == 1)
                                         {
-                                            *(FSPath*)(Commands[Loop].attribute) = CCProjectExpressionPathFromExpression(CCExpressionEvaluate(*(CCExpression*)CCCollectionEnumeratorNext(&Enumerator)), Result);
+                                            *(FSPath*)(Commands[Loop].attribute) = B2ProjectExpressionPathFromExpression(CCExpressionEvaluate(*(CCExpression*)CCCollectionEnumeratorNext(&Enumerator)), Result);
                                         }
                                         
                                         else
@@ -239,7 +239,7 @@ CCExpression CCProjectExpressionGame(CCExpression Expression)
                                         //TODO: Make a directory expression
                                         for (Expr = NULL; (Expr = CCCollectionEnumeratorNext(&Enumerator)); )
                                         {
-                                            FSPath Dir = CCProjectExpressionPathFromExpression(CCExpressionEvaluate(*Expr), Result);
+                                            FSPath Dir = B2ProjectExpressionPathFromExpression(CCExpressionEvaluate(*Expr), Result);
                                             CCCollectionInsertElement(Directories, &Dir);
                                         }
                                         
@@ -254,19 +254,19 @@ CCExpression CCProjectExpressionGame(CCExpression Expression)
         }
     }
 
-    CCEngineConfig *Result;
-    CC_SAFE_Malloc(Result, sizeof(CCEngineConfig),
-                   CC_LOG_ERROR("Failed to allocate CCEngineConfig for expression. Allocation size: %zu", sizeof(CCEngineConfig));
+    B2EngineConfig *Result;
+    CC_SAFE_Malloc(Result, sizeof(B2EngineConfig),
+                   CC_LOG_ERROR("Failed to allocate CCEngineConfig for expression. Allocation size: %zu", sizeof(B2EngineConfig));
                    );
     
     if (Result)
     {
-        *(CCEngineConfig*)Result = Config;
+        *(B2EngineConfig*)Result = Config;
         
-        return CCExpressionCreateCustomType(CC_STD_ALLOCATOR, (CCExpressionValueType)CCProjectExpressionValueTypeGameConfig, Result, NULL, (CCExpressionValueDestructor)CCProjectExpressionValueGameConfigDestructor);
+        return CCExpressionCreateCustomType(CC_STD_ALLOCATOR, (CCExpressionValueType)B2ProjectExpressionValueTypeGameConfig, Result, NULL, (CCExpressionValueDestructor)B2ProjectExpressionValueGameConfigDestructor);
     }
     
-    else CCProjectExpressionValueGameConfigDestructor(&Config);
+    else B2ProjectExpressionValueGameConfigDestructor(&Config);
     
     return Expression;
 }

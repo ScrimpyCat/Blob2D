@@ -37,7 +37,7 @@
 {
     [super setUp];
     
-    CCExpressionEvaluatorRegister(CC_STRING("game"), CCProjectExpressionGame);
+    CCExpressionEvaluatorRegister(CC_STRING("game"), B2ProjectExpressionGame);
 }
 
 -(void) testProject
@@ -59,21 +59,21 @@
                                                            ")\n");
     
     CCExpression Result = CCExpressionEvaluate(Expression);
-    XCTAssertEqual(CCExpressionGetType(Result), CCProjectExpressionValueTypeGameConfig, @"Should be a project config");
-    XCTAssertTrue(!strcmp(((CCEngineConfig*)CCExpressionGetData(Result))->title, "Test Game"), @"Should be initialized");
-    XCTAssertEqual(((CCEngineConfig*)CCExpressionGetData(Result))->window.fullscreen, FALSE, @"Should be initialized");
-    XCTAssertEqual(((CCEngineConfig*)CCExpressionGetData(Result))->window.width, 640, @"Should be initialized");
-    XCTAssertEqual(((CCEngineConfig*)CCExpressionGetData(Result))->window.height, 480, @"Should be initialized");
-    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((CCEngineConfig*)CCExpressionGetData(Result))->directory.fonts, 0)), "font/"), @"Should be initialized");
-    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((CCEngineConfig*)CCExpressionGetData(Result))->directory.levels, 0)), "logic/levels/"), @"Should be initialized");
-    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((CCEngineConfig*)CCExpressionGetData(Result))->directory.rules, 0)), "logic/rules/"), @"Should be initialized");
-    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((CCEngineConfig*)CCExpressionGetData(Result))->directory.textures, 0)), "graphics/textures/"), @"Should be initialized");
-    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((CCEngineConfig*)CCExpressionGetData(Result))->directory.shaders, 0)), "graphics/shaders/"), @"Should be initialized");
-    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((CCEngineConfig*)CCExpressionGetData(Result))->directory.sounds, 0)), "audio/"), @"Should be initialized");
-    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((CCEngineConfig*)CCExpressionGetData(Result))->directory.layouts, 0)), "ui/"), @"Should be initialized");
-    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((CCEngineConfig*)CCExpressionGetData(Result))->directory.entities, 0)), "logic/entities/"), @"Should be initialized");
-    XCTAssertTrue(!strcmp(FSPathGetPathString(((CCEngineConfig*)CCExpressionGetData(Result))->directory.logs), "logs/"), @"Should be initialized");
-    XCTAssertTrue(!strcmp(FSPathGetPathString(((CCEngineConfig*)CCExpressionGetData(Result))->directory.tmp), "tmp/"), @"Should be initialized");
+    XCTAssertEqual(CCExpressionGetType(Result), B2ProjectExpressionValueTypeGameConfig, @"Should be a project config");
+    XCTAssertTrue(!strcmp(((B2EngineConfig*)CCExpressionGetData(Result))->title, "Test Game"), @"Should be initialized");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.fullscreen, FALSE, @"Should be initialized");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.width, 640, @"Should be initialized");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.height, 480, @"Should be initialized");
+    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.fonts, 0)), "font/"), @"Should be initialized");
+    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.levels, 0)), "logic/levels/"), @"Should be initialized");
+    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.rules, 0)), "logic/rules/"), @"Should be initialized");
+    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.textures, 0)), "graphics/textures/"), @"Should be initialized");
+    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.shaders, 0)), "graphics/shaders/"), @"Should be initialized");
+    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.sounds, 0)), "audio/"), @"Should be initialized");
+    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.layouts, 0)), "ui/"), @"Should be initialized");
+    XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.entities, 0)), "logic/entities/"), @"Should be initialized");
+    XCTAssertTrue(!strcmp(FSPathGetPathString(((B2EngineConfig*)CCExpressionGetData(Result))->directory.logs), "logs/"), @"Should be initialized");
+    XCTAssertTrue(!strcmp(FSPathGetPathString(((B2EngineConfig*)CCExpressionGetData(Result))->directory.tmp), "tmp/"), @"Should be initialized");
     
     CCExpressionDestroy(Expression);
 }

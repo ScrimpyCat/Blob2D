@@ -23,10 +23,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef Blob_Game_EngineSetup_h
-#define Blob_Game_EngineSetup_h
+#ifndef Blob2D_EngineSetup_h
+#define Blob2D_EngineSetup_h
 
-void CCEnginePreSetup(void);
-void CCEngineSetup(void);
+void B2EnginePreSetup(void);
+void B2EngineSetup(void);
 
 #endif

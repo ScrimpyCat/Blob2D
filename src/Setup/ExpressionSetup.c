@@ -3,7 +3,7 @@
 
 #include "ProjectExpressions.h"
 
-void CCExpressionSetup(void)
+void B2ExpressionSetup(void)
 {
-    CCExpressionEvaluatorRegister(CC_STRING("game"), CCProjectExpressionGame);
+    CCExpressionEvaluatorRegister(CC_STRING("game"), B2ProjectExpressionGame);
 }

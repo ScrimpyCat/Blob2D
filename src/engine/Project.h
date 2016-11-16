@@ -23,8 +23,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef Blob_Game_Project_h
-#define Blob_Game_Project_h
+#ifndef Blob2D_Project_h
+#define Blob2D_Project_h
 
 #include <CommonGameKit/CommonGameKit.h>
 
@@ -33,12 +33,12 @@
  * @description Creates the default gamepkg file and folders.
  * @return The path to the project's gamepkg file.
  */
-CC_NEW FSPath CCProjectCreate(const char *Directory);
+CC_NEW FSPath B2ProjectCreate(const char *Directory);
 
 /*!
  * @brief Load a project.
  * @param ProjectPath The path to the gamepkg file.
  */
-void CCProjectLoad(FSPath ProjectPath);
+void B2ProjectLoad(FSPath ProjectPath);
 
 #endif

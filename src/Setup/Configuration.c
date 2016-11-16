@@ -29,8 +29,8 @@
 #include "Project.h"
 
 
-CCEngineConfig CCEngineConfiguration = {
-    .launch = CCLaunchOptionGame,
+B2EngineConfig B2EngineConfiguration = {
+    .launch = B2LaunchOptionGame,
     .project = NULL,
     .title = NULL,
     .window = {
@@ -49,18 +49,20 @@ CCEngineConfig CCEngineConfiguration = {
     }
 };
 
-void CCConfigureOptions(int argc, const char *argv[])
+void B2ConfigureOptions(int argc, const char *argv[])
 {
+    B2EngineConfiguration.launch = B2LaunchOptionGame;
+    B2EngineConfiguration.project = FSPathCreateFromSystemPath("~/testfoldertest/blob.gamepkg");
     for (int Loop = 0; Loop < argc; Loop++)
     {
         if (argv[Loop][0] == '-')
         {
             if (!strcmp(argv[Loop], "-test"))
             {
-                CCEngineConfiguration.launch = CCLaunchOptionTest;
-                CCEngineConfiguration.title = "Test";
-                CCEngineConfiguration.window.width = 640;
-                CCEngineConfiguration.window.height = 480;
+                B2EngineConfiguration.launch = B2LaunchOptionTest;
+                B2EngineConfiguration.title = "Test";
+                B2EngineConfiguration.window.width = 640;
+                B2EngineConfiguration.window.height = 480;
                 return;
             }
             
@@ -68,20 +70,20 @@ void CCConfigureOptions(int argc, const char *argv[])
             {
                 if (!strcmp(argv[Loop], "-game")) //-game [path]
                 {
-                    CCEngineConfiguration.launch = CCLaunchOptionGame;
-                    CCEngineConfiguration.project = FSPathCreateFromSystemPath(argv[Loop + 1]);
+                    B2EngineConfiguration.launch = B2LaunchOptionGame;
+                    B2EngineConfiguration.project = FSPathCreateFromSystemPath(argv[Loop + 1]);
                 }
                 
                 else if (!strcmp(argv[Loop], "-edit")) //-edit [path]
                 {
-                    CCEngineConfiguration.launch = CCLaunchOptionEditor;
-                    CCEngineConfiguration.project = FSPathCreateFromSystemPath(argv[Loop + 1]);
+                    B2EngineConfiguration.launch = B2LaunchOptionEditor;
+                    B2EngineConfiguration.project = FSPathCreateFromSystemPath(argv[Loop + 1]);
                 }
                 
                 else if (!strcmp(argv[Loop], "-new")) //-new [path]
                 {
-                    CCEngineConfiguration.launch = CCLaunchOptionEditor;
-                    CCEngineConfiguration.project = CCProjectCreate(argv[Loop + 1]);
+                    B2EngineConfiguration.launch = B2LaunchOptionEditor;
+                    B2EngineConfiguration.project = B2ProjectCreate(argv[Loop + 1]);
                 }
                 
                 else if (Loop + 2 < argc)
@@ -96,9 +98,9 @@ void CCConfigureOptions(int argc, const char *argv[])
     }
     
     
-    if (CCEngineConfiguration.project)
+    if (B2EngineConfiguration.project)
     {
-        CCProjectLoad(CCEngineConfiguration.project);
+        B2ProjectLoad(B2EngineConfiguration.project);
     }
     
     else

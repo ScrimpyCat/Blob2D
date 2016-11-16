@@ -30,14 +30,14 @@
 #include <GLFW/glfw3native.h>
 #include <stdio.h>
 
-void CCPlatformSetup(void)
+void B2PlatformSetup(void)
 {
     AllocConsole();
     freopen("CONOUT$", "w", stdout);
     freopen("CONOUT$", "w", stderr);
 }
 
-void CCPlatformWindowSetup(GLFWwindow *Window)
+void B2PlatformWindowSetup(GLFWwindow *Window)
 {
     
 }

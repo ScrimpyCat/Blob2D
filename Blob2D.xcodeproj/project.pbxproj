@@ -255,7 +255,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = F34875591DDAE4F60068844D /* GLFW.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 5E4E9B1512F04830B0EC8B27;
+			remoteGlobalIDString = ECCA8B568F724EBA9ACE85D0;
 			remoteInfo = glfw;
 		};
 /* End PBXContainerItemProxy section */
@@ -662,49 +662,56 @@
 		};
 		F348757D1DDAE4F60068844D /* boing.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = boing;
 			path = boing.app;
 			remoteRef = F348757C1DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F348757F1DDAE4F60068844D /* gears.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = gears;
 			path = gears.app;
 			remoteRef = F348757E1DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F34875811DDAE4F60068844D /* heightmap.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = heightmap;
 			path = heightmap.app;
 			remoteRef = F34875801DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F34875831DDAE4F60068844D /* particles.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = particles;
 			path = particles.app;
 			remoteRef = F34875821DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F34875851DDAE4F60068844D /* simple.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = simple;
 			path = simple.app;
 			remoteRef = F34875841DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F34875871DDAE4F60068844D /* splitview.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = splitview;
 			path = splitview.app;
 			remoteRef = F34875861DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F34875891DDAE4F60068844D /* wave.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = wave;
 			path = wave.app;
 			remoteRef = F34875881DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -725,7 +732,8 @@
 		};
 		F348758F1DDAE4F60068844D /* empty.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = empty;
 			path = empty.app;
 			remoteRef = F348758E1DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -739,7 +747,8 @@
 		};
 		F34875931DDAE4F60068844D /* gamma.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = gamma;
 			path = gamma.app;
 			remoteRef = F34875921DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -753,7 +762,8 @@
 		};
 		F34875971DDAE4F60068844D /* icon.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = icon;
 			path = icon.app;
 			remoteRef = F34875961DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -767,7 +777,8 @@
 		};
 		F348759B1DDAE4F60068844D /* joysticks.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = joysticks;
 			path = joysticks.app;
 			remoteRef = F348759A1DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -795,42 +806,48 @@
 		};
 		F34875A31DDAE4F60068844D /* sharing.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = sharing;
 			path = sharing.app;
 			remoteRef = F34875A21DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F34875A51DDAE4F60068844D /* tearing.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = tearing;
 			path = tearing.app;
 			remoteRef = F34875A41DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F34875A71DDAE4F60068844D /* threads.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = threads;
 			path = threads.app;
 			remoteRef = F34875A61DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F34875A91DDAE4F60068844D /* timeout.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = timeout;
 			path = timeout.app;
 			remoteRef = F34875A81DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F34875AB1DDAE4F60068844D /* title.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = title;
 			path = title.app;
 			remoteRef = F34875AA1DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		F34875AD1DDAE4F60068844D /* windows.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
+			fileType = "compiled.mach-o.executable";
+			name = windows;
 			path = windows.app;
 			remoteRef = F34875AC1DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -1069,7 +1086,7 @@
 					$PROJECT_DIR/deps/CommonGameKit/deps/tinycthread/source,
 					$PROJECT_DIR/deps/CommonGameKit/deps/stdatomic,
 				);
-				INFOPLIST_FILE = BlobEngineTests/Info.plist;
+				INFOPLIST_FILE = Blob2DTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngineTests;
 				PRODUCT_NAME = Blob2D;
@@ -1085,7 +1102,7 @@
 					$PROJECT_DIR/deps/CommonGameKit/deps/tinycthread/source,
 					$PROJECT_DIR/deps/CommonGameKit/deps/stdatomic,
 				);
-				INFOPLIST_FILE = BlobEngineTests/Info.plist;
+				INFOPLIST_FILE = Blob2DTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngineTests;
 				PRODUCT_NAME = Blob2D;

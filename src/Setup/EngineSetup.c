@@ -35,12 +35,12 @@ void AnimationInterpolator(int *Previous, int *Next, double Time, int *Result)
     *Result = (int)(((1.0 - Time) * (double)*Previous) + (Time * (double)*Next)); //basic lerp
 }
 
-void CCEnginePreSetup(void)
+void B2EnginePreSetup(void)
 {
-    CCExpressionSetup();
+    B2ExpressionSetup();
 }
 
-void CCEngineSetup(void)
+void B2EngineSetup(void)
 {
     GLGFXSetup();
     
@@ -61,9 +61,9 @@ void CCEngineSetup(void)
         CC_COLLECTION_FOREACH(FSPath, Path, CorePaths)
         {
             FSPathComponent Dir = FSPathGetComponentAtIndex(Path, FSPathGetComponentCount(Path) - 1);
-            if (!strcmp(FSPathComponentGetString(Dir), "font")) CCOrderedCollectionPrependElement(CCEngineConfiguration.directory.fonts, &(FSPath){ FSPathCopy(Path) });
-            else if (!strcmp(FSPathComponentGetString(Dir), "shaders")) CCOrderedCollectionPrependElement(CCEngineConfiguration.directory.shaders, &(FSPath){ FSPathCopy(Path) });
-            else if (!strcmp(FSPathComponentGetString(Dir), "ui")) CCOrderedCollectionPrependElement(CCEngineConfiguration.directory.layouts, &(FSPath){ FSPathCopy(Path) });
+            if (!strcmp(FSPathComponentGetString(Dir), "font")) CCOrderedCollectionPrependElement(B2EngineConfiguration.directory.fonts, &(FSPath){ FSPathCopy(Path) });
+            else if (!strcmp(FSPathComponentGetString(Dir), "shaders")) CCOrderedCollectionPrependElement(B2EngineConfiguration.directory.shaders, &(FSPath){ FSPathCopy(Path) });
+            else if (!strcmp(FSPathComponentGetString(Dir), "ui")) CCOrderedCollectionPrependElement(B2EngineConfiguration.directory.layouts, &(FSPath){ FSPathCopy(Path) });
         }
         
         CCCollectionDestroy(CorePaths);
@@ -74,7 +74,7 @@ void CCEngineSetup(void)
     CCCollectionRemoveAllElements(Matches);
     CCCollectionInsertElement(Matches, &(FSPath){ FSPathCreate(".gfxlib") });
     
-    CC_COLLECTION_FOREACH(FSPath, Path, CCEngineConfiguration.directory.shaders)
+    CC_COLLECTION_FOREACH(FSPath, Path, B2EngineConfiguration.directory.shaders)
     {
         CCOrderedCollection Paths = FSManagerGetContentsAtPath(Path, Matches, FSMatchSkipHidden | FSMatchSkipDirectory);
         
@@ -103,8 +103,8 @@ void CCEngineSetup(void)
     CCCollectionInsertElement(Matches, &(FSPath){ FSPathCreate(".asset") });
     
     CCCollection GlobalAssetPaths[] = {
-        CCEngineConfiguration.directory.shaders,
-        CCEngineConfiguration.directory.fonts,
+        B2EngineConfiguration.directory.shaders,
+        B2EngineConfiguration.directory.fonts,
     };
     
     for (size_t Loop = 0; Loop < sizeof(GlobalAssetPaths) / sizeof(typeof(*GlobalAssetPaths)); Loop++)
@@ -154,7 +154,7 @@ void CCEngineSetup(void)
     
     //Load Dependent Assets
     CCCollection AssetPaths[] = {
-        CCEngineConfiguration.directory.layouts
+        B2EngineConfiguration.directory.layouts
     };
     
     for (size_t Loop = 0; Loop < sizeof(AssetPaths) / sizeof(typeof(*AssetPaths)); Loop++)
@@ -177,105 +177,4 @@ void CCEngineSetup(void)
     }
     
     CCCollectionDestroy(Matches);
-    
-    
-    //Initial Scene Setup
-#warning demo
-    CCEntity Player = CCEntityCreate(1, CC_STD_ALLOCATOR);
-    
-    CCComponent Renderer = CCComponentCreate(CC_RENDER_COMPONENT_ID);
-    CCRenderComponentSetColour(Renderer, (CCColourRGB){ .r = 1.0f, .g = 0.0, .b = 0.0f });
-    CCRenderComponentSetRect(Renderer, (CCRect){ .position = CCVector2DZero, .size = CCVector2DMake(1.0f, 1.0f) });
-    CCEntityAttachComponent(Player, Renderer);
-    CCComponentSystemAddComponent(Renderer);
-    
-    CCComponent Key = CCComponentCreate(CC_INPUT_MAP_KEYBOARD_COMPONENT_ID);
-    CCInputMapKeyboardComponentSetKeycode(Key, CCKeyboardKeycodeSpace);
-    CCInputMapKeyboardComponentSetIsKeycode(Key, TRUE);
-    CCInputMapKeyboardComponentSetIgnoreModifier(Key, TRUE);
-    CCInputMapComponentSetAction(Key, "recolour");
-    CCEntityAttachComponent(Player, Key);
-    CCComponentSystemAddComponent(Key);
-    
-    CCComponent Group = CCComponentCreate(CC_INPUT_MAP_GROUP_COMPONENT_ID);
-    Key = CCComponentCreate(CC_INPUT_MAP_KEYBOARD_COMPONENT_ID);
-    CCInputMapKeyboardComponentSetKeycode(Key, CCKeyboardKeycodeA);
-    CCInputMapKeyboardComponentSetIsKeycode(Key, TRUE);
-    CCInputMapKeyboardComponentSetIgnoreModifier(Key, TRUE);
-    CCInputMapKeyboardComponentSetRepeats(Key, TRUE);
-    CCInputMapKeyboardComponentSetRamp(Key, 1.0);
-    CCInputMapGroupComponentAddInputMap(Group, Key);
-    Key = CCComponentCreate(CC_INPUT_MAP_KEYBOARD_COMPONENT_ID);
-    CCInputMapKeyboardComponentSetKeycode(Key, CCKeyboardKeycodeS);
-    CCInputMapKeyboardComponentSetIsKeycode(Key, TRUE);
-    CCInputMapKeyboardComponentSetIgnoreModifier(Key, TRUE);
-    CCInputMapKeyboardComponentSetRepeats(Key, TRUE);
-    CCInputMapKeyboardComponentSetRamp(Key, 1.0);
-    CCInputMapGroupComponentAddInputMap(Group, Key);
-    Key = CCComponentCreate(CC_INPUT_MAP_KEYBOARD_COMPONENT_ID);
-    CCInputMapKeyboardComponentSetKeycode(Key, CCKeyboardKeycodeD);
-    CCInputMapKeyboardComponentSetIsKeycode(Key, TRUE);
-    CCInputMapKeyboardComponentSetIgnoreModifier(Key, TRUE);
-    CCInputMapKeyboardComponentSetRepeats(Key, TRUE);
-    CCInputMapKeyboardComponentSetRamp(Key, 1.0);
-    CCInputMapGroupComponentAddInputMap(Group, Key);
-    Key = CCComponentCreate(CC_INPUT_MAP_KEYBOARD_COMPONENT_ID);
-    CCInputMapKeyboardComponentSetKeycode(Key, CCKeyboardKeycodeW);
-    CCInputMapKeyboardComponentSetIsKeycode(Key, TRUE);
-    CCInputMapKeyboardComponentSetIgnoreModifier(Key, TRUE);
-    CCInputMapKeyboardComponentSetRepeats(Key, TRUE);
-    CCInputMapKeyboardComponentSetRamp(Key, 1.0);
-    CCInputMapGroupComponentAddInputMap(Group, Key);
-    CCInputMapComponentSetAction(Group, "move");
-    CCEntityAttachComponent(Player, Group);
-    CCComponentSystemAddComponent(Group);
-    
-    CCComponent Animation = CCComponentCreate(CC_ANIMATION_INTERPOLATE_COMPONENT_ID);
-    CCAnimationComponentSetPlaying(Animation, TRUE);
-    CCAnimationKeyframeComponentSetFrame(Animation, 1.0);
-//    CCOrderedCollection Frames = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered, sizeof(double), NULL);
-//    CCOrderedCollectionAppendElement(Frames, &(double){ 0.1 });
-//    CCOrderedCollectionAppendElement(Frames, &(double){ 0.1 });
-//    CCOrderedCollectionAppendElement(Frames, &(double){ 0.1 });
-//    CCOrderedCollectionAppendElement(Frames, &(double){ 0.5 });
-//    CCOrderedCollectionAppendElement(Frames, &(double){ 0.1 });
-//    CCOrderedCollectionAppendElement(Frames, &(double){ 0.1 });
-//    CCAnimationKeyframeComponentSetFrames(Animation, Frames);
-    CCAnimationInterpolateComponentSetInterpolator(Animation, (CCAnimationInterpolator)AnimationInterpolator);
-    CCOrderedCollection Data = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered, sizeof(int), NULL);
-    CCOrderedCollectionAppendElement(Data, &(int){ 10 });
-    CCOrderedCollectionAppendElement(Data, &(int){ 20 });
-    CCOrderedCollectionAppendElement(Data, &(int){ 30 });
-    CCOrderedCollectionAppendElement(Data, &(int){ 40 });
-    CCOrderedCollectionAppendElement(Data, &(int){ 50 });
-    CCOrderedCollectionAppendElement(Data, &(int){ 60 });
-    CCAnimationKeyframeComponentSetData(Animation, Data);
-    CCAnimationComponentSetLoop(Animation, CCAnimationLoopRepeatFlip);
-    CCEntityAttachComponent(Player, Animation);
-    CCComponentSystemAddComponent(Animation);
-    
-    CCEntityManagerAddEntity(Player);
-    
-    
-    
-    Player = CCEntityCreate(1, CC_STD_ALLOCATOR);
-    Renderer = CCComponentCreate(CC_RENDER_COMPONENT_ID);
-    
-    CCRenderComponentSetColour(Renderer, (CCColourRGB){ .r = 0.0f, .g = 0.0, .b = 1.0f });
-    CCRenderComponentSetRect(Renderer, (CCRect){ .position = CCVector2DMake(0.25f, 0.25f), .size = CCVector2DMake(0.5f, 0.5f) });
-    
-    CCEntityAttachComponent(Player, Renderer);
-    CCEntityManagerAddEntity(Player);
-    CCComponentSystemAddComponent(Renderer);
-    
-    
-    
-    
-    Renderer = CCComponentCreate(CC_RENDER_COMPONENT_ID);
-    
-    CCRenderComponentSetColour(Renderer, (CCColourRGB){ .r = 0.0f, .g = 1.0, .b = 0.0f });
-    CCRenderComponentSetRect(Renderer, (CCRect){ .position = CCVector2DMake(0.375f, 0.375f), .size = CCVector2DMake(0.25f, 0.25f) });
-    
-    CCEntityAttachComponent(Player, Renderer);
-    CCComponentSystemAddComponent(Renderer);
 }

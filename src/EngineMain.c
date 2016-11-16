@@ -25,6 +25,7 @@
 
 #define CC_LOG_OPTION CCLogOptionOutputAll
 
+#include "EngineMain.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <GLFW/glfw3.h>
@@ -34,8 +35,7 @@
 #include "EngineSetup.h"
 #include "Configuration.h"
 
-
-GLFWwindow *CCWindow = NULL;
+GLFWwindow *B2Window = NULL;
 
 #pragma mark - Window callbacks
 
@@ -226,10 +226,10 @@ static void WindowFocus(GLFWwindow *Window, int Focus)
 
 static int EngineMain(int argc, const char *argv[])
 {
-    CCEnginePreSetup();
-    CCConfigureOptions(argc, argv);
+    B2EnginePreSetup();
+    B2ConfigureOptions(argc, argv);
     
-    CCPlatformSetup();
+    B2PlatformSetup();
     glfwSetErrorCallback(ErrorCallback);
     
     if (!glfwInit())
@@ -253,8 +253,8 @@ static int EngineMain(int argc, const char *argv[])
     glfwWindowHint(GLFW_DEPTH_BITS, 0);
     glfwWindowHint(GLFW_STENCIL_BITS, 0);
     
-    CCWindow = glfwCreateWindow(CCEngineConfiguration.window.width, CCEngineConfiguration.window.height, CCEngineConfiguration.title, CCEngineConfiguration.window.fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
-    if (!CCWindow)
+    B2Window = glfwCreateWindow(B2EngineConfiguration.window.width, B2EngineConfiguration.window.height, B2EngineConfiguration.title, B2EngineConfiguration.window.fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+    if (!B2Window)
     {
         //TODO: Fallback to legacy GL profile?
         CC_LOG_ERROR("Failed to create window");
@@ -266,72 +266,44 @@ static int EngineMain(int argc, const char *argv[])
     glfwSetJoystickCallback(ControllerConnected);
     for (size_t Loop = 0; Loop <= GLFW_JOYSTICK_LAST; Loop++) CCControllerConnect(Loop, glfwJoystickPresent((int)Loop));
     
-    glfwSetWindowFocusCallback(CCWindow, WindowFocus);
+    glfwSetWindowFocusCallback(B2Window, WindowFocus);
     
-    glfwSetKeyCallback(CCWindow, KeyboardInput);
-    glfwSetCharModsCallback(CCWindow, KeyboardCharInput);
+    glfwSetKeyCallback(B2Window, KeyboardInput);
+    glfwSetCharModsCallback(B2Window, KeyboardCharInput);
     
-    glfwSetDropCallback(CCWindow, MouseDropInput);
-    glfwSetScrollCallback(CCWindow, MouseScrollInput);
-    glfwSetMouseButtonCallback(CCWindow, MouseButtonInput);
-    glfwSetCursorPosCallback(CCWindow, MousePositionInput);
-    glfwSetCursorEnterCallback(CCWindow, MouseEnterInput);
+    glfwSetDropCallback(B2Window, MouseDropInput);
+    glfwSetScrollCallback(B2Window, MouseScrollInput);
+    glfwSetMouseButtonCallback(B2Window, MouseButtonInput);
+    glfwSetCursorPosCallback(B2Window, MousePositionInput);
+    glfwSetCursorEnterCallback(B2Window, MouseEnterInput);
     
     CCVector2Di FrameSize;
-    glfwSetFramebufferSizeCallback(CCWindow, FramebufferSizeCallback);
-    glfwGetFramebufferSize(CCWindow, &FrameSize.x, &FrameSize.y);
+    glfwSetFramebufferSizeCallback(B2Window, FramebufferSizeCallback);
+    glfwGetFramebufferSize(B2Window, &FrameSize.x, &FrameSize.y);
     CCWindowSetFrameSize(FrameSize);
     
-    glfwMakeContextCurrent(CCWindow);
-    CCPlatformWindowSetup(CCWindow);
+    glfwMakeContextCurrent(B2Window);
+    B2PlatformWindowSetup(B2Window);
     
-    CCEngineSetup();
+    B2EngineSetup();
     
     glfwMakeContextCurrent(NULL);
     
     int err;
     thrd_t RenderThread;
-    if ((err = thrd_create(&RenderThread, (thrd_start_t)RenderLoop, CCWindow)) != thrd_success)
+    if ((err = thrd_create(&RenderThread, (thrd_start_t)RenderLoop, B2Window)) != thrd_success)
     {
         //Possibly fallback to single threaded implementation?
         CC_LOG_ERROR("Failed to create render thread (%d)", err);
         
-        glfwDestroyWindow(CCWindow);
+        glfwDestroyWindow(B2Window);
         glfwTerminate();
         
         return EXIT_FAILURE;
     }
     
-    while (!glfwWindowShouldClose(CCWindow))
+    while (!glfwWindowShouldClose(B2Window))
     {
-        CCEntityManagerLock();
-        CCEntityManagerUpdate();
-        
-        CCEnumerator Enumerator;
-        CCCollectionGetEnumerator(CCEntityManagerGetEntities(), &Enumerator);
-        
-        for (CCEntity *Entity = CCCollectionEnumeratorGetCurrent(&Enumerator); Entity; Entity = CCCollectionEnumeratorNext(&Enumerator))
-        {
-//            CCVector2D Move = CCInputSystemGetPressure2ForAction(*Entity, "move");
-//            CC_LOG_DEBUG("%f, %f", Move.x, Move.y);
-            
-            if (CCInputSystemGetStateForAction(*Entity, "recolour") == CCInputStateActive)
-            {
-                CCComponentSystemLock(CC_RENDER_SYSTEM_ID);
-                CCEnumerator Enumerator;
-                CCCollectionGetEnumerator(CCComponentSystemGetComponentsForSystem(CC_RENDER_SYSTEM_ID), &Enumerator);
-                
-                for (CCComponent *Component = CCCollectionEnumeratorGetCurrent(&Enumerator); Component; Component = CCCollectionEnumeratorNext(&Enumerator))
-                {
-                    CCRenderComponentSetColour(*Component, CCVector3DMake(CCRandomRangef(0.0f, 1.0f), CCRandomRangef(0.0f, 1.0f), CCRandomRangef(0.0f, 1.0f)));
-                }
-                CCComponentSystemUnlock(CC_RENDER_SYSTEM_ID);
-            }
-        }
-        
-        CCEntityManagerUnlock();
-        
-        
         CCComponentSystemRun(CCComponentSystemExecutionTypeInput);
         glfwWaitEvents();
     }
@@ -339,13 +311,13 @@ static int EngineMain(int argc, const char *argv[])
     
     thrd_detach(RenderThread);
     
-    glfwDestroyWindow(CCWindow);
+    glfwDestroyWindow(B2Window);
     glfwTerminate();
     
     return EXIT_SUCCESS;
 }
 
-int BEEngineMain(int argc, const char *argv[])
+int B2EngineRun(int argc, const char *argv[])
 {
     CCTimestamp = glfwGetTime;
     

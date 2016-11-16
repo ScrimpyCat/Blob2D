@@ -27,7 +27,7 @@
 #include "Configuration.h"
 #include "ProjectExpressions.h"
 
-static const char CCProjectGamepkg[] =
+static const char B2ProjectGamepkg[] =
 "(game \"Game\" ; title\n"
 "    (default-resolution: 640 480) ; resolution or window size\n"
 "    (default-fullscreen: #f) ; fullscreen mode\n"
@@ -44,7 +44,7 @@ static const char CCProjectGamepkg[] =
 "    (dir-tmp: \"tmp/\") ; tmp directory\n"
 ")\n";
 
-FSPath CCProjectCreate(const char *Directory)
+FSPath B2ProjectCreate(const char *Directory)
 {
     FSPath Path = FSPathCreateFromSystemPath(Directory);
     
@@ -67,7 +67,7 @@ FSPath CCProjectCreate(const char *Directory)
         }
         
         FSHandleRemove(Handle, SIZE_MAX, FSBehaviourDefault);
-        FSHandleWrite(Handle, sizeof(CCProjectGamepkg) - 1, CCProjectGamepkg, FSBehaviourDefault);
+        FSHandleWrite(Handle, sizeof(B2ProjectGamepkg) - 1, B2ProjectGamepkg, FSBehaviourDefault);
         FSHandleClose(Handle);
         
         
@@ -135,7 +135,7 @@ FSPath CCProjectCreate(const char *Directory)
     return Path;
 }
 
-void CCProjectLoad(FSPath ProjectPath)
+void B2ProjectLoad(FSPath ProjectPath)
 {
     CCExpression Expression = CCExpressionCreateFromSourceFile(ProjectPath);
     if (Expression)
@@ -151,11 +151,11 @@ void CCProjectLoad(FSPath ProjectPath)
         
         CCExpression Result = CCExpressionEvaluate(Expression);
         
-        if (CCExpressionGetType(Result) == CCProjectExpressionValueTypeGameConfig)
+        if (CCExpressionGetType(Result) == B2ProjectExpressionValueTypeGameConfig)
         {
-            ((CCEngineConfig*)CCExpressionGetData(Result))->launch = CCEngineConfiguration.launch;
-            CCEngineConfiguration = *(CCEngineConfig*)CCExpressionGetData(Result);
-            CCEngineConfiguration.project = ProjectPath;
+            ((B2EngineConfig*)CCExpressionGetData(Result))->launch = B2EngineConfiguration.launch;
+            B2EngineConfiguration = *(B2EngineConfig*)CCExpressionGetData(Result);
+            B2EngineConfiguration.project = ProjectPath;
             
             CCExpressionChangeOwnership(Result, NULL, CCFree);
         }
