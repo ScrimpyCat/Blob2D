@@ -27,6 +27,12 @@
 #define Blob2D_EngineMain_h
 
 /*!
+ * @brief Called when the engine has finished setting up.
+ * @description Use this callback to handle custom setup.
+ */
+extern void (*B2EngineSetupComplete)(void);
+
+/*!
  * @brief The main entrypoint into the engine.
  * @param argc The number of entries in argv.
  * @param argv The program inputs.

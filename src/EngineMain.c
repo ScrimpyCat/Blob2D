@@ -35,6 +35,8 @@
 #include "EngineSetup.h"
 #include "Configuration.h"
 
+void (*B2EngineSetupComplete)(void) = NULL;
+
 GLFWwindow *B2Window = NULL;
 
 #pragma mark - Window callbacks
@@ -299,6 +301,7 @@ static int EngineMain(int argc, const char *argv[])
     B2PlatformWindowSetup(B2Window);
     
     B2EngineSetup();
+    B2EngineSetupComplete();
     
     glfwMakeContextCurrent(NULL);
     
