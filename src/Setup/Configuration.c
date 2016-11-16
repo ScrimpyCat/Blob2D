@@ -51,8 +51,6 @@ B2EngineConfig B2EngineConfiguration = {
 
 void B2ConfigureOptions(int argc, const char *argv[])
 {
-    B2EngineConfiguration.launch = B2LaunchOptionGame;
-    B2EngineConfiguration.project = FSPathCreateFromSystemPath("~/testfoldertest/blob.gamepkg");
     for (int Loop = 0; Loop < argc; Loop++)
     {
         if (argv[Loop][0] == '-')
