@@ -426,31 +426,31 @@
 			isa = PBXGroup;
 			children = (
 				F348757B1DDAE4F60068844D /* libglfw3.a */,
-				F348757D1DDAE4F60068844D /* boing.app */,
-				F348757F1DDAE4F60068844D /* gears.app */,
-				F34875811DDAE4F60068844D /* heightmap.app */,
-				F34875831DDAE4F60068844D /* particles.app */,
-				F34875851DDAE4F60068844D /* simple.app */,
-				F34875871DDAE4F60068844D /* splitview.app */,
-				F34875891DDAE4F60068844D /* wave.app */,
+				F348757D1DDAE4F60068844D /* boing */,
+				F348757F1DDAE4F60068844D /* gears */,
+				F34875811DDAE4F60068844D /* heightmap */,
+				F34875831DDAE4F60068844D /* particles */,
+				F34875851DDAE4F60068844D /* simple */,
+				F34875871DDAE4F60068844D /* splitview */,
+				F34875891DDAE4F60068844D /* wave */,
 				F348758B1DDAE4F60068844D /* clipboard */,
 				F348758D1DDAE4F60068844D /* cursor */,
-				F348758F1DDAE4F60068844D /* empty.app */,
+				F348758F1DDAE4F60068844D /* empty */,
 				F34875911DDAE4F60068844D /* events */,
-				F34875931DDAE4F60068844D /* gamma.app */,
+				F34875931DDAE4F60068844D /* gamma */,
 				F34875951DDAE4F60068844D /* glfwinfo */,
-				F34875971DDAE4F60068844D /* icon.app */,
+				F34875971DDAE4F60068844D /* icon */,
 				F34875991DDAE4F60068844D /* iconify */,
-				F348759B1DDAE4F60068844D /* joysticks.app */,
+				F348759B1DDAE4F60068844D /* joysticks */,
 				F348759D1DDAE4F60068844D /* monitors */,
 				F348759F1DDAE4F60068844D /* msaa */,
 				F34875A11DDAE4F60068844D /* reopen */,
-				F34875A31DDAE4F60068844D /* sharing.app */,
-				F34875A51DDAE4F60068844D /* tearing.app */,
-				F34875A71DDAE4F60068844D /* threads.app */,
-				F34875A91DDAE4F60068844D /* timeout.app */,
-				F34875AB1DDAE4F60068844D /* title.app */,
-				F34875AD1DDAE4F60068844D /* windows.app */,
+				F34875A31DDAE4F60068844D /* sharing */,
+				F34875A51DDAE4F60068844D /* tearing */,
+				F34875A71DDAE4F60068844D /* threads */,
+				F34875A91DDAE4F60068844D /* timeout */,
+				F34875AB1DDAE4F60068844D /* title */,
+				F34875AD1DDAE4F60068844D /* windows */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -660,7 +660,7 @@
 			remoteRef = F348757A1DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F348757D1DDAE4F60068844D /* boing.app */ = {
+		F348757D1DDAE4F60068844D /* boing */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = boing;
@@ -668,7 +668,7 @@
 			remoteRef = F348757C1DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F348757F1DDAE4F60068844D /* gears.app */ = {
+		F348757F1DDAE4F60068844D /* gears */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = gears;
@@ -676,7 +676,7 @@
 			remoteRef = F348757E1DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875811DDAE4F60068844D /* heightmap.app */ = {
+		F34875811DDAE4F60068844D /* heightmap */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = heightmap;
@@ -684,7 +684,7 @@
 			remoteRef = F34875801DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875831DDAE4F60068844D /* particles.app */ = {
+		F34875831DDAE4F60068844D /* particles */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = particles;
@@ -692,7 +692,7 @@
 			remoteRef = F34875821DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875851DDAE4F60068844D /* simple.app */ = {
+		F34875851DDAE4F60068844D /* simple */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = simple;
@@ -700,7 +700,7 @@
 			remoteRef = F34875841DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875871DDAE4F60068844D /* splitview.app */ = {
+		F34875871DDAE4F60068844D /* splitview */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = splitview;
@@ -708,7 +708,7 @@
 			remoteRef = F34875861DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875891DDAE4F60068844D /* wave.app */ = {
+		F34875891DDAE4F60068844D /* wave */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = wave;
@@ -730,7 +730,7 @@
 			remoteRef = F348758C1DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F348758F1DDAE4F60068844D /* empty.app */ = {
+		F348758F1DDAE4F60068844D /* empty */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = empty;
@@ -745,7 +745,7 @@
 			remoteRef = F34875901DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875931DDAE4F60068844D /* gamma.app */ = {
+		F34875931DDAE4F60068844D /* gamma */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = gamma;
@@ -760,7 +760,7 @@
 			remoteRef = F34875941DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875971DDAE4F60068844D /* icon.app */ = {
+		F34875971DDAE4F60068844D /* icon */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = icon;
@@ -775,7 +775,7 @@
 			remoteRef = F34875981DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F348759B1DDAE4F60068844D /* joysticks.app */ = {
+		F348759B1DDAE4F60068844D /* joysticks */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = joysticks;
@@ -804,7 +804,7 @@
 			remoteRef = F34875A01DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875A31DDAE4F60068844D /* sharing.app */ = {
+		F34875A31DDAE4F60068844D /* sharing */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = sharing;
@@ -812,7 +812,7 @@
 			remoteRef = F34875A21DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875A51DDAE4F60068844D /* tearing.app */ = {
+		F34875A51DDAE4F60068844D /* tearing */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = tearing;
@@ -820,7 +820,7 @@
 			remoteRef = F34875A41DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875A71DDAE4F60068844D /* threads.app */ = {
+		F34875A71DDAE4F60068844D /* threads */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = threads;
@@ -828,7 +828,7 @@
 			remoteRef = F34875A61DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875A91DDAE4F60068844D /* timeout.app */ = {
+		F34875A91DDAE4F60068844D /* timeout */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = timeout;
@@ -836,7 +836,7 @@
 			remoteRef = F34875A81DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875AB1DDAE4F60068844D /* title.app */ = {
+		F34875AB1DDAE4F60068844D /* title */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = title;
@@ -844,7 +844,7 @@
 			remoteRef = F34875AA1DDAE4F60068844D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F34875AD1DDAE4F60068844D /* windows.app */ = {
+		F34875AD1DDAE4F60068844D /* windows */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			name = windows;
@@ -1022,8 +1022,9 @@
 		F33F20071DDAE16200264034 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1051,8 +1052,9 @@
 		F33F20081DDAE16200264034 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1080,6 +1082,7 @@
 		F33F200A1DDAE16200264034 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = (
 					$PROJECT_DIR/deps/CommonGameKit/deps/threads,
@@ -1096,6 +1099,7 @@
 		F33F200B1DDAE16200264034 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = (
 					$PROJECT_DIR/deps/CommonGameKit/deps/threads,
