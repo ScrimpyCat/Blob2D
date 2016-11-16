@@ -24,8 +24,8 @@
  */
 
 
-#ifndef Blob2D_Window_h
-#define Blob2D_Window_h
+#ifndef Blob2D_Blob2D_h
+#define Blob2D_Blob2D_h
 
 #include <Blob2D/EngineMain.h>
 

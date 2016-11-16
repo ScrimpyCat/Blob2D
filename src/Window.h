@@ -23,8 +23,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef Blob_Game_Window_h
-#define Blob_Game_Window_h
+#ifndef Blob2D_Window_h
+#define Blob2D_Window_h
 
 #include <GLFW/glfw3.h>
 #include <stdatomic.h>
