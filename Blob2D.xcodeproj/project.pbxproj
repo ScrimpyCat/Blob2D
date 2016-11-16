@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F33F1FF61DDAE16200264034 /* BlobEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = F33F1FF51DDAE16200264034 /* BlobEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F33F1FFD1DDAE16200264034 /* BlobEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F1FF21DDAE16200264034 /* BlobEngine.framework */; };
+		F33F1FF61DDAE16200264034 /* Blob2D.h in Headers */ = {isa = PBXBuildFile; fileRef = F33F1FF51DDAE16200264034 /* Blob2D.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F33F1FFD1DDAE16200264034 /* Blob2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F33F1FF21DDAE16200264034 /* Blob2D.framework */; };
 		F34875361DDAE30A0068844D /* stdatomic_clang.h in Headers */ = {isa = PBXBuildFile; fileRef = F34875331DDAE30A0068844D /* stdatomic_clang.h */; };
 		F34875371DDAE30A0068844D /* stdatomic_portable.h in Headers */ = {isa = PBXBuildFile; fileRef = F34875341DDAE30A0068844D /* stdatomic_portable.h */; };
 		F34875381DDAE30A0068844D /* stdatomic.h in Headers */ = {isa = PBXBuildFile; fileRef = F34875351DDAE30A0068844D /* stdatomic.h */; };
@@ -275,10 +275,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F33F1FF21DDAE16200264034 /* BlobEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlobEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F33F1FF51DDAE16200264034 /* BlobEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlobEngine.h; sourceTree = "<group>"; };
+		F33F1FF21DDAE16200264034 /* Blob2D.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Blob2D.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F33F1FF51DDAE16200264034 /* Blob2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Blob2D.h; sourceTree = "<group>"; };
 		F33F1FF71DDAE16200264034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = mac/Info.plist; sourceTree = "<group>"; };
-		F33F1FFC1DDAE16200264034 /* BlobEngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlobEngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F33F1FFC1DDAE16200264034 /* Blob2D.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Blob2D.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F33F20031DDAE16200264034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F34875331DDAE30A0068844D /* stdatomic_clang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdatomic_clang.h; sourceTree = "<group>"; };
 		F34875341DDAE30A0068844D /* stdatomic_portable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdatomic_portable.h; sourceTree = "<group>"; };
@@ -327,7 +327,7 @@
 			files = (
 				F34876C11DDAF8190068844D /* CommonC.framework in Frameworks */,
 				F34876C01DDAF80F0068844D /* CommonGameKit.framework in Frameworks */,
-				F33F1FFD1DDAE16200264034 /* BlobEngine.framework in Frameworks */,
+				F33F1FFD1DDAE16200264034 /* Blob2D.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,8 +339,8 @@
 			children = (
 				F34875BD1DDAF1A70068844D /* assets */,
 				F34874691DDAE2570068844D /* Dependencies */,
-				F33F1FF41DDAE16200264034 /* BlobEngine */,
-				F33F20001DDAE16200264034 /* BlobEngineTests */,
+				F33F1FF41DDAE16200264034 /* Blob2D */,
+				F33F20001DDAE16200264034 /* Blob2DTests */,
 				F33F1FF31DDAE16200264034 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -348,16 +348,16 @@
 		F33F1FF31DDAE16200264034 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F33F1FF21DDAE16200264034 /* BlobEngine.framework */,
-				F33F1FFC1DDAE16200264034 /* BlobEngineTests.xctest */,
+				F33F1FF21DDAE16200264034 /* Blob2D.framework */,
+				F33F1FFC1DDAE16200264034 /* Blob2D.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F33F1FF41DDAE16200264034 /* BlobEngine */ = {
+		F33F1FF41DDAE16200264034 /* Blob2D */ = {
 			isa = PBXGroup;
 			children = (
-				F33F1FF51DDAE16200264034 /* BlobEngine.h */,
+				F33F1FF51DDAE16200264034 /* Blob2D.h */,
 				F34876C21DDAFA360068844D /* EngineMain.h */,
 				F34876721DDAF6CB0068844D /* EngineMain.c */,
 				F34876841DDAF6CB0068844D /* Window.h */,
@@ -366,17 +366,17 @@
 				F34876791DDAF6CB0068844D /* Setup */,
 				F348764B1DDAF69F0068844D /* Supporting Files */,
 			);
-			name = BlobEngine;
+			name = Blob2D;
 			path = src;
 			sourceTree = "<group>";
 		};
-		F33F20001DDAE16200264034 /* BlobEngineTests */ = {
+		F33F20001DDAE16200264034 /* Blob2DTests */ = {
 			isa = PBXGroup;
 			children = (
 				F34876471DDAF6750068844D /* Scripting */,
 				F348764A1DDAF68E0068844D /* Supporting Files */,
 			);
-			path = BlobEngineTests;
+			path = Blob2DTests;
 			sourceTree = "<group>";
 		};
 		F34874691DDAE2570068844D /* Dependencies */ = {
@@ -536,7 +536,7 @@
 				F34876921DDAF6CB0068844D /* ExpressionSetup.h in Headers */,
 				F34876901DDAF6CB0068844D /* EngineSetup.h in Headers */,
 				F348753F1DDAE3480068844D /* tinycthread.h in Headers */,
-				F33F1FF61DDAE16200264034 /* BlobEngine.h in Headers */,
+				F33F1FF61DDAE16200264034 /* Blob2D.h in Headers */,
 				F34876971DDAF6CB0068844D /* Window.h in Headers */,
 				F34875381DDAE30A0068844D /* stdatomic.h in Headers */,
 				F34875371DDAE30A0068844D /* stdatomic_portable.h in Headers */,
@@ -553,9 +553,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		F33F1FF11DDAE16200264034 /* BlobEngine */ = {
+		F33F1FF11DDAE16200264034 /* Blob2D */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F33F20061DDAE16200264034 /* Build configuration list for PBXNativeTarget "BlobEngine" */;
+			buildConfigurationList = F33F20061DDAE16200264034 /* Build configuration list for PBXNativeTarget "Blob2D" */;
 			buildPhases = (
 				F33F1FED1DDAE16200264034 /* Sources */,
 				F33F1FEE1DDAE16200264034 /* Frameworks */,
@@ -570,14 +570,14 @@
 				F34875B11DDAE51D0068844D /* PBXTargetDependency */,
 				F34875AF1DDAE50C0068844D /* PBXTargetDependency */,
 			);
-			name = BlobEngine;
+			name = Blob2D;
 			productName = BlobEngine;
-			productReference = F33F1FF21DDAE16200264034 /* BlobEngine.framework */;
+			productReference = F33F1FF21DDAE16200264034 /* Blob2D.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		F33F1FFB1DDAE16200264034 /* BlobEngineTests */ = {
+		F33F1FFB1DDAE16200264034 /* Blob2DTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F33F20091DDAE16200264034 /* Build configuration list for PBXNativeTarget "BlobEngineTests" */;
+			buildConfigurationList = F33F20091DDAE16200264034 /* Build configuration list for PBXNativeTarget "Blob2DTests" */;
 			buildPhases = (
 				F33F1FF81DDAE16200264034 /* Sources */,
 				F33F1FF91DDAE16200264034 /* Frameworks */,
@@ -588,9 +588,9 @@
 			dependencies = (
 				F33F1FFF1DDAE16200264034 /* PBXTargetDependency */,
 			);
-			name = BlobEngineTests;
+			name = Blob2DTests;
 			productName = BlobEngineTests;
-			productReference = F33F1FFC1DDAE16200264034 /* BlobEngineTests.xctest */;
+			productReference = F33F1FFC1DDAE16200264034 /* Blob2D.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -610,7 +610,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F33F1FEC1DDAE16200264034 /* Build configuration list for PBXProject "BlobEngine" */;
+			buildConfigurationList = F33F1FEC1DDAE16200264034 /* Build configuration list for PBXProject "Blob2D" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -632,8 +632,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				F33F1FF11DDAE16200264034 /* BlobEngine */,
-				F33F1FFB1DDAE16200264034 /* BlobEngineTests */,
+				F33F1FF11DDAE16200264034 /* Blob2D */,
+				F33F1FFB1DDAE16200264034 /* Blob2DTests */,
 			);
 		};
 /* End PBXProject section */
@@ -901,7 +901,7 @@
 /* Begin PBXTargetDependency section */
 		F33F1FFF1DDAE16200264034 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F33F1FF11DDAE16200264034 /* BlobEngine */;
+			target = F33F1FF11DDAE16200264034 /* Blob2D */;
 			targetProxy = F33F1FFE1DDAE16200264034 /* PBXContainerItemProxy */;
 		};
 		F34875AF1DDAE50C0068844D /* PBXTargetDependency */ = {
@@ -1025,7 +1025,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngine;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Blob2D;
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-Wno-ambiguous-macro";
 			};
@@ -1054,7 +1054,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngine;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Blob2D;
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-Wno-ambiguous-macro";
 			};
@@ -1072,7 +1072,7 @@
 				INFOPLIST_FILE = BlobEngineTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngineTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Blob2D;
 			};
 			name = Debug;
 		};
@@ -1088,14 +1088,14 @@
 				INFOPLIST_FILE = BlobEngineTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngineTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Blob2D;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F33F1FEC1DDAE16200264034 /* Build configuration list for PBXProject "BlobEngine" */ = {
+		F33F1FEC1DDAE16200264034 /* Build configuration list for PBXProject "Blob2D" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F33F20041DDAE16200264034 /* Debug */,
@@ -1104,7 +1104,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F33F20061DDAE16200264034 /* Build configuration list for PBXNativeTarget "BlobEngine" */ = {
+		F33F20061DDAE16200264034 /* Build configuration list for PBXNativeTarget "Blob2D" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F33F20071DDAE16200264034 /* Debug */,
@@ -1113,7 +1113,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F33F20091DDAE16200264034 /* Build configuration list for PBXNativeTarget "BlobEngineTests" */ = {
+		F33F20091DDAE16200264034 /* Build configuration list for PBXNativeTarget "Blob2DTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F33F200A1DDAE16200264034 /* Debug */,

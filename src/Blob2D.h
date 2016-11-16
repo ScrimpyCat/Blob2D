@@ -24,9 +24,9 @@
  */
 
 
-#ifndef BlobEngine_Window_h
-#define BlobEngine_Window_h
+#ifndef Blob2D_Window_h
+#define Blob2D_Window_h
 
-#include <BlobEngine/EngineMain.h>
+#include <Blob2D/EngineMain.h>
 
 #endif
