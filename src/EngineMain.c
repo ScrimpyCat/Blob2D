@@ -301,7 +301,7 @@ static int EngineMain(int argc, const char *argv[])
     B2PlatformWindowSetup(B2Window);
     
     B2EngineSetup();
-    B2EngineSetupComplete();
+    if (B2EngineSetupComplete) B2EngineSetupComplete();
     
     glfwMakeContextCurrent(NULL);
     
