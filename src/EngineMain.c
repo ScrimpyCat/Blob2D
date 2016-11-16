@@ -222,6 +222,19 @@ static void WindowFocus(GLFWwindow *Window, int Focus)
     CCInputSystemWindowFocus(Focus);
 }
 
+#pragma mark - Updating
+
+static int UpdateLoop(GLFWwindow *Window)
+{
+    while (!glfwWindowShouldClose(Window))
+    {
+        CCComponentSystemRun(CCComponentSystemExecutionTypeUpdate);
+        thrd_sleep(&(struct timespec){ .tv_nsec = 16666667 }, NULL); //TODO: Allow user to specify
+    }
+    
+    return EXIT_SUCCESS;
+}
+
 #pragma mark -
 
 static int EngineMain(int argc, const char *argv[])
@@ -302,6 +315,22 @@ static int EngineMain(int argc, const char *argv[])
         return EXIT_FAILURE;
     }
     
+    thrd_t UpdateThread;
+    if ((err = thrd_create(&UpdateThread, (thrd_start_t)UpdateLoop, B2Window)) != thrd_success)
+    {
+        //Possibly fallback to single threaded implementation?
+        CC_LOG_ERROR("Failed to create update thread (%d)", err);
+        
+        glfwSetWindowShouldClose(B2Window, TRUE);
+        
+        thrd_join(RenderThread, NULL);
+        
+        glfwDestroyWindow(B2Window);
+        glfwTerminate();
+        
+        return EXIT_FAILURE;
+    }
+    
     while (!glfwWindowShouldClose(B2Window))
     {
         CCComponentSystemRun(CCComponentSystemExecutionTypeInput);
@@ -309,7 +338,8 @@ static int EngineMain(int argc, const char *argv[])
     }
     
     
-    thrd_detach(RenderThread);
+    thrd_join(UpdateThread, NULL);
+    thrd_join(RenderThread, NULL);
     
     glfwDestroyWindow(B2Window);
     glfwTerminate();
