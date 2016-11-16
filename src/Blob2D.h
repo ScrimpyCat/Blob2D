@@ -27,6 +27,7 @@
 #ifndef Blob2D_Blob2D_h
 #define Blob2D_Blob2D_h
 
+#include <CommonGameKit/CommonGameKit.h>
 #include <Blob2D/EngineMain.h>
 
 #endif
