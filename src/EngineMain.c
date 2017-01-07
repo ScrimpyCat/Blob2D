@@ -230,6 +230,7 @@ static int UpdateLoop(GLFWwindow *Window)
 {
     while (!glfwWindowShouldClose(Window))
     {
+        CCEntityManagerUpdate();
         CCComponentSystemRun(CCComponentSystemExecutionTypeUpdate);
         thrd_sleep(&(struct timespec){ .tv_nsec = 16666667 }, NULL); //TODO: Allow user to specify
     }
