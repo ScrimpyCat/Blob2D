@@ -39,6 +39,8 @@ void (*B2EngineSetupComplete)(void) = NULL;
 
 GLFWwindow *B2Window = NULL;
 
+double B2UpdateThreadTimeSlice = 1.0 / 60.0;
+
 #pragma mark - Window callbacks
 
 static void ErrorCallback(int Error, const char *Description)
@@ -230,9 +232,13 @@ static int UpdateLoop(GLFWwindow *Window)
 {
     while (!glfwWindowShouldClose(Window))
     {
+        double Wait = CCTimestamp();
+        
         CCEntityManagerUpdate();
         CCComponentSystemRun(CCComponentSystemExecutionTypeUpdate);
-        thrd_sleep(&(struct timespec){ .tv_nsec = 16666667 }, NULL); //TODO: Allow user to specify
+        
+        Wait = (B2UpdateThreadTimeSlice - (CCTimestamp() - Wait)) * 1000000000.0;
+        thrd_sleep(&(struct timespec){ .tv_nsec = (Wait < 0 ? 0 : (uint64_t)Wait) }, NULL);
     }
     
     return EXIT_SUCCESS;

@@ -40,4 +40,10 @@ extern void (*B2EngineSetupComplete)(void);
  */
 int B2EngineRun(int argc, const char *argv[]);
 
+/*!
+ * @brief Set this to the amount of time (in seconds) the update thread should occur.
+ * @description The default value is set at 1/60 update cycles.
+ */
+extern double B2UpdateThreadTimeSlice;
+
 #endif
