@@ -27,6 +27,12 @@
 #define Blob2D_EngineMain_h
 
 /*!
+ * @brief Called when the engine has started setting up.
+ * @description Use this callback to handle custom pre-setup.
+ */
+extern void (*B2EngineSetupBegin)(void);
+
+/*!
  * @brief Called when the engine has finished setting up.
  * @description Use this callback to handle custom setup.
  */

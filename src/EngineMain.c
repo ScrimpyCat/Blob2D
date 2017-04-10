@@ -35,6 +35,7 @@
 #include "EngineSetup.h"
 #include "Configuration.h"
 
+void (*B2EngineSetupBegin)(void) = NULL;
 void (*B2EngineSetupComplete)(void) = NULL;
 
 GLFWwindow *B2Window = NULL;
@@ -248,6 +249,7 @@ static int UpdateLoop(GLFWwindow *Window)
 
 static int EngineMain(int argc, const char *argv[])
 {
+    if (B2EngineSetupBegin) B2EngineSetupBegin();
     B2EnginePreSetup();
     B2ConfigureOptions(argc, argv);
     
