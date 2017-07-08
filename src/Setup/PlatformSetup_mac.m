@@ -31,7 +31,7 @@
 
 void B2PlatformSetup(void)
 {
-    
+    [[NSUserDefaults standardUserDefaults] setBool: NO forKey: @"ApplePressAndHoldEnabled"];
 }
 
 void B2PlatformWindowSetup(GLFWwindow *Window)
