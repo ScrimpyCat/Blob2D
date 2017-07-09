@@ -239,7 +239,7 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
                                         //TODO: Make a directory expression
                                         for (Expr = NULL; (Expr = CCCollectionEnumeratorNext(&Enumerator)); )
                                         {
-                                            FSPath Dir = B2ProjectExpressionPathFromExpression(CCExpressionEvaluate(*Expr), Result);
+                                            FSPath Dir = B2ProjectExpressionPathFromExpression(CCExpressionEvaluate(*Expr), Expression);
                                             CCCollectionInsertElement(Directories, &Dir);
                                         }
                                         
