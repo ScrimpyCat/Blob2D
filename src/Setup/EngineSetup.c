@@ -143,7 +143,6 @@ void B2EngineSetup(void)
     CCInputMapMouseDropComponentRegister();
     CCInputMapControllerAxesComponentRegister();
     CCInputMapControllerButtonComponentRegister();
-    CCAnimationComponentRegister();
     CCAnimationKeyframeComponentRegister();
     CCAnimationInterpolateComponentRegister();
     
