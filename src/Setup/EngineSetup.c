@@ -83,14 +83,7 @@ void B2EngineSetup(void)
             CC_COLLECTION_FOREACH(FSPath, LibPath, Paths)
             {
                 CCExpression LibExpr = CCExpressionCreateFromSourceFile(LibPath);
-                CCExpression Result = CCExpressionEvaluate(LibExpr);
-                
-                if (CCExpressionGetType(Result) == CCAssetExpressionValueTypeShaderLibrary)
-                {
-                    CCAssetExpressionValueShaderLibrary *Library = CCExpressionGetData(Result);
-                    CCAssetManagerRegisterShaderLibrary(Library->name, Library->library);
-                }
-                
+                CCExpressionEvaluate(LibExpr);
                 CCExpressionDestroy(LibExpr);
             }
             
