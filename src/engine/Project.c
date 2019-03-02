@@ -40,6 +40,7 @@ static const char B2ProjectGamepkg[] =
 "    (dir-sounds: \"audio/\") ; sound directories\n"
 "    (dir-layouts: \"ui/\") ; layout directories\n"
 "    (dir-entities: \"logic/entities/\") ; entity directories\n"
+"    (dir-save: \"save/\") ; save directory\n"
 "    (dir-logs: \"logs/\") ; log directory\n"
 "    (dir-tmp: \"tmp/\") ; tmp directory\n"
 ")\n";
@@ -90,6 +91,10 @@ FSPath B2ProjectCreate(const char *Directory)
         
         //logs
         FSPathSetComponentAtIndex(ProjectDir, FSPathComponentCreate(FSPathComponentTypeDirectory, "logs"), FSPathGetComponentCount(ProjectDir) - 1);
+        FSManagerCreate(ProjectDir, FALSE);
+        
+        //save
+        FSPathSetComponentAtIndex(ProjectDir, FSPathComponentCreate(FSPathComponentTypeDirectory, "save"), FSPathGetComponentCount(ProjectDir) - 1);
         FSManagerCreate(ProjectDir, FALSE);
         
         //ui
