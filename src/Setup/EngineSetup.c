@@ -125,6 +125,7 @@ void B2EngineSetup(void)
     CCRenderSystemRegister();
     CCInputSystemRegister();
     CCAnimationSystemRegister();
+    CCScriptableInterfaceSystemRegister();
     
     //Register Components
     CCRenderComponentRegister();
@@ -138,6 +139,7 @@ void B2EngineSetup(void)
     CCInputMapControllerButtonComponentRegister();
     CCAnimationKeyframeComponentRegister();
     CCAnimationInterpolateComponentRegister();
+    CCScriptableInterfaceDynamicFieldComponentRegister();
     
     
     //Create Managers Dependent on ECS :(
