@@ -44,14 +44,14 @@ typedef struct {
         _Bool fullscreen; //TODO: Change to specifying monitors
     } window;
     struct {
-        CCCollection fonts;
-        CCCollection levels;
-        CCCollection rules;
-        CCCollection entities;
-        CCCollection textures;
-        CCCollection shaders;
-        CCCollection sounds;
-        CCCollection layouts;
+        CCOrderedCollection fonts;
+        CCOrderedCollection levels;
+        CCOrderedCollection rules;
+        CCOrderedCollection entities;
+        CCOrderedCollection textures;
+        CCOrderedCollection shaders;
+        CCOrderedCollection sounds;
+        CCOrderedCollection layouts;
         FSPath save;
         FSPath logs;
         FSPath tmp;

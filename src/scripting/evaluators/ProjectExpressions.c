@@ -57,10 +57,9 @@ static FSPath B2ProjectExpressionPathFromExpression(CCExpression Expression, CCE
         Path = FSPathCreate("");
         CC_COLLECTION_FOREACH(CCExpression, Part, CCExpressionGetList(Expression))
         {
-            CCExpression Result = CCExpressionEvaluate(Part);
-            if (CCExpressionGetType(Result) == CCExpressionValueTypeString)
+            if (CCExpressionGetType(Part) == CCExpressionValueTypeString)
             {
-                CC_STRING_TEMP_BUFFER(Buffer, CCExpressionGetString(Result))
+                CC_STRING_TEMP_BUFFER(Buffer, CCExpressionGetString(Part))
                 {
                     CCOrderedCollection Components = FSPathConvertPathToComponents(Buffer, FALSE);
                     CC_COLLECTION_FOREACH(FSPathComponent, Component, Components)
@@ -113,14 +112,14 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
             .fullscreen = FALSE
         },
         .directory = {
-            .fonts = NULL,
-            .levels = NULL,
-            .rules = NULL,
-            .entities = NULL,
-            .textures = NULL,
-            .shaders = NULL,
-            .sounds = NULL,
-            .layouts = NULL,
+            .fonts = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered | CCCollectionHintSizeSmall | CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection),
+            .levels = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered | CCCollectionHintSizeSmall | CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection),
+            .rules = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered | CCCollectionHintSizeSmall | CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection),
+            .entities = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered | CCCollectionHintSizeSmall | CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection),
+            .textures = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered | CCCollectionHintSizeSmall | CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection),
+            .shaders = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered | CCCollectionHintSizeSmall | CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection),
+            .sounds = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered | CCCollectionHintSizeSmall | CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection),
+            .layouts = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered | CCCollectionHintSizeSmall | CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection),
             .save = NULL,
             .logs = NULL,
             .tmp = NULL
@@ -149,7 +148,7 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
         for (Expr = NULL; (Expr = CCCollectionEnumeratorNext(&Enumerator)); )
         {
             Result = CCExpressionEvaluate(*Expr);
-            if (CCExpressionGetType(Result) == CCExpressionValueTypeExpression)
+            if (CCExpressionGetType(Result) == CCExpressionValueTypeList)
             {
                 size_t ArgCount = CCCollectionGetCount(CCExpressionGetList(Result)) - 1;
                 
@@ -160,14 +159,14 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
                 
                 if (Expr)
                 {
-                    Result = CCExpressionEvaluate(*Expr);
-                    if (CCExpressionGetType(Result) == CCExpressionValueTypeAtom)
+                    CCExpression Option = *Expr;
+                    if (CCExpressionGetType(Option) == CCExpressionValueTypeAtom)
                     {
-                        if (CCStringEqual(CCExpressionGetAtom(Result), CC_STRING("default-resolution:")))
+                        if (CCStringEqual(CCExpressionGetAtom(Option), CC_STRING("default-resolution:")))
                         {
                             if (ArgCount == 2)
                             {
-                                CCExpression Width = CCExpressionEvaluate(*(CCExpression*)CCCollectionEnumeratorNext(&Enumerator)), Height = CCExpressionEvaluate(*(CCExpression*)CCCollectionEnumeratorNext(&Enumerator));
+                                CCExpression Width = *(CCExpression*)CCCollectionEnumeratorNext(&Enumerator), Height = *(CCExpression*)CCCollectionEnumeratorNext(&Enumerator);
                                 
                                 if ((CCExpressionGetType(Width) == CCExpressionValueTypeInteger) && (CCExpressionGetType(Height) == CCExpressionValueTypeInteger))
                                 {
@@ -181,11 +180,11 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
                             else CC_EXPRESSION_EVALUATOR_LOG_OPTION_ERROR("default-resolution", "width:integer height:integer");
                         }
                         
-                        else if (CCStringEqual(CCExpressionGetAtom(Result), CC_STRING("default-fullscreen:")))
+                        else if (CCStringEqual(CCExpressionGetAtom(Option), CC_STRING("default-fullscreen:")))
                         {
                             if (ArgCount == 1)
                             {
-                                CCExpression Fullscreen = CCExpressionEvaluate(*(CCExpression*)CCCollectionEnumeratorNext(&Enumerator));
+                                CCExpression Fullscreen = *(CCExpression*)CCCollectionEnumeratorNext(&Enumerator);
                                 
                                 if (CCExpressionGetType(Fullscreen) == CCExpressionValueTypeInteger)
                                 {
@@ -198,9 +197,9 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
                             else CC_EXPRESSION_EVALUATOR_LOG_OPTION_ERROR("default-fullscreen", "fullscreen:boolean");
                         }
                         
-                        else if (CCStringHasPrefix(CCExpressionGetAtom(Result), CC_STRING("dir-")))
+                        else if (CCStringHasPrefix(CCExpressionGetAtom(Option), CC_STRING("dir-")))
                         {
-                            CCString Dir = CCExpressionGetAtom(Result);
+                            CCString Dir = CCExpressionGetAtom(Option);
                             
                             struct {
                                 CCString atom;
@@ -228,7 +227,9 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
                                     {
                                         if (ArgCount == 1)
                                         {
-                                            *(FSPath*)(Commands[Loop].attribute) = B2ProjectExpressionPathFromExpression(CCExpressionEvaluate(*(CCExpression*)CCCollectionEnumeratorNext(&Enumerator)), Result);
+                                            if (*(FSPath*)Commands[Loop].attribute) FSPathDestroy(*(FSPath*)Commands[Loop].attribute);
+                                            
+                                            *(FSPath*)Commands[Loop].attribute = B2ProjectExpressionPathFromExpression(*(CCExpression*)CCCollectionEnumeratorNext(&Enumerator), Result);
                                         }
                                         
                                         else
@@ -239,16 +240,13 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
                                     
                                     else
                                     {
-                                        CCCollection Directories = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintSizeSmall | CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection);
+                                        CCOrderedCollection Directories = *(CCOrderedCollection*)Commands[Loop].attribute;
                                         
-                                        //TODO: Make a directory expression
                                         for (Expr = NULL; (Expr = CCCollectionEnumeratorNext(&Enumerator)); )
                                         {
-                                            FSPath Dir = B2ProjectExpressionPathFromExpression(CCExpressionEvaluate(*Expr), Expression);
-                                            CCCollectionInsertElement(Directories, &Dir);
+                                            FSPath Dir = B2ProjectExpressionPathFromExpression(*Expr, Expression);
+                                            CCOrderedCollectionAppendElement(Directories, &Dir);
                                         }
-                                        
-                                        *(CCCollection*)(Commands[Loop].attribute) = Directories;
                                     }
                                 }
                             }
