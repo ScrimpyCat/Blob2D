@@ -80,4 +80,29 @@
     CCExpressionDestroy(Expression);
 }
 
+-(void) testDefaultProject
+{
+    CCExpression Expression = CCExpressionCreateFromSource("(game)\n");
+    
+    CCExpression Result = CCExpressionEvaluate(Expression);
+    XCTAssertEqual(CCExpressionGetType(Result), B2ProjectExpressionValueTypeGameConfig, @"Should be a project config");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->title, NULL, @"Should be initialized");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.fullscreen, FALSE, @"Should be initialized");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.width, 0, @"Should be initialized");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.height, 0, @"Should be initialized");
+    XCTAssertEqual(CCCollectionGetCount(((B2EngineConfig*)CCExpressionGetData(Result))->directory.fonts), 0, @"Should be initialized");
+    XCTAssertEqual(CCCollectionGetCount(((B2EngineConfig*)CCExpressionGetData(Result))->directory.levels), 0, @"Should be initialized");
+    XCTAssertEqual(CCCollectionGetCount(((B2EngineConfig*)CCExpressionGetData(Result))->directory.rules), 0, @"Should be initialized");
+    XCTAssertEqual(CCCollectionGetCount(((B2EngineConfig*)CCExpressionGetData(Result))->directory.textures), 0, @"Should be initialized");
+    XCTAssertEqual(CCCollectionGetCount(((B2EngineConfig*)CCExpressionGetData(Result))->directory.shaders), 0, @"Should be initialized");
+    XCTAssertEqual(CCCollectionGetCount(((B2EngineConfig*)CCExpressionGetData(Result))->directory.sounds), 0, @"Should be initialized");
+    XCTAssertEqual(CCCollectionGetCount(((B2EngineConfig*)CCExpressionGetData(Result))->directory.layouts), 0, @"Should be initialized");
+    XCTAssertEqual(CCCollectionGetCount(((B2EngineConfig*)CCExpressionGetData(Result))->directory.entities), 0, @"Should be initialized");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->directory.save, NULL, @"Should be initialized");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->directory.logs, NULL, @"Should be initialized");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->directory.tmp, NULL, @"Should be initialized");
+    
+    CCExpressionDestroy(Expression);
+}
+
 @end
