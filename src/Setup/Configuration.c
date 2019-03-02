@@ -47,6 +47,7 @@ B2EngineConfig B2EngineConfiguration = {
         .shaders = NULL,
         .sounds = NULL,
         .layouts = NULL,
+        .save = NULL,
         .logs = NULL,
         .tmp = NULL
     }

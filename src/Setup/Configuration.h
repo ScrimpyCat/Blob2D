@@ -52,6 +52,7 @@ typedef struct {
         CCCollection shaders;
         CCCollection sounds;
         CCCollection layouts;
+        FSPath save;
         FSPath logs;
         FSPath tmp;
     } directory;

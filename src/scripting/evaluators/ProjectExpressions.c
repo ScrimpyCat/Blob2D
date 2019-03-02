@@ -38,6 +38,7 @@ static void B2ProjectExpressionValueGameConfigDestructor(B2EngineConfig *Data)
     if (Data->directory.shaders) CCCollectionDestroy(Data->directory.shaders);
     if (Data->directory.sounds) CCCollectionDestroy(Data->directory.sounds);
     if (Data->directory.layouts) CCCollectionDestroy(Data->directory.layouts);
+    if (Data->directory.save) FSPathDestroy(Data->directory.save);
     if (Data->directory.logs) FSPathDestroy(Data->directory.logs);
     if (Data->directory.tmp) FSPathDestroy(Data->directory.tmp);
     CC_SAFE_Free(Data);
@@ -120,6 +121,7 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
             .shaders = NULL,
             .sounds = NULL,
             .layouts = NULL,
+            .save = NULL,
             .logs = NULL,
             .tmp = NULL
         }
@@ -213,6 +215,7 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
                                 { CC_STRING("sounds:"), &Config.directory.sounds, FALSE },
                                 { CC_STRING("layouts:"), &Config.directory.layouts, FALSE },
                                 { CC_STRING("entities:"), &Config.directory.entities, FALSE },
+                                { CC_STRING("save:"), &Config.directory.save, TRUE },
                                 { CC_STRING("logs:"), &Config.directory.logs, TRUE },
                                 { CC_STRING("tmp:"), &Config.directory.tmp, TRUE }
                             };

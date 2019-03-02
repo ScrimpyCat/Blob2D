@@ -54,6 +54,7 @@
                                                            "    (dir-sounds: \"audio/\")\n"
                                                            "    (dir-layouts: \"ui/\")\n"
                                                            "    (dir-entities: \"logic/entities/\")\n"
+                                                           "    (dir-save: \"save/\")\n"
                                                            "    (dir-logs: \"logs/\")\n"
                                                            "    (dir-tmp: \"tmp/\")\n"
                                                            ")\n");
@@ -72,6 +73,7 @@
     XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.sounds, 0)), "audio/"), @"Should be initialized");
     XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.layouts, 0)), "ui/"), @"Should be initialized");
     XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.entities, 0)), "logic/entities/"), @"Should be initialized");
+    XCTAssertTrue(!strcmp(FSPathGetPathString(((B2EngineConfig*)CCExpressionGetData(Result))->directory.save), "save/"), @"Should be initialized");
     XCTAssertTrue(!strcmp(FSPathGetPathString(((B2EngineConfig*)CCExpressionGetData(Result))->directory.logs), "logs/"), @"Should be initialized");
     XCTAssertTrue(!strcmp(FSPathGetPathString(((B2EngineConfig*)CCExpressionGetData(Result))->directory.tmp), "tmp/"), @"Should be initialized");
     
