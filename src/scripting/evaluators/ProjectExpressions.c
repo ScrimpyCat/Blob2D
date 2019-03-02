@@ -33,6 +33,7 @@ static void B2ProjectExpressionValueGameConfigDestructor(B2EngineConfig *Data)
     if (Data->directory.fonts) CCCollectionDestroy(Data->directory.fonts);
     if (Data->directory.levels) CCCollectionDestroy(Data->directory.levels);
     if (Data->directory.rules) CCCollectionDestroy(Data->directory.rules);
+    if (Data->directory.entities) CCCollectionDestroy(Data->directory.entities);
     if (Data->directory.textures) CCCollectionDestroy(Data->directory.textures);
     if (Data->directory.shaders) CCCollectionDestroy(Data->directory.shaders);
     if (Data->directory.sounds) CCCollectionDestroy(Data->directory.sounds);
@@ -114,6 +115,7 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
             .fonts = NULL,
             .levels = NULL,
             .rules = NULL,
+            .entities = NULL,
             .textures = NULL,
             .shaders = NULL,
             .sounds = NULL,

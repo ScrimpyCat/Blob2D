@@ -42,10 +42,13 @@ B2EngineConfig B2EngineConfiguration = {
         .fonts = NULL,
         .levels = NULL,
         .rules = NULL,
+        .entities = NULL,
         .textures = NULL,
         .shaders = NULL,
         .sounds = NULL,
-        .layouts = NULL
+        .layouts = NULL,
+        .logs = NULL,
+        .tmp = NULL
     }
 };
 
