@@ -25,6 +25,20 @@
                     "args": [[{ "type": "boolean", "name": "fullscreen-mode" }]]
                 },
                 {
+                    "name": "renderer",
+                    "description": "The renderer that should be used.",
+                    "args": [
+                        [{ "type": "atom", "name": "api" }],
+                        [{ "type": "atom", "value": "opengl" }],
+                        [{ "type": "atom", "value": "metal" }]
+                    ]
+                },
+                {
+                    "name": "vsync",
+                    "description": "Whether it should be synced to the display.",
+                    "args": [[{ "type": "boolean" }]]
+                },
+                {
                     "name": "dir-fonts",
                     "description": "The directories containing fonts. Use either paths or list of path components.",
                     "args": [
@@ -78,6 +92,14 @@
                     "description": "The directories containing entities. Use either paths or list of path components.",
                     "args": [
                         { "repeat": [{ "type": "string", "name": "path" }, { "type": "list" }] }
+                    ]
+                },
+                {
+                    "name": "dir-save",
+                    "description": "The directory to store the saves. Use either paths or list of path components.",
+                    "args": [
+                        [{ "type": "string", "name": "path" }],
+                        [{ "type": "list", "name": "path-components" }]
                     ]
                 },
                 {
