@@ -38,6 +38,10 @@ B2EngineConfig B2EngineConfiguration = {
         .height = 0,
         .fullscreen = FALSE
     },
+    .renderer = {
+        .pipeline = B2EngineRenderPipelineNone,
+        .vsync = TRUE
+    },
     .directory = {
         .fonts = NULL,
         .levels = NULL,

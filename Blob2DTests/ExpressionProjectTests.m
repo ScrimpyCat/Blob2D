@@ -46,6 +46,9 @@
                                                            "    (default-resolution: 640 480)\n"
                                                            "    (default-fullscreen: #f)\n"
                                                            "\n"
+                                                           "    (renderer: :opengl)\n"
+                                                           "    (vsync: #t)\n"
+                                                           "\n"
                                                            "    (dir-fonts: \"font/\")\n"
                                                            "    (dir-levels: \"logic/levels/\")\n"
                                                            "    (dir-rules: \"logic/rules/\")\n"
@@ -65,6 +68,8 @@
     XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.fullscreen, FALSE, @"Should be initialized");
     XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.width, 640, @"Should be initialized");
     XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.height, 480, @"Should be initialized");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->renderer.pipeline, B2EngineRenderPipelineOpenGL, @"Should be initialized");
+    XCTAssertTrue(((B2EngineConfig*)CCExpressionGetData(Result))->renderer.vsync, @"Should be initialized");
     XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.fonts, 0)), "font/"), @"Should be initialized");
     XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.levels, 0)), "logic/levels/"), @"Should be initialized");
     XCTAssertTrue(!strcmp(FSPathGetPathString(*(FSPath*)CCOrderedCollectionGetElementAtIndex(((B2EngineConfig*)CCExpressionGetData(Result))->directory.rules, 0)), "logic/rules/"), @"Should be initialized");
@@ -90,6 +95,8 @@
     XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.fullscreen, FALSE, @"Should be initialized");
     XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.width, 0, @"Should be initialized");
     XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->window.height, 0, @"Should be initialized");
+    XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->renderer.pipeline, B2EngineRenderPipelineNone, @"Should be initialized");
+    XCTAssertTrue(((B2EngineConfig*)CCExpressionGetData(Result))->renderer.vsync, @"Should be initialized");
     XCTAssertEqual(CCCollectionGetCount(((B2EngineConfig*)CCExpressionGetData(Result))->directory.fonts), 0, @"Should be initialized");
     XCTAssertEqual(CCCollectionGetCount(((B2EngineConfig*)CCExpressionGetData(Result))->directory.levels), 0, @"Should be initialized");
     XCTAssertEqual(CCCollectionGetCount(((B2EngineConfig*)CCExpressionGetData(Result))->directory.rules), 0, @"Should be initialized");

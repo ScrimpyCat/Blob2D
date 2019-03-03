@@ -34,6 +34,12 @@ typedef enum {
     B2LaunchOptionTest
 } B2LaunchOption;
 
+typedef enum {
+    B2EngineRenderPipelineNone,
+    B2EngineRenderPipelineOpenGL,
+    B2EngineRenderPipelineMetal
+} B2EngineRenderPipeline;
+
 typedef struct {
     B2LaunchOption launch;
     FSPath project;
@@ -43,6 +49,10 @@ typedef struct {
         int height;
         _Bool fullscreen; //TODO: Change to specifying monitors
     } window;
+    struct {
+        B2EngineRenderPipeline pipeline;
+        _Bool vsync;
+    } renderer;
     struct {
         CCOrderedCollection fonts;
         CCOrderedCollection levels;

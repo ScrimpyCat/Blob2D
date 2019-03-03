@@ -111,6 +111,10 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
             .height = 0,
             .fullscreen = FALSE
         },
+        .renderer = {
+            .pipeline = B2EngineRenderPipelineNone,
+            .vsync = TRUE
+        },
         .directory = {
             .fonts = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered | CCCollectionHintSizeSmall | CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection),
             .levels = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintOrdered | CCCollectionHintSizeSmall | CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection),
@@ -195,6 +199,43 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
                             }
                             
                             else CC_EXPRESSION_EVALUATOR_LOG_OPTION_ERROR("default-fullscreen", "fullscreen:boolean");
+                        }
+                        
+                        else if (CCStringEqual(CCExpressionGetAtom(Option), CC_STRING("renderer:")))
+                        {
+                            if (ArgCount == 1)
+                            {
+                                CCExpression Renderer = *(CCExpression*)CCCollectionEnumeratorNext(&Enumerator);
+                                
+                                if (CCExpressionGetType(Renderer) == CCExpressionValueTypeAtom)
+                                {
+                                    CCString Pipeline = CCExpressionGetAtom(Renderer);
+                                    if (CCStringEqual(Pipeline, CC_STRING(":opengl"))) Config.renderer.pipeline = B2EngineRenderPipelineOpenGL;
+                                    else if (CCStringEqual(Pipeline, CC_STRING(":metal"))) Config.renderer.pipeline = B2EngineRenderPipelineMetal;
+                                    else CC_EXPRESSION_EVALUATOR_LOG_ERROR("Incorrect usage of renderer: unknown argument (%S)", Pipeline);
+                                }
+                                
+                                else CC_EXPRESSION_EVALUATOR_LOG_OPTION_ERROR("renderer", "renderer:atom");
+                            }
+                            
+                            else CC_EXPRESSION_EVALUATOR_LOG_OPTION_ERROR("renderer", "renderer:atom");
+                        }
+                        
+                        else if (CCStringEqual(CCExpressionGetAtom(Option), CC_STRING("vsync:")))
+                        {
+                            if (ArgCount == 1)
+                            {
+                                CCExpression Fullscreen = *(CCExpression*)CCCollectionEnumeratorNext(&Enumerator);
+                                
+                                if (CCExpressionGetType(Fullscreen) == CCExpressionValueTypeInteger)
+                                {
+                                    Config.renderer.vsync = CCExpressionGetInteger(Fullscreen);
+                                }
+                                
+                                else CC_EXPRESSION_EVALUATOR_LOG_OPTION_ERROR("vsync", "boolean");
+                            }
+                            
+                            else CC_EXPRESSION_EVALUATOR_LOG_OPTION_ERROR("vsync", "boolean");
                         }
                         
                         else if (CCStringHasPrefix(CCExpressionGetAtom(Option), CC_STRING("dir-")))
