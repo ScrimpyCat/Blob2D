@@ -119,6 +119,12 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "app-data-dir",
+            "description": "Get the current directory to store application data. If this is used inside a (game) expression it will use the title set in there.",
+            "examples": ["(app-data-dir) ; \"/Users/foo/Library/Application Support/old-title/\"", "(game \"new-title\"\n\t(app-data-dir) ; \"/Users/foo/Library/Application Support/new-title/\"\n)"],
+            "return": { "type": "string" }
         }
     ]
 }
