@@ -6,4 +6,5 @@
 void B2ExpressionSetup(void)
 {
     CCExpressionEvaluatorRegister(CC_STRING("game"), B2ProjectExpressionGame);
+    CCExpressionEvaluatorRegister(CC_STRING("app-data-dir"), B2ProjectExpressionAppDataDir);
 }

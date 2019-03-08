@@ -100,6 +100,7 @@ static FSPath B2ProjectExpressionPathFromExpression(CCExpression Expression, CCE
     return Path;
 }
 
+_Thread_local const char *TempTitle = NULL;
 CCExpression B2ProjectExpressionGame(CCExpression Expression)
 {
     B2EngineConfig Config = {
@@ -147,6 +148,7 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
             *CCStringCopyCharacters(CCExpressionGetString(Result), 0, CCStringGetLength(CCExpressionGetString(Result)), Title) = 0;
             
             Config.title = Title;
+            TempTitle = Title;
         }
         
         for (Expr = NULL; (Expr = CCCollectionEnumeratorNext(&Enumerator)); )
@@ -297,7 +299,9 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
             }
         }
     }
-
+    
+    TempTitle = NULL;
+    
     B2EngineConfig *Result;
     CC_SAFE_Malloc(Result, sizeof(B2EngineConfig),
                    CC_LOG_ERROR("Failed to allocate CCEngineConfig for expression. Allocation size: %zu", sizeof(B2EngineConfig));
@@ -313,4 +317,13 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
     else B2ProjectExpressionValueGameConfigDestructor(&Config);
     
     return Expression;
+}
+
+CCExpression B2ProjectExpressionAppDataDir(CCExpression Expression)
+{
+    FSPath AppDataPath = FSPathCreateAppData(TempTitle ? TempTitle : B2EngineConfiguration.title);
+    CCString Path = CCStringCreate(CC_STD_ALLOCATOR, CCStringHintCopy, FSPathGetPathString(AppDataPath));
+    FSPathDestroy(AppDataPath);
+    
+    return CCExpressionCreateString(CC_STD_ALLOCATOR, Path, FALSE);
 }

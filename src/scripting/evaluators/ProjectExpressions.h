@@ -28,23 +28,6 @@
 
 #include <CommonGameKit/CommonGameKit.h>
 
-/*
- (game "Game" ; title
- (default-resolution 640 480) ; resolution or window size
- (default-fullscreen false) ; fullscreen mode
- 
- (dir-fonts "font/") ; font directories
- (dir-levels "logic/levels/") ; level directories
- (dir-rules "logic/rules/") ; rule directories
- (dir-textures "graphics/textures/") ; texture directories
- (dir-shaders "graphics/shaders/") ; shader directories
- (dir-sounds "audio/") ; sound directories
- (dir-layouts "ui/") ; layout directories
- (dir-entities "logic/entities/") ; entity directories
- (dir-logs "logs/") ; log directory
- (dir-tmp "tmp/") ; tmp directory
- )
- */
 
 typedef enum {
     B2ProjectExpressionValueTypeGameConfig = 'cfg\0'
@@ -52,5 +35,6 @@ typedef enum {
 
 
 CC_EXPRESSION_EVALUATOR(game) CCExpression B2ProjectExpressionGame(CCExpression Expression);
+CC_EXPRESSION_EVALUATOR(app-data-dir) CCExpression B2ProjectExpressionAppDataDir(CCExpression Expression);
 
 #endif
