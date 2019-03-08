@@ -322,7 +322,7 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
 CCExpression B2ProjectExpressionAppDataDir(CCExpression Expression)
 {
     FSPath AppDataPath = FSPathCreateAppData(TempTitle ? TempTitle : B2EngineConfiguration.title);
-    CCString Path = CCStringCreate(CC_STD_ALLOCATOR, CCStringHintCopy, FSPathGetPathString(AppDataPath));
+    CCString Path = CCStringCreate(CC_STD_ALLOCATOR, CCStringEncodingUTF8 | CCStringHintCopy, FSPathGetPathString(AppDataPath));
     FSPathDestroy(AppDataPath);
     
     return CCExpressionCreateString(CC_STD_ALLOCATOR, Path, FALSE);
