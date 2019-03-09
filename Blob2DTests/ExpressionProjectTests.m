@@ -24,6 +24,7 @@
  */
 
 #import <XCTest/XCTest.h>
+@import Foundation;
 #import "ProjectExpressions.h"
 #import "Configuration.h"
 
@@ -38,6 +39,7 @@
     [super setUp];
     
     CCExpressionEvaluatorRegister(CC_STRING("game"), B2ProjectExpressionGame);
+    CCExpressionEvaluatorRegister(CC_STRING("app-data-dir"), B2ProjectExpressionAppDataDir);
 }
 
 -(void) testProject
@@ -110,6 +112,33 @@
     XCTAssertEqual(((B2EngineConfig*)CCExpressionGetData(Result))->directory.tmp, NULL, @"Should be initialized");
     
     CCExpressionDestroy(Expression);
+}
+
+-(void) testAppDataDir
+{
+    B2EngineConfiguration.title = "old-title";
+    
+    CCExpression Expression = CCExpressionCreateFromSource("(game \"new-title\" (dir-tmp: (app-data-dir)))\n");
+    
+    CCExpression Result = CCExpressionEvaluate(Expression);
+    NSString *Path = [NSString stringWithFormat: @"/Users/%@/Library/Application Support/new-title/", NSUserName()];
+    XCTAssertEqualObjects([NSString stringWithUTF8String: FSPathGetPathString(((B2EngineConfig*)CCExpressionGetData(Result))->directory.tmp)], Path, @"Should be initialized");
+    
+    CCExpressionDestroy(Expression);
+    
+    
+    Expression = CCExpressionCreateFromSource("(app-data-dir)\n");
+    
+    Result = CCExpressionEvaluate(Expression);
+    Path = [NSString stringWithFormat: @"/Users/%@/Library/Application Support/old-title/", NSUserName()];
+    CC_STRING_TEMP_BUFFER(Buffer, CCExpressionGetString(Result))
+    {
+        XCTAssertEqualObjects([NSString stringWithUTF8String: Buffer], Path, @"Should be initialized");
+    }
+    
+    CCExpressionDestroy(Expression);
+    
+    B2EngineConfiguration.title = NULL;
 }
 
 @end
