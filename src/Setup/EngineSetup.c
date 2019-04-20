@@ -42,7 +42,20 @@ void B2EnginePreSetup(void)
 
 void B2EngineSetup(void)
 {
-    GLGFXSetup();
+    switch (B2EngineConfiguration.renderer.pipeline)
+    {
+        case B2EngineRenderPipelineNone:
+            CC_LOG_ERROR("No renderer pipeline was selected");
+            break;
+            
+        case B2EngineRenderPipelineOpenGL:
+            GLGFXSetup();
+            break;
+            
+        case B2EngineRenderPipelineMetal:
+            MTLGFXSetup();
+            break;
+    }
     
     CCAssetManagerCreate();
     
