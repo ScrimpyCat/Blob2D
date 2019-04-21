@@ -59,7 +59,52 @@ static void FramebufferSizeCallback(GLFWwindow *Window, int Width, int Height)
 
 #pragma mark - Rendering
 
-static int RenderLoop(GLFWwindow *Window)
+static void Render(GFXFramebuffer Final, GFXFramebufferAttachment *FinalTarget)
+{
+    FinalTarget->load = GFXFramebufferAttachmentActionFlagClearOnce | GFXFramebufferAttachmentActionLoad;
+    
+    CCComponentSystemRun(CCComponentSystemExecutionTypeRender); //TODO: pass in render target
+    
+    GUIManagerLock();
+    GUIManagerUpdate();
+    GUIManagerRender(Final, 0);
+    GUIManagerUnlock();
+}
+
+static CCConcurrentIndexBuffer FinalTargetIndexBuffer;
+GFXBlit FinalTargetBlit[3];
+static int SynchronizedBlit(GLFWwindow *Window)
+{
+    size_t BlitIndex = SIZE_MAX;
+    while (!glfwWindowShouldClose(Window))
+    {
+        size_t Index;
+        if (CCConcurrentIndexBufferReadAcquire(FinalTargetIndexBuffer, &Index))
+        {
+            if (BlitIndex != SIZE_MAX) CCConcurrentIndexBufferDiscard(FinalTargetIndexBuffer, BlitIndex);
+            
+            BlitIndex = Index;
+        }
+        
+        if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL)
+        {
+            mtx_lock(&RenderLock);
+            glfwMakeContextCurrent(Window);
+        }
+        
+        if (BlitIndex != SIZE_MAX)
+        {
+            GFXBlitSubmit(FinalTargetBlit[BlitIndex]);
+        }
+        
+        glfwSwapBuffers(Window);
+        if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL) mtx_unlock(&RenderLock);
+    }
+    
+    return EXIT_SUCCESS;
+}
+
+static int RenderAsyncLoop(GLFWwindow *Window)
 {
     int err;
     if ((err = mtx_init(&RenderLock, mtx_plain)) != thrd_success)
@@ -67,7 +112,109 @@ static int RenderLoop(GLFWwindow *Window)
         CC_LOG_ERROR("Failed to create render thread lock (%d)", err);
     }
     
-    glfwMakeContextCurrent(Window);
+    const size_t IndexCount = sizeof(FinalTargetBlit) / sizeof(typeof(*FinalTargetBlit));
+    FinalTargetIndexBuffer = CCConcurrentIndexBufferCreate(CC_STD_ALLOCATOR, IndexCount);
+    
+    thrd_t BlitThread;
+    if ((err = thrd_create(&BlitThread, (thrd_start_t)SynchronizedBlit, B2Window)) != thrd_success)
+    {
+        //TODO: fallback to RenderSyncLoop
+        CC_LOG_ERROR("Failed to create render thread (%d)", err);
+        
+        glfwDestroyWindow(B2Window);
+        glfwTerminate();
+        
+        return EXIT_FAILURE;
+    }
+    
+    if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL)
+    {
+        mtx_lock(&RenderLock);
+        glfwMakeContextCurrent(Window);
+    }
+    
+    for (size_t Loop = 0; Loop < IndexCount; Loop++)
+    {
+        FinalTargetBlit[Loop] = GFXBlitCreate(CC_STD_ALLOCATOR);
+        GFXBlitSetFilterMode(FinalTargetBlit[Loop], GFXTextureHintFilterModeNearest);
+    }
+    
+    if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL) mtx_unlock(&RenderLock);
+    
+    GFXTexture FinalTexture[IndexCount] = {NULL};
+    GFXFramebufferAttachment *FinalTarget[IndexCount] = {NULL};
+    GFXFramebuffer Final[IndexCount] = {NULL};
+    while (!glfwWindowShouldClose(Window))
+    {
+        if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL)
+        {
+            mtx_lock(&RenderLock);
+            glfwMakeContextCurrent(Window);
+        }
+        
+        CCWindowFrameStep();
+        
+        const size_t BlitIndex = CCConcurrentIndexBufferWriteAcquire(FinalTargetIndexBuffer);
+        const CCVector2Di FrameSize = CCWindowGetFrameSize();
+        
+        if (FinalTexture[BlitIndex])
+        {
+            size_t Width, Height;
+            GFXTextureGetSize(FinalTexture[BlitIndex], &Width, &Height, NULL);
+            
+            if ((Width != FrameSize.x) || (Height != FrameSize.y))
+            {
+                if (Final[BlitIndex]) GFXFramebufferDestroy(Final[BlitIndex]);
+                GFXTextureDestroy(FinalTexture[BlitIndex]);
+                
+                Final[BlitIndex] = NULL;
+                FinalTexture[BlitIndex] = NULL;
+            }
+        }
+        
+        if (!Final[BlitIndex])
+        {
+            FinalTexture[BlitIndex] = GFXTextureCreate(CC_STD_ALLOCATOR, GFXTextureHintDimension2D | (GFXTextureHintFilterModeNearest << GFXTextureHintFilterMin) | (GFXTextureHintFilterModeNearest << GFXTextureHintFilterMag), CCColourFormatRGB8Unorm, FrameSize.x, FrameSize.y, 1, NULL);
+            GFXFramebufferAttachment Attachment = GFXFramebufferAttachmentCreateColour(CCRetain(FinalTexture[BlitIndex]), GFXFramebufferAttachmentActionFlagClearOnce | GFXFramebufferAttachmentActionLoad, GFXFramebufferAttachmentActionStore, CCVector4DFill(0.0f));
+            Final[BlitIndex] = GFXFramebufferCreate(CC_STD_ALLOCATOR, &Attachment, 1);
+            
+            FinalTarget[BlitIndex] = GFXFramebufferGetAttachment(Final[BlitIndex], 0);
+            
+            const CCRect Region = { .position = CCVector2DFill(0.0f), .size = CCVector2DMake(FrameSize.x, FrameSize.y) };
+            GFXBlitSetSource(FinalTargetBlit[BlitIndex], Final[BlitIndex], 0, Region);
+            GFXBlitSetDestination(FinalTargetBlit[BlitIndex], GFXFramebufferDefault(), 0, Region);
+        }
+        
+        Render(Final[BlitIndex], FinalTarget[BlitIndex]);
+        
+        GFXBlitSubmit(FinalTargetBlit[BlitIndex]);
+        CCConcurrentIndexBufferStage(FinalTargetIndexBuffer, BlitIndex);
+        if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL) mtx_unlock(&RenderLock);
+    }
+    
+    thrd_join(BlitThread, NULL);
+    
+    for (size_t Loop = 0; Loop < IndexCount; Loop++)
+    {
+        GFXBlitDestroy(FinalTargetBlit[Loop]);
+        
+        if (Final[Loop]) GFXFramebufferDestroy(Final[Loop]);
+        if (FinalTexture[Loop]) GFXTextureDestroy(FinalTexture[Loop]);
+        
+    }
+    
+    return EXIT_SUCCESS;
+}
+
+static int RenderSyncLoop(GLFWwindow *Window)
+{
+    int err;
+    if ((err = mtx_init(&RenderLock, mtx_plain)) != thrd_success)
+    {
+        CC_LOG_ERROR("Failed to create render thread lock (%d)", err);
+    }
+    
+    if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL) glfwMakeContextCurrent(Window);
     
     GFXBlit Blit = GFXBlitCreate(CC_STD_ALLOCATOR);
     GFXBlitSetFilterMode(Blit, GFXTextureHintFilterModeNearest);
@@ -110,15 +257,7 @@ static int RenderLoop(GLFWwindow *Window)
             GFXBlitSetDestination(Blit, GFXFramebufferDefault(), 0, Region);
         }
         
-        FinalTarget->load = GFXFramebufferAttachmentActionFlagClearOnce | GFXFramebufferAttachmentActionLoad;
-        
-        CCComponentSystemRun(CCComponentSystemExecutionTypeRender); //TODO: pass in render target
-        
-        GUIManagerLock();
-        GUIManagerUpdate();
-        GUIManagerRender(Final, 0);
-        GUIManagerUnlock();
-        
+        Render(Final, FinalTarget);
         GFXBlitSubmit(Blit);
         
         glfwSwapBuffers(Window);
@@ -131,6 +270,11 @@ static int RenderLoop(GLFWwindow *Window)
     if (FinalTexture) GFXTextureDestroy(FinalTexture);
     
     return EXIT_SUCCESS;
+}
+
+static int RenderLoop(GLFWwindow *Window)
+{
+    return B2EngineConfiguration.renderer.vsync ? RenderSyncLoop(Window) : RenderAsyncLoop(Window);
 }
 
 #pragma mark - Input callbacks
@@ -263,10 +407,19 @@ static int EngineMain(int argc, const char *argv[])
     }
     
     
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    switch (B2EngineConfiguration.renderer.pipeline)
+    {
+        case B2EngineRenderPipelineOpenGL:
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+            glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+            break;
+            
+        default:
+            glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+            break;
+    }
     
     glfwWindowHint(GLFW_SRGB_CAPABLE, GL_TRUE);
     
@@ -280,7 +433,6 @@ static int EngineMain(int argc, const char *argv[])
     B2Window = glfwCreateWindow(B2EngineConfiguration.window.width, B2EngineConfiguration.window.height, B2EngineConfiguration.title, B2EngineConfiguration.window.fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
     if (!B2Window)
     {
-        //TODO: Fallback to legacy GL profile?
         CC_LOG_ERROR("Failed to create window");
         glfwTerminate();
         return EXIT_FAILURE;
@@ -306,7 +458,7 @@ static int EngineMain(int argc, const char *argv[])
     glfwGetFramebufferSize(B2Window, &FrameSize.x, &FrameSize.y);
     CCWindowSetFrameSize(FrameSize);
     
-    glfwMakeContextCurrent(B2Window);
+    if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL) glfwMakeContextCurrent(B2Window);
     B2PlatformWindowSetup(B2Window);
     
     B2EngineSetup();
