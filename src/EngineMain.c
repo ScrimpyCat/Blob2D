@@ -97,8 +97,11 @@ static int SynchronizedBlit(GLFWwindow *Window)
             GFXBlitSubmit(FinalTargetBlit[BlitIndex]);
         }
         
-        glfwSwapBuffers(Window);
-        if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL) mtx_unlock(&RenderLock);
+        if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL)
+        {
+            glfwSwapBuffers(Window);
+            mtx_unlock(&RenderLock);
+        }
     }
     
     return EXIT_SUCCESS;
