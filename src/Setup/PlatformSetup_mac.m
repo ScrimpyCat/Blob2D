@@ -28,6 +28,9 @@
 
 #import "PlatformSetup.h"
 #import <GLFW/glfw3native.h>
+#import "Configuration.h"
+@import QuartzCore.CAMetalLayer;
+@import Metal;
 
 void B2PlatformSetup(void)
 {
@@ -36,7 +39,21 @@ void B2PlatformSetup(void)
     }
 }
 
+static CAMetalLayer *RenderLayer;
 void B2PlatformWindowSetup(GLFWwindow *Window)
 {
-    
+    if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineMetal)
+    {
+        @autoreleasepool {
+            NSView *View = ((NSWindow*)glfwGetCocoaWindow(Window)).contentView;
+            
+            RenderLayer = [CAMetalLayer layer];
+            RenderLayer.device = MTLCreateSystemDefaultDevice(); // TODO: Use notifications to manage devices
+            RenderLayer.pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;
+            RenderLayer.framebufferOnly = YES;
+            RenderLayer.frame = View.layer.frame;
+            
+            View.layer = RenderLayer;
+        }
+    }
 }
