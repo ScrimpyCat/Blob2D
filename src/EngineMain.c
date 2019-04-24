@@ -195,8 +195,6 @@ static int RenderAsyncLoop(GLFWwindow *Window)
         SetRenderTarget(FinalTargetBlit[BlitIndex], &Final[BlitIndex], &FinalTexture[BlitIndex], &FinalTarget[BlitIndex]);
         Render(Final[BlitIndex], FinalTarget[BlitIndex]);
         
-        GFXBlitSubmit(FinalTargetBlit[BlitIndex]);
-        
         CCConcurrentIndexBufferStage(FinalTargetIndexBuffer, BlitIndex);
         if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL) mtx_unlock(&RenderLock);
     }
