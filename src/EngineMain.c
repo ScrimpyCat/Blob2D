@@ -94,6 +94,7 @@ static int SynchronizedBlit(GLFWwindow *Window)
         
         if (BlitIndex != SIZE_MAX)
         {
+            B2PlatformFramebufferSetup(Window);
             GFXBlitSubmit(FinalTargetBlit[BlitIndex]);
         }
         
@@ -237,6 +238,7 @@ static int RenderSyncLoop(GLFWwindow *Window)
         SetRenderTarget(Blit, &Final, &FinalTexture, &FinalTarget);
         Render(Final, FinalTarget);
         
+        B2PlatformFramebufferSetup(Window);
         GFXBlitSubmit(Blit);
         
         glfwSwapBuffers(Window);

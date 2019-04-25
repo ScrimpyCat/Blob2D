@@ -30,5 +30,6 @@
 
 void B2PlatformSetup(void);
 void B2PlatformWindowSetup(GLFWwindow *Window);
+void B2PlatformFramebufferSetup(GLFWwindow *Window);
 
 #endif

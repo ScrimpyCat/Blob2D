@@ -41,3 +41,8 @@ void B2PlatformWindowSetup(GLFWwindow *Window)
 {
     
 }
+
+void B2PlatformFramebufferSetup(GLFWwindow *Window)
+{
+    
+}
