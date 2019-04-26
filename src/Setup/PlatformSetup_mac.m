@@ -60,5 +60,11 @@ void B2PlatformWindowSetup(GLFWwindow *Window)
 
 void B2PlatformFramebufferSetup(GLFWwindow *Window)
 {
-    
+    if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineMetal)
+    {
+        @autoreleasepool {
+            id <CAMetalDrawable>Drawable = [RenderLayer nextDrawable];
+            MTLGFXSetDrawable(Drawable.texture);
+        }
+    }
 }
