@@ -232,7 +232,7 @@ static int RenderSyncLoop(GLFWwindow *Window)
     GFXFramebuffer Final = NULL;
     while (!glfwWindowShouldClose(Window))
     {
-        mtx_lock(&RenderLock);
+        if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL) mtx_lock(&RenderLock);
         CCWindowFrameStep();
         
         SetRenderTarget(Blit, &Final, &FinalTexture, &FinalTarget);
@@ -241,8 +241,11 @@ static int RenderSyncLoop(GLFWwindow *Window)
         B2PlatformFramebufferSetup(Window);
         GFXBlitSubmit(Blit);
         
-        glfwSwapBuffers(Window);
-        mtx_unlock(&RenderLock);
+        if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL)
+        {
+            glfwSwapBuffers(Window);
+            mtx_unlock(&RenderLock);
+        }
     }
     
     GFXBlitDestroy(Blit);
