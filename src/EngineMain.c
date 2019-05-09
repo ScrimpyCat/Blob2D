@@ -73,6 +73,7 @@ static void Render(GFXFramebuffer Final, GFXFramebufferAttachment *FinalTarget)
 
 static CCConcurrentIndexBuffer FinalTargetIndexBuffer;
 GFXBlit FinalTargetBlit[3];
+GFXCommandBuffer FinalCommandBuffer[3];
 static int SynchronizedBlit(GLFWwindow *Window)
 {
     size_t BlitIndex = SIZE_MAX;
@@ -96,6 +97,9 @@ static int SynchronizedBlit(GLFWwindow *Window)
         {
             B2PlatformFramebufferSetup(Window);
             GFXBlitSubmit(FinalTargetBlit[BlitIndex]);
+            
+            GFXCommandBufferCommit(FinalCommandBuffer[BlitIndex], TRUE);
+            FinalCommandBuffer[BlitIndex] = NULL;
         }
         
         if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL)
@@ -193,6 +197,10 @@ static int RenderAsyncLoop(GLFWwindow *Window)
         
         const size_t BlitIndex = CCConcurrentIndexBufferWriteAcquire(FinalTargetIndexBuffer);
         
+        if (FinalCommandBuffer[BlitIndex]) GFXCommandBufferDestroy(FinalCommandBuffer[BlitIndex]);
+        FinalCommandBuffer[BlitIndex] = GFXCommandBufferCreate(CC_STD_ALLOCATOR);
+        GFXCommandBufferRecord(FinalCommandBuffer[BlitIndex]);
+        
         SetRenderTarget(FinalTargetBlit[BlitIndex], &Final[BlitIndex], &FinalTexture[BlitIndex], &FinalTarget[BlitIndex]);
         Render(Final[BlitIndex], FinalTarget[BlitIndex]);
         
@@ -235,11 +243,16 @@ static int RenderSyncLoop(GLFWwindow *Window)
         if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL) mtx_lock(&RenderLock);
         CCWindowFrameStep();
         
+        GFXCommandBuffer CommandBuffer = GFXCommandBufferCreate(CC_STD_ALLOCATOR);
+        GFXCommandBufferRecord(CommandBuffer);
+        
         SetRenderTarget(Blit, &Final, &FinalTexture, &FinalTarget);
         Render(Final, FinalTarget);
         
         B2PlatformFramebufferSetup(Window);
         GFXBlitSubmit(Blit);
+        
+        GFXCommandBufferCommit(CommandBuffer, TRUE);
         
         if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineOpenGL)
         {
