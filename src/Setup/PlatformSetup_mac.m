@@ -64,7 +64,7 @@ void B2PlatformFramebufferSetup(GLFWwindow *Window)
     {
         @autoreleasepool {
             id <CAMetalDrawable>Drawable = [RenderLayer nextDrawable];
-            MTLGFXSetDrawable(Drawable.texture);
+            MTLGFXSetDrawable(Drawable, Drawable.texture);
         }
     }
 }
