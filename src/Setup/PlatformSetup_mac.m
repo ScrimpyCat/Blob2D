@@ -49,7 +49,7 @@ void B2PlatformWindowSetup(GLFWwindow *Window)
             
             RenderLayer = [CAMetalLayer layer];
             RenderLayer.device = MTLCreateSystemDefaultDevice(); // TODO: Use notifications to manage devices
-            RenderLayer.pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;
+            RenderLayer.pixelFormat = MTLPixelFormatBGRA8Unorm;
             RenderLayer.framebufferOnly = YES;
             RenderLayer.frame = View.layer.frame;
             RenderLayer.colorspace = nil;
