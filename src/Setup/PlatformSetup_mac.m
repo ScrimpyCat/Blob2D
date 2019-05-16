@@ -52,6 +52,7 @@ void B2PlatformWindowSetup(GLFWwindow *Window)
             RenderLayer.pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;
             RenderLayer.framebufferOnly = YES;
             RenderLayer.frame = View.layer.frame;
+            RenderLayer.colorspace = nil;
             
             View.layer = RenderLayer;
         }
