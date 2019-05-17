@@ -93,8 +93,9 @@ static int SynchronizedBlit(GLFWwindow *Window)
             glfwMakeContextCurrent(Window);
         }
         
-        if (BlitIndex != SIZE_MAX)
+        if ((BlitIndex != SIZE_MAX) && (FinalCommandBuffer[BlitIndex]))
         {
+            GFXCommandBufferRecord(FinalCommandBuffer[BlitIndex]);
             B2PlatformFramebufferSetup(Window);
             GFXBlitSubmit(FinalTargetBlit[BlitIndex]);
             
