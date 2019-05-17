@@ -64,6 +64,9 @@ void B2PlatformFramebufferSetup(GLFWwindow *Window)
     if (B2EngineConfiguration.renderer.pipeline == B2EngineRenderPipelineMetal)
     {
         @autoreleasepool {
+            const CCVector2Di FrameSize = CCWindowGetFrameSize();
+            RenderLayer.drawableSize = CGSizeMake(FrameSize.x, FrameSize.y);
+            
             id <CAMetalDrawable>Drawable = [RenderLayer nextDrawable];
             MTLGFXSetDrawable(Drawable, Drawable.texture);
         }
