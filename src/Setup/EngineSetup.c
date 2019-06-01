@@ -153,6 +153,7 @@ void B2EngineSetup(void)
     CCAnimationKeyframeComponentRegister();
     CCAnimationInterpolateComponentRegister();
     CCScriptableInterfaceDynamicFieldComponentRegister();
+    CCRelationParentComponentRegister();
     
     
     //Create Managers Dependent on ECS :(
