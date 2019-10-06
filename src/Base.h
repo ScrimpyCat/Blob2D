@@ -28,13 +28,13 @@
 #define Blob2D_Base_h
 
 #define B2_TYPES(func, ...) \
-CC_CUSTOM_COMMON_GAME_KIT_TYPES(func, __VA_ARGS_); \
+CC_CUSTOM_COMMON_GAME_KIT_TYPES(func, __VA_ARGS__); \
 func(__VA_ARGS__, B2LaunchOption); \
 func(__VA_ARGS__, B2EngineRenderPipeline); \
 func(__VA_ARGS__, B2EngineConfig);
 
 #define B2_TYPES_(func, ...) \
-CC_CUSTOM_COMMON_GAME_KIT_TYPES_(func, __VA_ARGS_); \
+CC_CUSTOM_COMMON_GAME_KIT_TYPES_(func, __VA_ARGS__); \
 func(__VA_ARGS__, B2LaunchOption); \
 func(__VA_ARGS__, B2EngineRenderPipeline); \
 func(__VA_ARGS__, B2EngineConfig);
