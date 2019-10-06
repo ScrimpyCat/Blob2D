@@ -24,12 +24,29 @@
  */
 
 
-#ifndef Blob2D_Blob2D_h
-#define Blob2D_Blob2D_h
+#ifndef Blob2D_Base_h
+#define Blob2D_Base_h
 
-#include <Blob2D/Base.h>
+#define B2_TYPES(func, ...) \
+CC_CUSTOM_COMMON_GAME_KIT_TYPES(func, __VA_ARGS_); \
+func(__VA_ARGS__, B2LaunchOption); \
+func(__VA_ARGS__, B2EngineRenderPipeline); \
+func(__VA_ARGS__, B2EngineConfig);
 
-#include <Blob2D/EngineMain.h>
-#include <Blob2D/Configuration.h>
+#define B2_TYPES_(func, ...) \
+CC_CUSTOM_COMMON_GAME_KIT_TYPES_(func, __VA_ARGS_); \
+func(__VA_ARGS__, B2LaunchOption); \
+func(__VA_ARGS__, B2EngineRenderPipeline); \
+func(__VA_ARGS__, B2EngineConfig);
+
+#ifndef CC_CUSTOM_TYPES
+#define CC_CUSTOM_TYPES B2_TYPES
+#endif
+
+#ifndef CC_CUSTOM_TYPES_
+#define CC_CUSTOM_TYPES_ B2_TYPES_
+#endif
+
+#include <CommonGameKit/CommonGameKit.h>
 
 #endif

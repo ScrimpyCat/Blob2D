@@ -38,6 +38,7 @@
 		F34876C01DDAF80F0068844D /* CommonGameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34875561DDAE4ED0068844D /* CommonGameKit.framework */; };
 		F34876C11DDAF8190068844D /* CommonC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34875B51DDAE54F0068844D /* CommonC.framework */; };
 		F34876C31DDAFA360068844D /* EngineMain.h in Headers */ = {isa = PBXBuildFile; fileRef = F34876C21DDAFA360068844D /* EngineMain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F3B0864C234A2F1A0056C116 /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = F3B0864B234A2F1A0056C116 /* Base.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -315,6 +316,7 @@
 		F34876831DDAF6CB0068844D /* PlatformSetup_win.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PlatformSetup_win.c; sourceTree = "<group>"; };
 		F34876841DDAF6CB0068844D /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		F34876C21DDAFA360068844D /* EngineMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineMain.h; sourceTree = "<group>"; };
+		F3B0864B234A2F1A0056C116 /* Base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				F33F1FF51DDAE16200264034 /* Blob2D.h */,
+				F3B0864B234A2F1A0056C116 /* Base.h */,
 				F34876C21DDAFA360068844D /* EngineMain.h */,
 				F34876721DDAF6CB0068844D /* EngineMain.c */,
 				F34876841DDAF6CB0068844D /* Window.h */,
@@ -541,6 +544,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3B0864C234A2F1A0056C116 /* Base.h in Headers */,
 				F34876921DDAF6CB0068844D /* ExpressionSetup.h in Headers */,
 				F34876901DDAF6CB0068844D /* EngineSetup.h in Headers */,
 				F348753F1DDAE3480068844D /* tinycthread.h in Headers */,
