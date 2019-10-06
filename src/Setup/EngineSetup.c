@@ -23,6 +23,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#define CC_QUICK_COMPILE
 #include "EngineSetup.h"
 #include <CommonGameKit/CommonGameKit.h>
 #include "ExpressionSetup.h"

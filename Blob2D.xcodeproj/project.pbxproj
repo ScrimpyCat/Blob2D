@@ -1094,6 +1094,7 @@
 					"$(PROJECT_DIR)/deps/CommonGameKit/deps/CommonC/build/Debug",
 				);
 				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = "CC_QUICK_COMPILE=1";
 				HEADER_SEARCH_PATHS = (
 					$PROJECT_DIR/deps/glfw/include,
 					$PROJECT_DIR/deps/CommonGameKit/deps/threads,
@@ -1115,6 +1116,11 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"CC_QUICK_COMPILE=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					$PROJECT_DIR/deps/CommonGameKit/deps/threads,
 					$PROJECT_DIR/deps/CommonGameKit/deps/tinycthread/source,
@@ -1132,6 +1138,7 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "CC_QUICK_COMPILE=1";
 				HEADER_SEARCH_PATHS = (
 					$PROJECT_DIR/deps/CommonGameKit/deps/threads,
 					$PROJECT_DIR/deps/CommonGameKit/deps/tinycthread/source,
