@@ -54,14 +54,14 @@ typedef struct {
         _Bool vsync;
     } renderer;
     struct {
-        CCOrderedCollection fonts;
-        CCOrderedCollection levels;
-        CCOrderedCollection rules;
-        CCOrderedCollection entities;
-        CCOrderedCollection textures;
-        CCOrderedCollection shaders;
-        CCOrderedCollection sounds;
-        CCOrderedCollection layouts;
+        CCOrderedCollection(FSPath) fonts;
+        CCOrderedCollection(FSPath) levels;
+        CCOrderedCollection(FSPath) rules;
+        CCOrderedCollection(FSPath) entities;
+        CCOrderedCollection(FSPath) textures;
+        CCOrderedCollection(FSPath) shaders;
+        CCOrderedCollection(FSPath) sounds;
+        CCOrderedCollection(FSPath) layouts;
         FSPath save;
         FSPath logs;
         FSPath tmp;

@@ -62,7 +62,7 @@ static FSPath B2ProjectExpressionPathFromExpression(CCExpression Expression, CCE
             {
                 CC_STRING_TEMP_BUFFER(Buffer, CCExpressionGetString(Part))
                 {
-                    CCOrderedCollection Components = FSPathConvertPathToComponents(Buffer, FALSE);
+                    CCOrderedCollection(FSPathComponent) Components = FSPathConvertPathToComponents(Buffer, FALSE);
                     CC_COLLECTION_FOREACH(FSPathComponent, Component, Components)
                     {
                         FSPathAppendComponent(Path, FSPathComponentCopy(Component));
@@ -284,7 +284,7 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
                                     
                                     else
                                     {
-                                        CCOrderedCollection Directories = *(CCOrderedCollection*)Commands[Loop].attribute;
+                                        CCOrderedCollection(FSPath) Directories = *(CCOrderedCollection*)Commands[Loop].attribute;
                                         
                                         for (Expr = NULL; (Expr = CCCollectionEnumeratorNext(&Enumerator)); )
                                         {

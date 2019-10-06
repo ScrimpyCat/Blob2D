@@ -284,7 +284,7 @@ static CCString ControllerGetName(size_t Index)
     return CCStringCreate(CC_STD_ALLOCATOR, CCStringEncodingASCII | CCStringHintCopy, glfwGetJoystickName((int)Index));
 }
 
-static void ControllerUpdateAxes(size_t Index, CCOrderedCollection Axes)
+static void ControllerUpdateAxes(size_t Index, CCOrderedCollection(float) Axes)
 {
     int Count;
     const float *Values = glfwGetJoystickAxes((int)Index, &Count);
@@ -297,7 +297,7 @@ static void ControllerUpdateAxes(size_t Index, CCOrderedCollection Axes)
     }
 }
 
-static void ControllerUpdateButtons(size_t Index, CCOrderedCollection Buttons)
+static void ControllerUpdateButtons(size_t Index, CCOrderedCollection(_Bool) Buttons)
 {
     int Count;
     const unsigned char *Values = glfwGetJoystickButtons((int)Index, &Count);
@@ -331,7 +331,7 @@ static void KeyboardCharInput(GLFWwindow *Window, unsigned int Codepoint, int Mo
 
 static void MouseDropInput(GLFWwindow *Window, int Count, const char **Files)
 {
-    CCOrderedCollection FileList = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintHeavyEnumerating | CCCollectionHintConstantLength | CCCollectionHintConstantElements | CCCollectionHintSizeSmall, sizeof(CCString), CCStringDestructorForCollection);
+    CCOrderedCollection(CCString) FileList = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintHeavyEnumerating | CCCollectionHintConstantLength | CCCollectionHintConstantElements | CCCollectionHintSizeSmall, sizeof(CCString), CCStringDestructorForCollection);
     
     for (int Loop = 0; Loop < Count; Loop++) CCOrderedCollectionAppendElement(FileList, &(CCString){ CCStringCreate(CC_STD_ALLOCATOR, (CCStringHint)CCStringEncodingASCII, Files[Loop]) });
     

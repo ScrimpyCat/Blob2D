@@ -64,11 +64,11 @@ void B2EngineSetup(void)
     
     
     //Load Global Assets
-    CCCollection Matches = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection);
+    CCCollection(FSPath) Matches = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintHeavyEnumerating, sizeof(FSPath), FSPathDestructorForCollection);
     
     CCCollectionInsertElement(Matches, &(FSPath){ FSPathCreate("*/") });
     
-    CCOrderedCollection CorePaths = FSManagerGetContentsAtPath(CCAssetPath, Matches, FSMatchSkipHidden | FSMatchSkipFile);
+    CCOrderedCollection(FSPath) CorePaths = FSManagerGetContentsAtPath(CCAssetPath, Matches, FSMatchSkipHidden | FSMatchSkipFile);
     
     if (CorePaths)
     {
@@ -90,7 +90,7 @@ void B2EngineSetup(void)
     
     CC_COLLECTION_FOREACH(FSPath, Path, B2EngineConfiguration.directory.shaders)
     {
-        CCOrderedCollection Paths = FSManagerGetContentsAtPath(Path, Matches, FSMatchSkipHidden | FSMatchSkipDirectory);
+        CCOrderedCollection(FSPath) Paths = FSManagerGetContentsAtPath(Path, Matches, FSMatchSkipHidden | FSMatchSkipDirectory);
         
         if (Paths)
         {
@@ -109,7 +109,7 @@ void B2EngineSetup(void)
     CCCollectionRemoveAllElements(Matches);
     CCCollectionInsertElement(Matches, &(FSPath){ FSPathCreate(".asset") });
     
-    CCCollection GlobalAssetPaths[] = {
+    CCCollection(FSPath) GlobalAssetPaths[] = {
         B2EngineConfiguration.directory.shaders,
         B2EngineConfiguration.directory.fonts,
     };
@@ -118,7 +118,7 @@ void B2EngineSetup(void)
     {
         CC_COLLECTION_FOREACH(FSPath, Path, GlobalAssetPaths[Loop])
         {
-            CCOrderedCollection Paths = FSManagerGetContentsAtPath(Path, Matches, FSMatchSkipHidden | FSMatchSkipDirectory);
+            CCOrderedCollection(FSPath) Paths = FSManagerGetContentsAtPath(Path, Matches, FSMatchSkipHidden | FSMatchSkipDirectory);
             
             if (Paths)
             {
@@ -162,7 +162,7 @@ void B2EngineSetup(void)
     
     
     //Load Dependent Assets
-    CCCollection AssetPaths[] = {
+    CCCollection(FSPath) AssetPaths[] = {
         B2EngineConfiguration.directory.layouts
     };
     
@@ -170,7 +170,7 @@ void B2EngineSetup(void)
     {
         CC_COLLECTION_FOREACH(FSPath, Path, AssetPaths[Loop])
         {
-            CCOrderedCollection Paths = FSManagerGetContentsAtPath(Path, Matches, FSMatchSkipHidden | FSMatchSkipDirectory);
+            CCOrderedCollection(FSPath) Paths = FSManagerGetContentsAtPath(Path, Matches, FSMatchSkipHidden | FSMatchSkipDirectory);
             if (Paths)
             {
                 CC_COLLECTION_FOREACH(FSPath, LibPath, Paths)
