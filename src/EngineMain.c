@@ -26,11 +26,11 @@
 #define CC_QUICK_COMPILE
 #define CC_LOG_OPTION CCLogOptionOutputAll
 
+#include "Base.h"
 #include "EngineMain.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <GLFW/glfw3.h>
-#include <CommonGameKit/CommonGameKit.h>
 
 #include "PlatformSetup.h"
 #include "EngineSetup.h"

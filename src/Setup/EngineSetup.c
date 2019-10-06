@@ -24,8 +24,8 @@
  */
 
 #define CC_QUICK_COMPILE
+#include "Base.h"
 #include "EngineSetup.h"
-#include <CommonGameKit/CommonGameKit.h>
 #include "ExpressionSetup.h"
 #include "Configuration.h"
 #include "ProjectExpressions.h"

@@ -26,7 +26,7 @@
 #ifndef Blob2D_ProjectExpressions_h
 #define Blob2D_ProjectExpressions_h
 
-#include <CommonGameKit/CommonGameKit.h>
+#include <Blob2D/Base.h>
 
 
 typedef enum {

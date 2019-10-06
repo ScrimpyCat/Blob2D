@@ -26,7 +26,7 @@
 #ifndef Blob2D_Project_h
 #define Blob2D_Project_h
 
-#include <CommonGameKit/CommonGameKit.h>
+#include <Blob2D/Base.h>
 
 /*!
  * @brief Create a new project.

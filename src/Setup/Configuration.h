@@ -26,7 +26,7 @@
 #ifndef Blob2D_Configuration_h
 #define Blob2D_Configuration_h
 
-#include <CommonGameKit/CommonGameKit.h>
+#include <Blob2D/Base.h>
 
 typedef enum {
     B2LaunchOptionGame,
