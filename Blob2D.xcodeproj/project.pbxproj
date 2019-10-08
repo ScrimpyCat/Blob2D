@@ -38,6 +38,7 @@
 		F34876C01DDAF80F0068844D /* CommonGameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34875561DDAE4ED0068844D /* CommonGameKit.framework */; };
 		F34876C11DDAF8190068844D /* CommonC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F34875B51DDAE54F0068844D /* CommonC.framework */; };
 		F34876C31DDAFA360068844D /* EngineMain.h in Headers */ = {isa = PBXBuildFile; fileRef = F34876C21DDAFA360068844D /* EngineMain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F378DB46234D5474000600CC /* ContainerTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = F378DB26234D5474000600CC /* ContainerTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F3B0864C234A2F1A0056C116 /* Base.h in Headers */ = {isa = PBXBuildFile; fileRef = F3B0864B234A2F1A0056C116 /* Base.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -316,6 +317,7 @@
 		F34876831DDAF6CB0068844D /* PlatformSetup_win.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PlatformSetup_win.c; sourceTree = "<group>"; };
 		F34876841DDAF6CB0068844D /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		F34876C21DDAFA360068844D /* EngineMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineMain.h; sourceTree = "<group>"; };
+		F378DB26234D5474000600CC /* ContainerTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerTypes.h; sourceTree = "<group>"; };
 		F3B0864B234A2F1A0056C116 /* Base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -371,6 +373,7 @@
 				F34876C21DDAFA360068844D /* EngineMain.h */,
 				F34876721DDAF6CB0068844D /* EngineMain.c */,
 				F34876841DDAF6CB0068844D /* Window.h */,
+				F378DB26234D5474000600CC /* ContainerTypes.h */,
 				F348766F1DDAF6CB0068844D /* Engine */,
 				F34876731DDAF6CB0068844D /* Scripting */,
 				F34876791DDAF6CB0068844D /* Setup */,
@@ -558,6 +561,7 @@
 				F34876871DDAF6CB0068844D /* Project.h in Headers */,
 				F34876931DDAF6CB0068844D /* PlatformSetup.h in Headers */,
 				F34875361DDAE30A0068844D /* stdatomic_clang.h in Headers */,
+				F378DB46234D5474000600CC /* ContainerTypes.h in Headers */,
 				F34876C31DDAFA360068844D /* EngineMain.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
