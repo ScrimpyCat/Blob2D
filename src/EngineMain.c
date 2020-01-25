@@ -512,6 +512,17 @@ static int EngineMain(int argc, const char *argv[])
 
 int B2EngineRun(int argc, const char *argv[])
 {
+    char Path[] = __FILE__;
+    if ((sizeof(__FILE__) > sizeof("Blob2D/src/EngineMain.c")) && (!strcmp(Path + (sizeof(__FILE__) - sizeof("Blob2D/src/EngineMain.c")), "Blob2D/src/EngineMain.c")))
+    {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warray-bounds"
+        Path[sizeof(__FILE__) - sizeof("Blob2D/src/EngineMain.c")] = 0;
+#pragma clang diagnostic pop
+        
+        CCFileFilterInputAddPath(Path);
+    }
+    
     CCTimestamp = glfwGetTime;
     
     return CCMain(EngineMain, argc, argv);
