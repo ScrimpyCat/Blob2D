@@ -1,5 +1,8 @@
 git submodule update
 
+cd deps/CommonGameKit
+sh setup.sh
+
 build=${BUILD_DIR:-build}
 parent=$(echo $build | sed s/[^\/]*/../g)
 
