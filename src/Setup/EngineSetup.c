@@ -31,11 +31,6 @@
 #include "ProjectExpressions.h"
 
 
-void AnimationInterpolator(int *Previous, int *Next, double Time, int *Result)
-{
-    *Result = (int)(((1.0 - Time) * (double)*Previous) + (Time * (double)*Next)); //basic lerp
-}
-
 void B2EnginePreSetup(void)
 {
     B2ExpressionSetup();
@@ -140,6 +135,7 @@ void B2EngineSetup(void)
     CCInputSystemRegister();
     CCAnimationSystemRegister();
     CCScriptableInterfaceSystemRegister();
+    CCRelationSystemRegister();
     
     //Register Components
     CCRenderComponentRegister();
