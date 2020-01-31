@@ -43,6 +43,8 @@ GLFWwindow *B2Window = NULL;
 
 double B2UpdateThreadTimeSlice = 1.0 / 60.0;
 
+FSPath B2EnginePath = NULL;
+
 #pragma mark - Window callbacks
 
 static void ErrorCallback(int Error, const char *Description)
