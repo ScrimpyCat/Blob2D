@@ -131,11 +131,11 @@ void B2EngineSetup(void)
     
     
     //Register Systems
+    CCRelationSystemRegister();
+    CCScriptableInterfaceSystemRegister();
     CCRenderSystemRegister();
     CCInputSystemRegister();
     CCAnimationSystemRegister();
-    CCScriptableInterfaceSystemRegister();
-    CCRelationSystemRegister();
     
     //Register Components
     CCRenderComponentRegister();
