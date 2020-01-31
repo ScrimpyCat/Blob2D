@@ -52,4 +52,10 @@ int B2EngineRun(int argc, const char *argv[]);
  */
 extern double B2UpdateThreadTimeSlice;
 
+/*!
+ * @brief The engine asset path.
+ * @note This should only be set if using a different project structure.
+ */
+extern FSPath B2EnginePath;
+
 #endif

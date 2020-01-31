@@ -27,6 +27,7 @@
 #include "Project.h"
 #include "Configuration.h"
 #include "ProjectExpressions.h"
+#include "EngineMain.h"
 
 static const char B2ProjectGamepkg[] =
 "(game \"Game\" ; title\n"
@@ -149,14 +150,7 @@ void B2ProjectLoad(FSPath ProjectPath)
     CCExpression Expression = CCExpressionCreateFromSourceFile(ProjectPath);
     if (Expression)
     {
-        FSPath EnginePath = FSPathCreateFromSystemPath(__FILE__);
-        FSPathRemoveComponentLast(EnginePath); // src/engine/Project.c
-        FSPathRemoveComponentLast(EnginePath); // src/engine/Project
-        FSPathRemoveComponentLast(EnginePath); // src/engine/
-        FSPathRemoveComponentLast(EnginePath); // src/
-        CCExpressionCreateState(Expression, CC_STRING("@engine-path"), CCExpressionCreateString(CC_STD_ALLOCATOR, CCStringCreate(CC_STD_ALLOCATOR, CCStringEncodingUTF8 | CCStringHintCopy, FSPathGetPathString(EnginePath)), FALSE), FALSE, NULL, FALSE);
-        FSPathDestroy(EnginePath);
-        
+        CCExpressionCreateState(Expression, CC_STRING("@engine-path"), CCExpressionCreateString(CC_STD_ALLOCATOR, CCStringCreate(CC_STD_ALLOCATOR, CCStringEncodingUTF8 | CCStringHintCopy, FSPathGetPathString(B2EnginePath)), FALSE), FALSE, NULL, FALSE);
         
         CCExpression Result = CCExpressionEvaluate(Expression);
         

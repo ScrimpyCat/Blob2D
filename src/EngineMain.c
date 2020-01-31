@@ -522,6 +522,52 @@ int B2EngineRun(int argc, const char *argv[])
         
         CCFileFilterInputAddPath(Path);
     }
+
+    if (!B2EnginePath)
+    {
+#if CC_PLATFORM_OS_X || CC_PLATFORM_IOS
+        CFBundleRef Bundle = CFBundleGetBundleWithIdentifier(CFSTR("io.scrimpycat.Blob2D"));
+        if (Bundle)
+        {
+            CFURLRef ResourceURL = CFBundleCopyResourcesDirectoryURL(Bundle);
+            char ResourcePath[PATH_MAX];
+            
+            if ((!ResourceURL) || (!CFURLGetFileSystemRepresentation(ResourceURL, TRUE, (UInt8*)ResourcePath, sizeof(ResourcePath))))
+            {
+                CC_LOG_ERROR("Could not find engine asset path");
+                return EXIT_FAILURE;
+            }
+            
+            CFRelease(ResourceURL);
+            
+            B2EnginePath = FSPathCreateFromSystemPath(ResourcePath);
+            FSPathAppendComponent(B2EnginePath, FSPathComponentCreate(FSPathComponentTypeDirectory, "assets"));
+        }
+        
+        else
+#endif
+        {
+            CCOrderedCollection(FSPathComponent) Path = FSPathConvertSystemPathToComponents(argv[0], TRUE);
+            CCOrderedCollectionRemoveLastElement(Path);
+            FSPath ProjectFolder = FSPathCreateFromComponents(Path);
+            
+            CCCollection(FSPath) Paths = CCCollectionCreate(CC_STD_ALLOCATOR, CCCollectionHintSizeSmall, sizeof(FSPath), FSPathDestructorForCollection);
+            CCCollectionInsertElement(Paths, &(FSPath){ FSPathCreate("Blob2D/assets/") });
+            CCOrderedCollection(FSPath) Matches = FSManagerGetContentsAtPath(ProjectFolder, Paths, FSMatchSearchRecursively);
+            CCCollectionDestroy(Paths);
+            FSPathDestroy(ProjectFolder);
+            
+            if (CCCollectionGetCount(Matches) != 1)
+            {
+                CCCollectionDestroy(Matches);
+                CC_LOG_ERROR("Could not find engine asset path");
+                return EXIT_FAILURE;
+            }
+            
+            B2EnginePath = CCRetain(*(FSPath*)CCOrderedCollectionGetElementAtIndex(Matches, 0));
+            CCCollectionDestroy(Matches);
+        }
+    }
     
     CCTimestamp = glfwGetTime;
     

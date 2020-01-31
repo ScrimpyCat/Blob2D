@@ -3,13 +3,13 @@
         {
             "name": "game",
             "description": "Creates a CCEngineConfig structure.",
-            "examples": ["(game \"My Game\" ; title\n\t(default-resolution: 640 480) ; resolution or window size\n\t(default-fullscreen: #f) ; fullscreen mode\n\n\t(dir-fonts: \"font/\" (engine-path: \"assets/font/\")) ; font directories\n\t(dir-levels: \"logic/levels/\") ; level directories\n\t(dir-rules: \"logic/rules/\") ; rule directories\n\t(dir-textures: \"graphics/textures/\") ; texture directories\n\t(dir-shaders: \"graphics/shaders/\" (engine-path: \"assets/shaders/\")) ; shader directories\n\t(dir-sounds: \"audio/\") ; sound directories\n\t(dir-layouts: \"ui/\" (engine-path: \"assets/ui/\")) ; layout directories\n\t(dir-entities: \"logic/entities/\") ; entity directories\n\t(dir-logs: \"logs/\") ; log directory\n\t(dir-tmp: \"tmp/\") ; tmp directory\n)"],
+            "examples": ["(game \"My Game\" ; title\n\t(default-resolution: 640 480) ; resolution or window size\n\t(default-fullscreen: #f) ; fullscreen mode\n\n\t(dir-fonts: \"font/\" (cat @engine-path \"font/\")) ; font directories\n\t(dir-levels: \"logic/levels/\") ; level directories\n\t(dir-rules: \"logic/rules/\") ; rule directories\n\t(dir-textures: \"graphics/textures/\") ; texture directories\n\t(dir-shaders: \"graphics/shaders/\" (cat @engine-path \"graphics/shaders/\")) ; shader directories\n\t(dir-sounds: \"audio/\") ; sound directories\n\t(dir-layouts: \"ui/\" (cat @engine-path \"ui/\")) ; layout directories\n\t(dir-entities: \"logic/entities/\") ; entity directories\n\t(dir-logs: \"logs/\") ; log directory\n\t(dir-tmp: \"tmp/\") ; tmp directory\n)"],
             "return": { "type": "custom:CCEngineConfig" },
             "args": [[{ "type": "string", "name": "title" }]],
             "inputs": [
                 {
                     "name": "engine-path",
-                    "description": "The engine's directory.",
+                    "description": "The engine's asset directory.",
                     "return": { "type": "string" }
                 }
             ],
