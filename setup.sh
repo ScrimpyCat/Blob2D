@@ -1,18 +1,42 @@
-git submodule update
+#!/bin/bash
 
-cd deps/CommonGameKit
-sh setup.sh
+usage() { echo "Usage: $0 [-h] [-s] [-p]" 1>&2; exit 1; }
+
+while getopts "hsp" opt; do
+    case "${opt}" in
+        s)
+            shallow=1
+            ;;
+        p)
+            preserve=1
+            ;;
+        h|*)
+            usage
+            ;;
+    esac
+done
 
 build=${BUILD_DIR:-build}
-parent=$(echo $build | sed s/[^\/]*/../g)
 
-cd ../glfw
-rm -rf "$build"
-mkdir -p "$build" && cd "$build"
-cmake -G Ninja "$parent"
-ninja
+if [ -z "${shallow}" ]; then
+    if [ -z "${preserve}" ]; then
+        git submodule update
+    fi
 
-cd "$parent/../../"
+    parent=$(echo $build | sed s/[^\/]*/../g)
+
+    cd deps/CommonGameKit
+    sh setup.sh $@
+    cd "../../"
+
+    cd deps/glfw
+    rm -rf "$build"
+    mkdir -p "$build" && cd "$build"
+    cmake -G Ninja "$parent"
+    ninja
+    cd "$parent/../../"
+fi
+
 rm -rf "$build"
 ruby deps/CommonGameKit/build.rb \
 --framework="deps/CommonGameKit/$build/CommonGameKit" \
