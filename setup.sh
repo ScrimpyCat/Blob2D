@@ -1,14 +1,17 @@
 #!/bin/bash
 
-usage() { echo "Usage: $0 [-h] [-s] [-p]" 1>&2; exit 1; }
+usage() { echo "Usage: $0 [-h] [-s] [-p] [-i]" 1>&2; exit 1; }
 
-while getopts "hsp" opt; do
+while getopts "hspi" opt; do
     case "${opt}" in
         s)
             shallow=1
             ;;
         p)
             preserve=1
+            ;;
+        i)
+            internal=1
             ;;
         h|*)
             usage
@@ -29,12 +32,14 @@ if [ -z "${shallow}" ]; then
     sh setup.sh $@
     cd "../../"
 
-    cd deps/glfw
-    rm -rf "$build"
-    mkdir -p "$build" && cd "$build"
-    cmake -G Ninja "$parent"
-    ninja
-    cd "$parent/../../"
+    if [ -z "${internal}" ]; then
+        cd deps/glfw
+        rm -rf "$build"
+        mkdir -p "$build" && cd "$build"
+        cmake -G Ninja "$parent"
+        ninja
+        cd "$parent/../../"
+    fi
 fi
 
 rm -rf "$build"
