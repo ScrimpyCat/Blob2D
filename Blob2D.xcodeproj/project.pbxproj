@@ -1081,7 +1081,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/src/mac/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngine;
+				PRODUCT_BUNDLE_IDENTIFIER = io.scrimpycat.Blob2D;
 				PRODUCT_NAME = Blob2D;
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-Wno-ambiguous-macro";
@@ -1112,7 +1112,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/src/mac/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.BlobEngine;
+				PRODUCT_BUNDLE_IDENTIFIER = io.scrimpycat.Blob2D;
 				PRODUCT_NAME = Blob2D;
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-Wno-ambiguous-macro";
