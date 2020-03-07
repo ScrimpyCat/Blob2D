@@ -53,8 +53,6 @@ void B2EngineSetup(void)
             break;
     }
     
-    CCAssetManagerCreate();
-    
     CCEntityManagerCreate();
     
     
