@@ -41,7 +41,9 @@ void (*B2EngineSetupComplete)(void) = NULL;
 
 GLFWwindow *B2Window = NULL;
 
-uint64_t B2UpdateThreadTimeSlice = (uint64_t)((1.0 / 60.0) * UINT64_C(100000000));
+#define TIMER_BASE ECS_TIME_TO_NANOSECONDS(ECS_TIME_FROM_SECONDS(1))
+
+uint64_t B2UpdateThreadTimeSlice = (uint64_t)((1.0 / 60.0) * TIMER_BASE);
 
 FSPath B2EnginePath = NULL;
 
@@ -54,8 +56,6 @@ static mach_timebase_info_data_t Timebase;
 #elif CC_PLATFORM_WINDOWS
 #include <windows.h>
 #endif
-
-#define TIMER_BASE 1000000000
 
 static uint64_t Timer(void)
 {
@@ -566,7 +566,7 @@ static void WaitUntil(B2Thread Thread, uint64_t Wait, uint64_t Target)
     
     if (Wait < Target)
     {
-        if (Wait < ECS_TIME_FROM_MILLISECONDS(2))
+        if (Wait < ECS_TIME_TO_NANOSECONDS(ECS_TIME_FROM_MILLISECONDS(2)))
         {
             while (CCTimestamp() < Target) CC_SPIN_WAIT();
         }
@@ -634,7 +634,7 @@ static int UpdateLoop(GLFWwindow *Window)
         {
             const size_t Index = VariableTimeStep[Loop];
             
-            ECSTick(B2EngineECS.instances[Index].context, B2EngineECS.instances[Index].groups, B2EngineECS.instances[Index].groupCount, B2EngineECS.instances[Index].state, (DeltaTime * TickScale[Index].numerator) / TickScale[Index].denominator);
+            ECSTick(B2EngineECS.instances[Index].context, B2EngineECS.instances[Index].groups, B2EngineECS.instances[Index].groupCount, B2EngineECS.instances[Index].state, ECS_TIME_FROM_NANOSECONDS((DeltaTime * TickScale[Index].numerator) / TickScale[Index].denominator));
             
             ECSMutationApply(B2EngineECS.instances[Index].context);
         }
@@ -649,7 +649,7 @@ static int UpdateLoop(GLFWwindow *Window)
             {
                 TickTime[Index] -= TickWait[Index];
                 
-                ECSTick(B2EngineECS.instances[Index].context, B2EngineECS.instances[Index].groups, B2EngineECS.instances[Index].groupCount, B2EngineECS.instances[Index].state, TickWait[Index]);
+                ECSTick(B2EngineECS.instances[Index].context, B2EngineECS.instances[Index].groups, B2EngineECS.instances[Index].groupCount, B2EngineECS.instances[Index].state, ECS_TIME_FROM_NANOSECONDS(TickWait[Index]));
                 
                 ECSMutationApply(B2EngineECS.instances[Index].context);
                 
