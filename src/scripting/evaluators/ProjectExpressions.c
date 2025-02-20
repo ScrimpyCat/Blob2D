@@ -113,6 +113,9 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
             .height = 0,
             .fullscreen = FALSE
         },
+        .ecs = {
+            .workers = 1
+        },
         .renderer = {
             .pipeline = B2EngineRenderPipelineNone,
             .vsync = TRUE
@@ -202,6 +205,23 @@ CCExpression B2ProjectExpressionGame(CCExpression Expression)
                             }
                             
                             else CC_EXPRESSION_EVALUATOR_LOG_OPTION_ERROR("default-fullscreen", "fullscreen:boolean");
+                        }
+                        
+                        else if (CCStringEqual(CCExpressionGetAtom(Option), CC_STRING("workers:")))
+                        {
+                            if (ArgCount == 1)
+                            {
+                                CCExpression Workers = *(CCExpression*)CCCollectionEnumeratorNext(&Enumerator);
+                                
+                                if (CCExpressionGetType(Workers) == CCExpressionValueTypeInteger)
+                                {
+                                    Config.ecs.workers = CCMax(CCExpressionGetInteger(Workers), 1);
+                                }
+                                
+                                else CC_EXPRESSION_EVALUATOR_LOG_OPTION_ERROR("workers", "integer");
+                            }
+                            
+                            else CC_EXPRESSION_EVALUATOR_LOG_OPTION_ERROR("workers", "integer");
                         }
                         
                         else if (CCStringEqual(CCExpressionGetAtom(Option), CC_STRING("renderer:")))

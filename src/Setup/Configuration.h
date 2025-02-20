@@ -50,6 +50,9 @@ typedef struct {
         _Bool fullscreen; //TODO: Change to specifying monitors
     } window;
     struct {
+        size_t workers;
+    } ecs;
+    struct {
         B2EngineRenderPipeline pipeline;
         _Bool vsync;
     } renderer;

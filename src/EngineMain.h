@@ -26,6 +26,8 @@
 #ifndef Blob2D_EngineMain_h
 #define Blob2D_EngineMain_h
 
+#include <Blob2D/Base.h>
+
 /*!
  * @brief Called when the engine has started setting up.
  * @description Use this callback to handle custom pre-setup.
@@ -47,15 +49,70 @@ extern void (*B2EngineSetupComplete)(void);
 int B2EngineRun(int argc, const char *argv[]);
 
 /*!
- * @brief Set this to the amount of time (in seconds) the update thread should occur.
+ * @brief Set this to the amount of time (in nanoseconds) the update thread should occur.
  * @description The default value is set at 1/60 update cycles.
  */
-extern double B2UpdateThreadTimeSlice;
+extern uint64_t B2UpdateThreadTimeSlice;
 
 /*!
  * @brief The engine asset path.
  * @note This should only be set if using a different project structure.
  */
 extern FSPath B2EnginePath;
+
+typedef struct {
+    ECSContext *context;
+    size_t groupCount;
+    ECSGroup *groups;
+    ECSExecutionGroup *state;
+} B2ECSInstance;
+
+typedef struct {
+    uint32_t numerator;
+    uint32_t denominator;
+} B2TimeScale;
+
+typedef struct {
+    size_t count;
+    B2ECSInstance *instances;
+    struct {
+        _Atomic(B2TimeScale) *scale;
+        _Atomic(uint64_t) *wait;
+        _Atomic(_Bool) changed;
+    } tick;
+} B2ECSConfig;
+
+/*!
+ * @brief Set this to the ECS configuration to be used by the engine.
+ * @note This should be set and the contexts initialised prior to engine setup.
+ */
+extern B2ECSConfig B2EngineECS;
+
+typedef enum {
+    B2ThreadMain,
+    B2ThreadUpdate,
+    B2ThreadRender
+} B2Thread;
+
+/*!
+ * @brief A callback a waiting thread calls.
+ * @param Thread The calling thread. Note that there are no guarantees that any one thread will ever call this callback.
+ * @param Available The amount of available execution time. Execution should return before this amount of time elapses.
+ * @param ReturnBy Is the timestamp the function should return by.
+ */
+typedef void (*B2WaitingCallback)(B2Thread Thread, uint64_t Available, uint64_t ReturnBy);
+
+/*!
+ * @brief Set this to the waiting callback.
+ * @note This should be set by @b B2EngineSetupComplete at the latest.
+ */
+extern B2WaitingCallback B2Waiting;
+
+/*!
+ * @brief The refresh rate of the input thread in seconds. Defaults to 1ms (0.001).
+ * @description This mainly influences the refresh rate of the controller state and clipboard.
+ * @note This may run faster than the specified rate, but will not run slower.
+ */
+extern double B2InputFrequency;
 
 #endif

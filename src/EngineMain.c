@@ -41,9 +41,153 @@ void (*B2EngineSetupComplete)(void) = NULL;
 
 GLFWwindow *B2Window = NULL;
 
-double B2UpdateThreadTimeSlice = 1.0 / 60.0;
+uint64_t B2UpdateThreadTimeSlice = (uint64_t)((1.0 / 60.0) * UINT64_C(100000000));
 
 FSPath B2EnginePath = NULL;
+
+#pragma mark - Timing
+
+#if CC_PLATFORM_APPLE
+#include <mach/mach.h>
+
+static mach_timebase_info_data_t Timebase;
+#elif CC_PLATFORM_WINDOWS
+#include <windows.h>
+#endif
+
+#define TIMER_BASE 1000000000
+
+static uint64_t Timer(void)
+{
+#if CC_PLATFORM_APPLE
+    unsigned _BitInt(128) Time = mach_absolute_time();
+    
+    return (Time * Timebase.numer) / Timebase.denom;
+#elif CC_PLATFORM_UNIX
+    struct timespec Time;
+    
+#if CLOCK_UPTIME_RAW
+    clock_gettime(CLOCK_UPTIME_RAW, &Time);
+#elif CLOCK_MONOTONIC_COARSE
+    clock_gettime(CLOCK_MONOTONIC_COARSE, &Time);
+#elif CLOCK_MONOTONIC_RAW
+    clock_gettime(CLOCK_MONOTONIC_RAW, &Time);
+#else
+    clock_gettime(CLOCK_MONOTONIC, &Time);
+#endif
+    
+    return (Time.tv_sec * TIMER_BASE) + Time.tv_nsec;
+#else
+    return glfwGetTime() * TIMER_BASE;
+#endif
+}
+
+static uint64_t ScaleTimerFactor;
+
+static uint64_t ScaleUpTimer(void)
+{
+#if CC_PLATFORM_WINDOWS
+    LARGE_INTEGER Time;
+    
+    QueryPerformanceCounter(&Time);
+    
+    return Time * ScaleTimerFactor;
+#else
+    return glfwGetTimerValue() * ScaleTimerFactor;
+#endif
+}
+
+static uint64_t ScaleDownTimer(void)
+{
+#if CC_PLATFORM_WINDOWS
+    LARGE_INTEGER Time;
+    
+    QueryPerformanceCounter(&Time);
+    
+    return Time / ScaleTimerFactor;
+#else
+    return glfwGetTimerValue() / ScaleTimerFactor;
+#endif
+}
+
+#if CC_PLATFORM_WINDOWS
+static uint64_t WinGetFrequency(void)
+{
+    LARGE_INTEGER Freq;
+    
+    QueryPerformanceFrequency(&Freq);
+    
+    return Freq.QuadPart;
+}
+
+static uint64_t WinGetTimer(void)
+{
+    LARGE_INTEGER Time;
+    
+    QueryPerformanceCounter(&Time);
+    
+    return Time.QuadPart;
+}
+#endif
+
+static inline void InitFromSecondsTimer(uint64_t (*GetFrequency)(void), uint64_t (*GetTimer)(void))
+{
+    const uint64_t Freq = GetFrequency();
+    const uint64_t Multiplier = TIMER_BASE / Freq;
+    
+    if (Multiplier)
+    {
+        if (TIMER_BASE % Freq)
+        {
+            CCTimestamp = Timer;
+        }
+        
+        else if (Multiplier == 1)
+        {
+            CCTimestamp = GetTimer;
+        }
+        
+        else
+        {
+            ScaleTimerFactor = Multiplier;
+            CCTimestamp = ScaleUpTimer;
+        }
+    }
+    
+    else
+    {
+        if (Freq % TIMER_BASE)
+        {
+            CCTimestamp = Timer;
+        }
+        
+        else
+        {
+            ScaleTimerFactor = Freq / TIMER_BASE;
+            CCTimestamp = ScaleDownTimer;
+        }
+    }
+}
+
+static void InitTimer(void)
+{
+#if CC_PLATFORM_APPLE
+    if (mach_timebase_info(&Timebase) != KERN_SUCCESS)
+    {
+        Timebase.numer = 0;
+        Timebase.denom = 1;
+    }
+    
+    if ((Timebase.numer == 1) && (Timebase.denom == 1)) CCTimestamp = mach_absolute_time;
+    else CCTimestamp = Timer;
+#elif CC_PLATFORM_WINDOWS
+    InitFromSecondsTimer(WinGetFrequency, WinGetTimer);
+#elif CC_PLATFORM_UNIX
+    CCTimestamp = Timer;
+#else
+    InitFromSecondsTimer(glfwGetTimerFrequency, glfwGetTimerValue);
+#endif
+}
 
 #pragma mark - Window callbacks
 
@@ -66,7 +210,7 @@ static void Render(GFXFramebuffer Final, GFXFramebufferAttachment *FinalTarget)
 {
     FinalTarget->load = GFXFramebufferAttachmentActionFlagClearOnce | GFXFramebufferAttachmentActionLoad;
     
-    CCComponentSystemRun(CCComponentSystemExecutionTypeRender); //TODO: pass in render target
+//    CCComponentSystemRun(CCComponentSystemExecutionTypeRender); //TODO: pass in render target
     
     GUIManagerLock();
     GUIManagerUpdate();
@@ -286,29 +430,61 @@ static CCString ControllerGetName(size_t Index)
     return CCStringCreate(CC_STD_ALLOCATOR, CCStringEncodingASCII | CCStringHintCopy, glfwGetJoystickName((int)Index));
 }
 
-static void ControllerUpdateAxes(size_t Index, CCOrderedCollection(float) Axes)
+static void ControllerUpdateAxes(size_t Index, CCArray(float) Axes)
 {
     int Count;
     const float *Values = glfwGetJoystickAxes((int)Index, &Count);
     
-    if (Count == CCCollectionGetCount(Axes)) for (int Loop2 = 0; Loop2 < Count; Loop2++) CCOrderedCollectionReplaceElementAtIndex(Axes, &Values[Loop2], Loop2);
+    if (Count == CCArrayGetCount(Axes)) CCArrayReplaceElementsAtIndex(Axes, 0, Values, Count);
     else
     {
-        CCCollectionRemoveAllElements(Axes);
-        for (int Loop2 = 0; Loop2 < Count; Loop2++) CCOrderedCollectionAppendElement(Axes, &Values[Loop2]);
+        CCArrayRemoveAllElements(Axes);
+        CCArrayAppendElements(Axes, Values, Count);
     }
 }
 
-static void ControllerUpdateButtons(size_t Index, CCOrderedCollection(_Bool) Buttons)
+static void ControllerUpdateButtons(size_t Index, CCArray(_Bool) Buttons)
 {
     int Count;
     const unsigned char *Values = glfwGetJoystickButtons((int)Index, &Count);
     
-    if (Count == CCCollectionGetCount(Buttons)) for (int Loop2 = 0; Loop2 < Count; Loop2++) CCOrderedCollectionReplaceElementAtIndex(Buttons, &Values[Loop2], Loop2);
+#if GLFW_PRESS == 1 && GLFW_RELEASE == 0 && BOOL_WIDTH == UCHAR_WIDTH
+    if (Count == CCArrayGetCount(Buttons)) CCArrayReplaceElementsAtIndex(Buttons, 0, Values, Count);
     else
     {
-        CCCollectionRemoveAllElements(Buttons);
-        for (int Loop2 = 0; Loop2 < Count; Loop2++) CCOrderedCollectionAppendElement(Buttons, &Values[Loop2]);
+        CCArrayRemoveAllElements(Buttons);
+        CCArrayAppendElements(Buttons, Values, Count);
+    }
+#else
+    if (Count == CCArrayGetCount(Buttons)) for (int Loop2 = 0; Loop2 < Count; Loop2++) CCArrayReplaceElementAtIndex(Buttons, Loop2, &(_Bool){ Values[Loop2] });
+    else
+    {
+        CCArrayRemoveAllElements(Buttons);
+        for (int Loop2 = 0; Loop2 < Count; Loop2++) CCArrayAppendElement(Buttons, &(_Bool){ Values[Loop2] });
+    }
+#endif
+}
+
+static void ControllerUpdateHats(size_t Index, CCArray(CCControllerHat) Hats)
+{
+    _Static_assert((CCControllerHatCenter == GLFW_HAT_CENTERED) &&
+                   (CCControllerHatUp == GLFW_HAT_UP) &&
+                   (CCControllerHatRight == GLFW_HAT_RIGHT) &&
+                   (CCControllerHatDown == GLFW_HAT_DOWN) &&
+                   (CCControllerHatLeft == GLFW_HAT_LEFT) &&
+                   (CCControllerHatRightUp == GLFW_HAT_RIGHT_UP) &&
+                   (CCControllerHatRightDown == GLFW_HAT_RIGHT_DOWN) &&
+                   (CCControllerHatLeftUp == GLFW_HAT_LEFT_UP) &&
+                   (CCControllerHatLeftDown == GLFW_HAT_LEFT_DOWN), "Controller hats enum does not match");
+    
+    int Count;
+    const unsigned char *Values = glfwGetJoystickHats((int)Index, &Count);
+    
+    if (Count == CCArrayGetCount(Hats)) for (int Loop2 = 0; Loop2 < Count; Loop2++) CCArrayReplaceElementAtIndex(Hats, Loop2, &(CCControllerHat){ Values[Loop2] });
+    else
+    {
+        CCArrayRemoveAllElements(Hats);
+        for (int Loop2 = 0; Loop2 < Count; Loop2++) CCArrayAppendElement(Hats, &(CCControllerHat){ Values[Loop2] });
     }
 }
 
@@ -369,28 +545,136 @@ static void MouseEnterInput(GLFWwindow *Window, int Entered)
 
 static void WindowFocus(GLFWwindow *Window, int Focus)
 {
-    CCInputSystemWindowFocus(Focus);
+    CCInputWindowFocus(Focus);
 }
 
 #pragma mark - Updating
 
+static void B2Wait(B2Thread Thread, uint64_t Available, uint64_t ReturnBy)
+{
+}
+
+B2WaitingCallback B2Waiting = B2Wait;
+
+B2ECSConfig B2EngineECS;
+
+static void WaitUntil(B2Thread Thread, uint64_t Wait, uint64_t Target)
+{
+    B2Waiting(B2ThreadUpdate, Wait, Target);
+    
+    Wait = Target - CCTimestamp();
+    
+    if (Wait < Target)
+    {
+        if (Wait < ECS_TIME_FROM_MILLISECONDS(2))
+        {
+            while (CCTimestamp() < Target) CC_SPIN_WAIT();
+        }
+        
+        else thrd_sleep(&(struct timespec){ .tv_nsec = Wait }, NULL);
+    }
+}
+
 static int UpdateLoop(GLFWwindow *Window)
 {
+    B2TimeScale TickScale[B2EngineECS.count];
+    uint64_t TickWait[B2EngineECS.count];
+    uint64_t TickTime[B2EngineECS.count];
+    size_t FixedTimeStep[B2EngineECS.count], VariableTimeStep[B2EngineECS.count];
+    
+    memset(TickTime, 0, sizeof(TickTime));
+    
+    for (size_t Loop = 0; Loop < B2EngineECS.count; Loop++)
+    {
+        ECSMutationApply(B2EngineECS.instances[Loop].context);
+    }
+    
+    uint64_t PrevTime = CCTimestamp();
+    size_t FixedCount = 0, VariableCount = 0;
+    
     while (!glfwWindowShouldClose(Window))
     {
-        double Wait = CCTimestamp();
+        if (atomic_load_explicit(&B2EngineECS.tick.changed, memory_order_relaxed))
+        {
+            atomic_store_explicit(&B2EngineECS.tick.changed, FALSE, memory_order_relaxed);
+            
+            atomic_thread_fence(memory_order_acq_rel);
+            
+            FixedCount = 0;
+            VariableCount = 0;
+            
+            for (size_t Loop = 0; Loop < B2EngineECS.count; Loop++)
+            {
+                TickScale[Loop] = atomic_load_explicit(&B2EngineECS.tick.scale[Loop], memory_order_relaxed);
+                TickWait[Loop] = atomic_load_explicit(&B2EngineECS.tick.wait[Loop], memory_order_relaxed);
+                
+                if ((TickScale[Loop].numerator) && (TickScale[Loop].denominator))
+                {
+                    if (TickWait[Loop])
+                    {
+                        FixedTimeStep[FixedCount++] = Loop;
+                    }
+                    
+                    else
+                    {
+                        VariableTimeStep[VariableCount++] = Loop;
+                        TickTime[Loop] = 0;
+                    }
+                }
+            }
+        }
         
-        CCEntityManagerUpdate();
-        CCComponentSystemRun(CCComponentSystemExecutionTypeUpdate);
+        const uint64_t Time = CCTimestamp();
+        const uint64_t DeltaTime = Time - PrevTime;
+        PrevTime = Time;
         
-        Wait = (B2UpdateThreadTimeSlice - (CCTimestamp() - Wait)) * 1000000000.0;
-        thrd_sleep(&(struct timespec){ .tv_nsec = (Wait < 0 ? 0 : (uint64_t)Wait) }, NULL);
+        uint64_t SleepTime = B2UpdateThreadTimeSlice;
+        
+        for (size_t Loop = 0; Loop < VariableCount; Loop++)
+        {
+            const size_t Index = VariableTimeStep[Loop];
+            
+            ECSTick(B2EngineECS.instances[Index].context, B2EngineECS.instances[Index].groups, B2EngineECS.instances[Index].groupCount, B2EngineECS.instances[Index].state, (DeltaTime * TickScale[Index].numerator) / TickScale[Index].denominator);
+            
+            ECSMutationApply(B2EngineECS.instances[Index].context);
+        }
+        
+        for (size_t Loop = 0; Loop < FixedCount; Loop++)
+        {
+            const size_t Index = FixedTimeStep[Loop];
+            
+            TickTime[Index] += (DeltaTime * TickScale[Index].numerator) / TickScale[Index].denominator;
+            
+            if (TickTime[Index] / TickWait[Index])
+            {
+                TickTime[Index] -= TickWait[Index];
+                
+                ECSTick(B2EngineECS.instances[Index].context, B2EngineECS.instances[Index].groups, B2EngineECS.instances[Index].groupCount, B2EngineECS.instances[Index].state, TickWait[Index]);
+                
+                ECSMutationApply(B2EngineECS.instances[Index].context);
+                
+                if (TickTime[Index] / TickWait[Index]) SleepTime = 0;
+                else if ((TickWait[Index] - TickTime[Index]) < SleepTime) SleepTime = TickWait[Index] - TickTime[Index];
+            }
+        }
+        
+        const uint64_t Elapsed = CCTimestamp() - PrevTime;
+        
+        if (SleepTime > Elapsed)
+        {
+            const uint64_t Wait = SleepTime - Elapsed;
+            const uint64_t Target = SleepTime + PrevTime;
+            
+            WaitUntil(B2ThreadUpdate, Wait, Target);
+        }
     }
     
     return EXIT_SUCCESS;
 }
 
 #pragma mark -
+
+double B2InputFrequency = 0.001;
 
 static int EngineMain(int argc, const char *argv[])
 {
@@ -407,6 +691,7 @@ static int EngineMain(int argc, const char *argv[])
         return EXIT_FAILURE;
     }
     
+    InitTimer();
     
     switch (B2EngineConfiguration.renderer.pipeline)
     {
@@ -439,7 +724,7 @@ static int EngineMain(int argc, const char *argv[])
         return EXIT_FAILURE;
     }
     
-    CCControllerSetup(GLFW_JOYSTICK_LAST + 1, ControllerGetName, ControllerUpdateAxes, ControllerUpdateButtons);
+    CCControllerSetup(GLFW_JOYSTICK_LAST + 1, ControllerGetName, ControllerUpdateAxes, ControllerUpdateButtons, ControllerUpdateHats);
     glfwSetJoystickCallback(ControllerConnected);
     for (size_t Loop = 0; Loop <= GLFW_JOYSTICK_LAST; Loop++) CCControllerConnect(Loop, glfwJoystickPresent((int)Loop));
     
@@ -496,11 +781,57 @@ static int EngineMain(int argc, const char *argv[])
         return EXIT_FAILURE;
     }
     
+    size_t ClipboardCounter = 0;
+    CCString ClipboardCache = CC_STRING("");
+    
     while (!glfwWindowShouldClose(B2Window))
     {
-        CCComponentSystemRun(CCComponentSystemExecutionTypeInput);
-        glfwWaitEvents();
+        const size_t CurrentClipboardCounter = CCClipboardCounter();
+        
+        if (ClipboardCounter != CurrentClipboardCounter)
+        {
+            ClipboardCounter = CurrentClipboardCounter;
+            
+            CCClipboardClipping Clipping = CCClipboardGet();
+            
+            if (Clipping.type == &CC_REFLECT(CCString))
+            {
+                ClipboardCache = CCStringCopy((CCString)Clipping.data);
+                
+                CC_STRING_TEMP_BUFFER(Buffer, (CCString)Clipping.data) glfwSetClipboardString(B2Window, Buffer);
+                
+                CCStringDestroy((CCString)Clipping.data);
+            }
+            
+            else CCFree(Clipping.data);
+        }
+        
+        else
+        {
+            // TODO: On mac use NSPasteboard changeCount
+            const char *String = glfwGetClipboardString(B2Window);
+            
+            CC_STRING_TEMP_BUFFER(Buffer, ClipboardCache)
+            {
+                if (strcmp(Buffer, String))
+                {
+                    CCStringDestroy(ClipboardCache);
+                    
+                    ClipboardCache = CCStringCreate(CC_STD_ALLOCATOR, CCStringHintCopy | CCStringEncodingUTF8, String);
+                    
+                    CCClipboardSet((CCClipboardClipping){ .type = &CC_REFLECT(CCString), .data = (void*)CCStringCopy(ClipboardCache) });
+                    
+                    ClipboardCounter++;
+                }
+            }
+        }
+        
+        CCControllerDiffUpdateState();
+        
+        glfwWaitEventsTimeout(B2InputFrequency);
     }
+    
+    CCStringDestroy(ClipboardCache);
     
     
     thrd_join(UpdateThread, NULL);
@@ -570,8 +901,6 @@ int B2EngineRun(int argc, const char *argv[])
             CCCollectionDestroy(Matches);
         }
     }
-    
-    CCTimestamp = glfwGetTime;
     
     return CCMain(EngineMain, argc, argv);
 }

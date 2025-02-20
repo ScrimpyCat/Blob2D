@@ -39,6 +39,9 @@ B2EngineConfig B2EngineConfiguration = {
         .height = 0,
         .fullscreen = FALSE
     },
+    .ecs = {
+        .workers = 1
+    },
     .renderer = {
         .pipeline = B2EngineRenderPipelineNone,
         .vsync = TRUE

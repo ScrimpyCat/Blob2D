@@ -34,6 +34,8 @@ static const char B2ProjectGamepkg[] =
 "    (default-resolution: 640 480) ; resolution or window size\n"
 "    (default-fullscreen: #f) ; fullscreen mode\n"
 "\n"
+"    (workers: (max (- (cpu-logical-core-count) 3) 1)) ; ECS worker threads\n"
+"\n"
 "    (renderer: :opengl) ; renderer API\n"
 "    (vsync: #t) ; vertical sync\n"
 "\n"

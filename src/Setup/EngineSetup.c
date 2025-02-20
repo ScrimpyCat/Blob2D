@@ -53,7 +53,20 @@ void B2EngineSetup(void)
             break;
     }
     
-    CCEntityManagerCreate();
+    // ECS Setup
+    ECSExpressionRegisterComponentEvaluators();
+    
+    ECSInit();
+    
+    for (size_t Loop = 0; Loop < B2EngineConfiguration.ecs.workers; Loop++)
+    {
+        if (!ECSWorkerCreate())
+        {
+            B2EngineConfiguration.ecs.workers = Loop + 1;
+            
+            break;
+        }
+    }
     
     
     //Load Global Assets
@@ -128,30 +141,7 @@ void B2EngineSetup(void)
     }
     
     
-    //Register Systems
-    CCRelationSystemRegister();
-    CCScriptableInterfaceSystemRegister();
-    CCRenderSystemRegister();
-    CCInputSystemRegister();
-    CCAnimationSystemRegister();
-    
-    //Register Components
-    CCRenderComponentRegister();
-    CCInputMapKeyboardComponentRegister();
-    CCInputMapGroupComponentRegister();
-    CCInputMapMousePositionComponentRegister();
-    CCInputMapMouseButtonComponentRegister();
-    CCInputMapMouseScrollComponentRegister();
-    CCInputMapMouseDropComponentRegister();
-    CCInputMapControllerAxesComponentRegister();
-    CCInputMapControllerButtonComponentRegister();
-    CCAnimationKeyframeComponentRegister();
-    CCAnimationInterpolateComponentRegister();
-    CCScriptableInterfaceDynamicFieldComponentRegister();
-    CCRelationParentComponentRegister();
-    
-    
-    //Create Managers Dependent on ECS :(
+    //Create GUI Manager
     GUIManagerCreate();
     
     
