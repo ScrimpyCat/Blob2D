@@ -55,6 +55,8 @@ FSPath B2EnginePath = NULL;
 static mach_timebase_info_data_t Timebase;
 #elif CC_PLATFORM_WINDOWS
 #include <windows.h>
+#elif CC_PLATFORM_UNIX
+#include <unistd.h>
 #endif
 
 static uint64_t Timer(void)
@@ -206,16 +208,25 @@ static void FramebufferSizeCallback(GLFWwindow *Window, int Width, int Height)
 
 #pragma mark - Rendering
 
+static _Atomic(uint64_t) LastRenderTimestamp = ATOMIC_VAR_INIT(0);
+static atomic_flag GUIUpdateSpinlock = ATOMIC_FLAG_INIT;
+
 static void Render(GFXFramebuffer Final, GFXFramebufferAttachment *FinalTarget)
 {
     FinalTarget->load = GFXFramebufferAttachmentActionFlagClearOnce | GFXFramebufferAttachmentActionLoad;
     
 //    CCComponentSystemRun(CCComponentSystemExecutionTypeRender); //TODO: pass in render target
     
+    while (atomic_flag_test_and_set_explicit(&GUIUpdateSpinlock, memory_order_relaxed)) CC_SPIN_WAIT();
+    atomic_signal_fence(memory_order_acquire);
     GUIManagerLock();
     GUIManagerUpdate();
+    atomic_signal_fence(memory_order_release);
+    atomic_flag_clear_explicit(&GUIUpdateSpinlock, memory_order_relaxed);
     GUIManagerRender(Final, 0);
     GUIManagerUnlock();
+    
+    atomic_store_explicit(&LastRenderTimestamp, CCTimestamp(), memory_order_relaxed);
 }
 
 static CCConcurrentIndexBuffer FinalTargetIndexBuffer;
@@ -581,15 +592,27 @@ static int UpdateLoop(GLFWwindow *Window)
     uint64_t TickWait[B2EngineECS.count];
     uint64_t TickTime[B2EngineECS.count];
     size_t FixedTimeStep[B2EngineECS.count], VariableTimeStep[B2EngineECS.count];
+    ECSTime MaxTime = 0;
     
     memset(TickTime, 0, sizeof(TickTime));
     
     for (size_t Loop = 0; Loop < B2EngineECS.count; Loop++)
     {
+        for (size_t Loop2 = 0; Loop2 < B2EngineECS.instances[Loop].groupCount; Loop2++)
+        {
+            MaxTime = CCMax(MaxTime, B2EngineECS.instances[Loop].groups[Loop2].freq);
+        }
+        
         ECSMutationApply(B2EngineECS.instances[Loop].context);
     }
     
+    size_t MouseLastIndex = CCConcurrentCircularBufferGetLastIndex(&CCMouseInputEventBuffer);
+    size_t KeyboardLastIndex = CCConcurrentCircularBufferGetLastIndex(&CCKeyboardInputEventBuffer);
+    size_t KeyboardCharLastIndex = CCConcurrentCircularBufferGetLastIndex(&CCKeyboardCharInputEventBuffer);
+    size_t ControllerLastIndex = CCConcurrentCircularBufferGetLastIndex(&CCControllerInputEventBuffer);
+        
     uint64_t PrevTime = CCTimestamp();
+    uint64_t LastIndexTimestamp = PrevTime;
     size_t FixedCount = 0, VariableCount = 0;
     
     while (!glfwWindowShouldClose(Window))
@@ -624,6 +647,10 @@ static int UpdateLoop(GLFWwindow *Window)
             }
         }
         
+        
+        CCControllerSync();
+        
+        
         const uint64_t Time = CCTimestamp();
         const uint64_t DeltaTime = Time - PrevTime;
         PrevTime = Time;
@@ -657,6 +684,36 @@ static int UpdateLoop(GLFWwindow *Window)
                 else if ((TickWait[Index] - TickTime[Index]) < SleepTime) SleepTime = TickWait[Index] - TickTime[Index];
             }
         }
+        
+        
+        if (Time > LastIndexTimestamp + (MaxTime * 2))
+        {
+            const uint64_t LastRender = atomic_load_explicit(&LastRenderTimestamp, memory_order_relaxed);
+            
+            if (LastIndexTimestamp < LastRender)
+            {
+                if (atomic_flag_test_and_set_explicit(&GUIUpdateSpinlock, memory_order_relaxed))
+                {
+                    atomic_signal_fence(memory_order_acquire);
+                    CCConcurrentCircularBufferSetStartIndex(&CCMouseInputEventBuffer, MouseLastIndex);
+                    CCConcurrentCircularBufferSetStartIndex(&CCKeyboardInputEventBuffer, KeyboardLastIndex);
+                    CCConcurrentCircularBufferSetStartIndex(&CCKeyboardCharInputEventBuffer, KeyboardCharLastIndex);
+                    CCConcurrentCircularBufferSetStartIndex(&CCControllerInputEventBuffer, ControllerLastIndex);
+                    atomic_signal_fence(memory_order_release);
+                    
+                    atomic_flag_clear_explicit(&GUIUpdateSpinlock, memory_order_relaxed);
+                    
+                    
+                    MouseLastIndex = CCConcurrentCircularBufferGetLastIndex(&CCMouseInputEventBuffer);
+                    KeyboardLastIndex = CCConcurrentCircularBufferGetLastIndex(&CCKeyboardInputEventBuffer);
+                    KeyboardCharLastIndex = CCConcurrentCircularBufferGetLastIndex(&CCKeyboardCharInputEventBuffer);
+                    ControllerLastIndex = CCConcurrentCircularBufferGetLastIndex(&CCControllerInputEventBuffer);
+                    
+                    LastIndexTimestamp = CCTimestamp();
+                }
+            }
+        }
+        
         
         const uint64_t Elapsed = CCTimestamp() - PrevTime;
         
