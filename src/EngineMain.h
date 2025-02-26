@@ -75,6 +75,7 @@ typedef struct {
 typedef struct {
     size_t count;
     B2ECSInstance *instances;
+    size_t *batches;
     struct {
         _Atomic(B2TimeScale) *scale;
         _Atomic(uint64_t) *wait;

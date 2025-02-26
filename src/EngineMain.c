@@ -588,6 +588,7 @@ static void WaitUntil(B2Thread Thread, uint64_t Wait, uint64_t Target)
 
 static int UpdateLoop(GLFWwindow *Window)
 {
+    ECSTickState Batch[B2EngineECS.count];
     B2TimeScale TickScale[B2EngineECS.count];
     uint64_t TickWait[B2EngineECS.count];
     uint64_t TickTime[B2EngineECS.count];
@@ -657,31 +658,55 @@ static int UpdateLoop(GLFWwindow *Window)
         
         uint64_t SleepTime = B2UpdateThreadTimeSlice;
         
-        for (size_t Loop = 0; Loop < VariableCount; Loop++)
+        for (size_t Loop = 0, VariableIndex = 0, FixedIndex = 0, BatchCount = 0, *Batches = B2EngineECS.batches; Loop < B2EngineECS.count; Batches++, Loop++)
         {
-            const size_t Index = VariableTimeStep[Loop];
+            Loop = *Batches;
             
-            ECSTick(B2EngineECS.instances[Index].context, B2EngineECS.instances[Index].groups, B2EngineECS.instances[Index].groupCount, B2EngineECS.instances[Index].state, ECS_TIME_FROM_NANOSECONDS((DeltaTime * TickScale[Index].numerator) / TickScale[Index].denominator));
-            
-            ECSMutationApply(B2EngineECS.instances[Index].context);
-        }
-        
-        for (size_t Loop = 0; Loop < FixedCount; Loop++)
-        {
-            const size_t Index = FixedTimeStep[Loop];
-            
-            TickTime[Index] += (DeltaTime * TickScale[Index].numerator) / TickScale[Index].denominator;
-            
-            if (TickTime[Index] / TickWait[Index])
+            for ( ; VariableIndex < VariableCount; VariableIndex++)
             {
-                TickTime[Index] -= TickWait[Index];
+                const size_t Index = VariableTimeStep[VariableIndex];
                 
-                ECSTick(B2EngineECS.instances[Index].context, B2EngineECS.instances[Index].groups, B2EngineECS.instances[Index].groupCount, B2EngineECS.instances[Index].state, ECS_TIME_FROM_NANOSECONDS(TickWait[Index]));
+                if (Index > Loop) break;
                 
-                ECSMutationApply(B2EngineECS.instances[Index].context);
+                Batch[BatchCount++] = (ECSTickState){
+                    .context = B2EngineECS.instances[Index].context,
+                    .groups = B2EngineECS.instances[Index].groups,
+                    .groupCount = B2EngineECS.instances[Index].groupCount,
+                    .state = B2EngineECS.instances[Index].state,
+                    .deltaTime = ECS_TIME_FROM_NANOSECONDS((DeltaTime * TickScale[Index].numerator) / TickScale[Index].denominator)
+                };
+            }
+            
+            for ( ; FixedIndex < FixedCount; FixedIndex++)
+            {
+                const size_t Index = FixedTimeStep[FixedIndex];
                 
-                if (TickTime[Index] / TickWait[Index]) SleepTime = 0;
-                else if ((TickWait[Index] - TickTime[Index]) < SleepTime) SleepTime = TickWait[Index] - TickTime[Index];
+                if (Index > Loop) break;
+                
+                TickTime[Index] += (DeltaTime * TickScale[Index].numerator) / TickScale[Index].denominator;
+                
+                if (TickTime[Index] / TickWait[Index])
+                {
+                    TickTime[Index] -= TickWait[Index];
+                    
+                    Batch[BatchCount++] = (ECSTickState){
+                        .context = B2EngineECS.instances[Index].context,
+                        .groups = B2EngineECS.instances[Index].groups,
+                        .groupCount = B2EngineECS.instances[Index].groupCount,
+                        .state = B2EngineECS.instances[Index].state,
+                        .deltaTime = ECS_TIME_FROM_NANOSECONDS(TickWait[Index])
+                    };
+                    
+                    if (TickTime[Index] / TickWait[Index]) SleepTime = 0;
+                    else if ((TickWait[Index] - TickTime[Index]) < SleepTime) SleepTime = TickWait[Index] - TickTime[Index];
+                }
+            }
+            
+            ECSBatchTick(Batch, BatchCount);
+            
+            while (BatchCount--)
+            {
+                ECSMutationApply(Batch[BatchCount].context);
             }
         }
         
