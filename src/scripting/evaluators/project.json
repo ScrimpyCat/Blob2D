@@ -25,6 +25,11 @@
                     "args": [[{ "type": "boolean", "name": "fullscreen-mode" }]]
                 },
                 {
+                    "name": "workers",
+                    "description": "The number of ECS workers.",
+                    "args": [[{ "type": "integer" }]]
+                },
+                {
                     "name": "renderer",
                     "description": "The renderer that should be used.",
                     "args": [
