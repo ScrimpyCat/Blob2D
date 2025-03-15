@@ -717,7 +717,7 @@ static int UpdateLoop(GLFWwindow *Window)
             
             if (LastIndexTimestamp < LastRender)
             {
-                if (atomic_flag_test_and_set_explicit(&GUIUpdateSpinlock, memory_order_relaxed))
+                if (!atomic_flag_test_and_set_explicit(&GUIUpdateSpinlock, memory_order_relaxed))
                 {
                     atomic_signal_fence(memory_order_acquire);
                     CCConcurrentCircularBufferSetStartIndex(&CCMouseInputEventBuffer, MouseLastIndex);
