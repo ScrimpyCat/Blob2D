@@ -63,7 +63,7 @@ extern FSPath B2EnginePath;
 typedef struct {
     ECSContext *context;
     size_t groupCount;
-    ECSGroup *groups;
+    const ECSGroup *groups;
     ECSExecutionGroup *state;
 } B2ECSInstance;
 
