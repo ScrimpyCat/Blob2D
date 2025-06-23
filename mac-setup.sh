@@ -8,7 +8,7 @@ cd ../glfw
 rm -rf build
 mkdir build && cd build
 cmake -G Xcode ..
-sed -i -e 's/SDKROOT/MACOSX_DEPLOYMENT_TARGET = 10.10; SDKROOT/' glfw.xcodeproj/project.pbxproj
+sed -i '' -e 's/SDKROOT[^;]*/MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)"; SDKROOT = macosx/' glfw.xcodeproj/project.pbxproj
 
 # Universal builds
 sed -i '' -e 's/ARCHS = "$(NATIVE_ARCH_ACTUAL)";/ARCHS = "$(ARCHS_STANDARD)";/' glfw.xcodeproj/project.pbxproj
